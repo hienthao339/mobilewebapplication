@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>W.REX</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/wwwroot/css/main.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/wwwroot/css/styles.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
@@ -17,7 +18,6 @@
 </head>
 <body>
     <header class="flex-col">
-
         @*icon-bar*@
         <nav id="navbar">
             <nav class="relative px-4 py-2 flex justify-between items-center bg-white">
@@ -39,36 +39,39 @@
         <nav class="h-screen font-light text-center text-xs hidden relative top-0 bg-white flex flex-col text-decoration-none z-10 text-center ease-in-out"
              id="menu-bar">
             <a href="#" onclick="closeMenu()" class="text-dark mb-lg-3 text-lg">╳</a>
-            <div class="my-4 space-y-3 flex flex-col">
-                <a href="@Url.Action("Index", "Home")" class="py-2 px-3  text-dark text-decoration-none">HOME</a>
-                <a href="@Url.Action("About", "Home")" class="py-2 px-3  text-dark text-decoration-none">ABOUT</a>
-                <a href="@Url.Action("Product", "Home")" class="py-2 px-3  text-dark text-decoration-none">EXPLORE</a>
-                <a href="#" class="py-2 px-3  text-dark text-decoration-none">COMPARE</a>
-                <a href="#" class="py-2 px-3  text-dark text-decoration-none">CHAT WITH US</a>
-                <a href="@Url.Action("Signin", "Home")" class="py-2 px-3  text-dark text-decoration-none">SIGN IN</a>
+            <div class="my-4 text-2xl">
+                <ul class="list-unstyled">
+                    <li class="mb-3"><a href="@Url.Action("Index", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">HOME</a></li>
+                    <li class="mb-3"><a href="@Url.Action("About", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">ABOUT</a></li>
+                    <li class="mb-3"><a href="@Url.Action("ProductList", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">EXPLORE</a></li>
+                    <li class="mb-3"><a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">COMPARE</a></li>
+                    <li class="mb-3"><a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">YOUR ORDERS</a></li>
+                    <li class="mb-3"><a href="@Url.Action("Signin", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">ACCOUNT</a></li>
+                    <li class="mb-3"> <a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">CHAT WITH US</a></li>
+                </ul>
             </div>
         </nav>
 
         @*search-bar*@
-        <nav class="flex flex-col h-screen text-center text-lg text-dark font-semibold hidden relative top-0 bg-white text-decoration-none z-10 text-center ease-in-out"
-             id="search-bar">
-            <a href="#" onclick="closeSearch()" class="text-dark mb-lg-5">╳</a>
-            <div class="text-[48px] font-bold mb-2">What are you searching for?</div>
-            <div class="font-light mb-4">Let's join with us and enjoy your aesthetic new-born discovery.</div>
-            <div class="container flex justify-center items-center px-4 sm:px-6 lg:px-8">
-                <div class="relative">
-                    <input type="text" class="h-14 w-96 pr-8 pl-5 rounded z-10 focus:shadow focus:outline-none border-0 border-bottom text-gray-400" placeholder="Search">
-                    <div class="absolute top-4 right-3">
-                        <i class="fa fa-search text-gray-200 z-20 hover:text-gray-500 text-black"></i>
-                    </div>
-                </div>
+    <nav class="flex flex-col h-screen text-center text-lg text-dark font-semibold hidden relative top-0 bg-white text-decoration-none z-10 text-center ease-in-out"
+         id="search-bar">
+        <a href="#" onclick="closeSearch()" class="text-dark mb-lg-5">╳</a>
+        <div class="text-3xl font-bold mt-4 mb-2">What are you searching for?</div>
+        <div class="font-light mb-4 text-md-center">Let's join with us and enjoy your aesthetic new-born discovery.</div>
+
+        <form class="mx-auto flex align-items-center ">
+            <input type="text" class="font-light text-gray-400 bg-white border-b py-2" style="padding-right: 300px" placeholder="  Search" />
+            <div class="p-2 mx-2 text-center font-light text-xs">
+                <i class="fa-solid fa-search"></i>
             </div>
-        </nav>
+        </form>
+
+    </nav>
 
     </header>
 
     <div class="w-full mb-lg-5">
-        <main role="main" class="p-3">
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
@@ -76,59 +79,59 @@
     <div class="flex w-full justify-between p-5">
         <div class="text-start">
             <div class="text-lg font-bold my-4">SHOP</div>
-            <ul class="list-unstyled font-light text-sm">
-                <li>Apple</li>
-                <li>Samsung</li>
-                <li>Huawei</li>
-                <li>Xiaomi</li>
-                <li>Google</li>
-                <li>Oppo</li>
+            <ul class="list-unstyled mt-3 font-light text-sm">
+                <li class="mb-2">Apple</li>
+                <li class="mb-2">Samsung</li>
+                <li class="mb-2">Huawei</li>
+                <li class="mb-2">Xiaomi</li>
+                <li class="mb-2">Google</li>
+                <li class="mb-2">Oppo</li>
             </ul>
         </div>
         <div class="text-start">
             <div class="text-lg font-bold my-4">SUPPORT</div>
-            <ul class="list-unstyled font-light text-sm">
-                <li>Product Support</li>
-                <li>Order Support</li>
-                <li>Account Support</li>
-                <li>Register For Admin</li>
-                <li>Community</li>
-                <li>Services</li>
+            <ul class="list-unstyled mt-3 font-light text-sm">
+                <li class="mb-2">Product Support</li>
+                <li class="mb-2">Order Support</li>
+                <li class="mb-2">Account Support</li>
+                <li class="mb-2">Register For Admin</li>
+                <li class="mb-2">Community</li>
+                <li class="mb-2">Services</li>
             </ul>
         </div>
         <div class="text-start">
             <div class="text-lg font-bold my-4">SOCIAL</div>
-            <ul class="list-unstyled font-light text-sm">
-                <li>Twitter</li>
-                <li>Facebook</li>
-                <li>Instagram</li>
+            <ul class="list-unstyled mt-3 font-light text-sm">
+                <li class="mb-2">Twitter</li>
+                <li class="mb-2">Facebook</li>
+                <li class="mb-2">Instagram</li>
             </ul>
         </div>
         <div class="text-start">
             <div class="text-lg font-bold my-4">MEMBERS</div>
-            <ul class="list-unstyled font-light text-sm">
-                <li>Tran Hien Thao</li>
-                <li>Pham Thieu Chau</li>
-                <li>Nguyen Quang Nhat</li>
-                <li>Dang The Nghia</li>
+            <ul class="list-unstyled mt-3 font-light text-sm">
+                <li class="mb-2">Tran Hien Thao</li>
+                <li class="mb-2">Pham Thieu Chau</li>
+                <li class="mb-2">Nguyen Quang Nhat</li>
+                <li class="mb-2">Dang The Nghia</li>
             </ul>
         </div>
     </div>
-    <footer class="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+    <footer class="p-4 bg-white rounded-lg shadow flex">
+        <span class="text-sm text-gray-500 sm:text-center">
             © 2023. All Rights Reserved.
         </span>
         <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
-            <li>
+            <li class="mb-2">
                 <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
             </li>
-            <li>
+            <li class="mb-2">
                 <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
             </li>
-            <li>
+            <li class="mb-2">
                 <a href="#" class="mr-4 hover:underline md:mr-6">License</a>
             </li>
-            <li>
+            <li class="mb-2">
                 <a href="#" class="hover:underline">Contact</a>
             </li>
         </ul>
