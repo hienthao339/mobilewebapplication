@@ -6,7 +6,6 @@
     <title>W.REX</title>
     <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/wwwroot/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/wwwroot/css/main.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/wwwroot/css/styles.css" asp-append-version="true" />
 
@@ -53,20 +52,20 @@
         </nav>
 
         @*search-bar*@
-    <nav class="flex flex-col h-screen text-center text-lg text-dark font-semibold hidden relative top-0 bg-white text-decoration-none z-10 text-center ease-in-out"
-         id="search-bar">
-        <a href="#" onclick="closeSearch()" class="text-dark mb-lg-5">╳</a>
-        <div class="text-3xl font-bold mt-4 mb-2">What are you searching for?</div>
-        <div class="font-light mb-4 text-md-center">Let's join with us and enjoy your aesthetic new-born discovery.</div>
+        <nav class="flex flex-col h-screen text-center text-lg text-dark font-semibold hidden relative top-0 bg-white text-decoration-none z-10 text-center ease-in-out"
+             id="search-bar">
+            <a href="#" onclick="closeSearch()" class="text-dark mb-lg-5">╳</a>
+            <div class="text-3xl font-bold mt-4 mb-2">What are you searching for?</div>
+            <div class="font-light mb-4 text-md-center">Let's join with us and enjoy your aesthetic new-born discovery.</div>
 
-        <form class="mx-auto flex align-items-center ">
-            <input type="text" class="font-light text-gray-400 bg-white border-b py-2" style="padding-right: 300px" placeholder="  Search" />
-            <div class="p-2 mx-2 text-center font-light text-xs">
-                <i class="fa-solid fa-search"></i>
-            </div>
-        </form>
+            <form class="mx-auto flex align-items-center ">
+                <input type="text" class="font-light text-gray-400 bg-white border-b py-2" style="padding-right: 300px" placeholder="  Search" />
+                <div class="p-2 mx-2 text-center font-light text-xs">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+            </form>
 
-    </nav>
+        </nav>
 
     </header>
 
@@ -117,11 +116,11 @@
             </ul>
         </div>
     </div>
-    <footer class="p-4 bg-white rounded-lg shadow flex">
-        <span class="text-sm text-gray-500 sm:text-center">
+    <footer class="p-4 bg-white rounded-lg shadow flex justify-between">
+        <span class="text-sm text-gray-500 sm:text-center my-2">
             © 2023. All Rights Reserved.
         </span>
-        <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+        <ul class="flex flex-wrap items-center mt-2 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
             <li class="mb-2">
                 <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
             </li>
@@ -136,6 +135,7 @@
             </li>
         </ul>
     </footer>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

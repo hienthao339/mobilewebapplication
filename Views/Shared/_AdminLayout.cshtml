@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>W.REX</title>
+<link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/wwwroot/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/wwwroot/css/styles.css" asp-append-version="true" />
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+<body>
+
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+        <button onclick="sidebar_close()" class="w-full text-center py-4">
+            <i class="fa-solid fa-x"></i>
+        </button>
+        <ul class="list-unstyled font-medium">
+            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Dashboard</li>
+            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Product</li>
+            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Order</li>
+            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Chatbox</li>
+            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Discount</li>
+            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer mt-6" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Logout</li>
+        </ul>
+    </div>
+
+    <div id="main">
+
+        <div class="bg-gray-100">
+            <button id="openNav" class="text-xl p-3" onclick="sidebar_open()"><i class="fa-solid fa-bars"></i></button>
+        </div>
+
+        <div class="w-full mb-lg-5">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="p-4 bg-white rounded-lg shadow flex justify-between">
+            <span class="text-sm text-gray-500 sm:text-center my-2">
+                © 2023. All Rights Reserved.
+            </span>
+            <ul class="flex flex-wrap items-center mt-2 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+                <li class="mb-2">
+                    <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" class="mr-4 hover:underline md:mr-6">License</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" class="hover:underline">Contact</a>
+                </li>
+            </ul>
+        </footer>
+
+    </div>
+
+    <script>
+            function sidebar_open() {
+                document.getElementById("main").style.marginLeft = "25%";
+                document.getElementById("mySidebar").style.width = "25%";
+                document.getElementById("mySidebar").style.display = "block";
+                document.getElementById("openNav").style.display = 'none';
+            }
+            function sidebar_close() {
+                document.getElementById("main").style.marginLeft = "0%";
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("openNav").style.display = "inline-block";
+            }
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
