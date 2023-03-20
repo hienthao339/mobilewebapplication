@@ -27,7 +27,7 @@
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                        href="@Url.Action("Cart", "Home")"><i class="fa-solid fa-cart-shopping text-black"></i></a>
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
-                       href="#" onclick="openSearch()"><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
+                       href="#" ><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                        href="#" onclick="openMenu()"><i class="fa-solid fa-bars text-black"></i></a>
                 </div>
@@ -149,16 +149,6 @@
         }
         function closeMenu() {
             menubar.classList.add('hidden');
-        }
-    </script>
-    <script>
-        const searchbar = document.getElementById('search-bar');
-
-        function openSearch() {
-            searchbar.classList.remove('hidden');
-        }
-        function closeSearch() {
-            searchbar.classList.add('hidden');
         }
     </script>
 
