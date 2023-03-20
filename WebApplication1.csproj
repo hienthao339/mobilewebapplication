@@ -324,10 +324,7 @@
     <Content Include="Views\Home\Signin.cshtml" />
     <Content Include="Views\Home\Signup.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-<<<<<<< HEAD
-=======
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
->>>>>>> 392eaf825c78699bf202957a1a21ac02a0131be5
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
