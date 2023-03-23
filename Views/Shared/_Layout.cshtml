@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>W.REX</title>
     <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/wwwroot/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/wwwroot/css/styles.css" asp-append-version="true" />
 
@@ -27,7 +26,7 @@
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                        href="@Url.Action("Cart", "Home")"><i class="fa-solid fa-cart-shopping text-black"></i></a>
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
-                       href="#" ><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
+                       href="@Url.Action("Search", "Home")" ><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                        href="#" onclick="openMenu()"><i class="fa-solid fa-bars text-black"></i></a>
                 </div>
