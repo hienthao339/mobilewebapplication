@@ -1,22 +1,27 @@
 ﻿<main>
-    <div class="p-3 grid grid-cols-4">
-
-        <div class="col-span-2 p-5 mr-2 text-xs font-semibold border rounded-lg shadow-md">
-            <div class="mb-4 pb-4 border-b">
-                <div class="mb-3 font-bold pb-2 my-2 border-b text-xl">Detail</div><br />
+    <div class="p-3 grid grid-cols-4 w-75 mx-auto">
+        <div class="col-span-2 pr-8 py-2 text-xs font-semibold">
+            <div class="mb-4 pb-4">
+                <div class="mb-3 font-bold pb-2 my-2 border-b text-xl">Details</div><br />
                 <div class=" grid grid-cols-4">
                     <div class="col-span-1">
-                        <img src="~/wwwroot/Images/Products/find-n2-flip-black.png" class="object-cover w-full" />
+                        <img src="~/wwwroot/Images/Products/1.png" class="object-cover w-full" />
                     </div>
-                    <div class="ml-2 col-span-2">
-                        <div class="text-md font-semibold">Oppo Find N2 Flip</div>
-                        <div class="mb-2">Black</div>
-                        <div class="mb-2">512 GB</div>
-                        <div class="mb-2">1</div>
-                        <div class="my-3">$0.00</div>
+                    <div class="ml-2 col-span-2 font-light">
+                        <div class="text-xl font-medium pb-2 row">
+                            iPhone 14
+                        </div>
+                        <div class="row">Iphone</div>
+                        <div class="row">Gold</div>
+                        <div class="py-2 font-medium row">$0.00</div>
+                        <div class="pt-2 text-sm font-semibold row" style="color: green">
+                            1
+                        </div>
                     </div>
-                    <div class="col-span-1">
-                        <i class="fa-solid fa-xmark text-red-600 text-sm"></i>
+                    <div class="col-span-1 text-end">
+                        <a href="#" class="bg-red-100 text-center py-1 px-2.5 hover:bg-red-200 rounded-md">
+                            <i class="fa-solid fa-xmark text-red-600 text-xs"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -40,35 +45,35 @@
                     <p>Subtotal</p>
                     <p>$0.00</p>
                 </div>
-                <button class="btn btn-primary hover:bg-blue-800 w-full rounded-md text-center text-xs font-semibold py-2">Edit</button>
+                <button class="hover:bg-yellow-700 text-black py-2 px-4 bg-yellow-300 rounded-md text-center text-xs font-semibold">Edit</button>
             </div>
         </div>
-        <div class="leading-loose col-span-2">
-            <form class="max-w-xl m-4 p-10 bg-white rounded text-xs">
+        <div class="leading-loose col-span-2 p-2 border rounded-lg shadow-md">
+            <form class="max-w-xl m-4 px-3 bg-white rounded text-xs">
                 <p class="text-gray-800 font-medium my-2">Customer information</p>
                 <div class="">
                     <label class="block mb-1 text-gray-600" for="cus_name">Name</label>
-                    <input class="w-full pl-3 py-2 text-gray-700 bg-gray-100 rounded" id="cus_name" name="cus_name" type="text" required="" placeholder="Your Name" aria-label="Name">
+                    <input class="w-full pl-3 py-3 text-gray-700 bg-gray-100 rounded" id="cus_name" name="cus_name" type="text" required="" placeholder="Your Name" aria-label="Name">
                 </div>
                 <div class="mt-2">
                     <label class="block mb-1 text-gray-600" for="cus_email">Email</label>
-                    <input class="w-full pl-3 py-2 text-gray-700 bg-gray-100 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Your Email" aria-label="Email">
+                    <input class="w-full pl-3 py-3 text-gray-700 bg-gray-100 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Your Email" aria-label="Email">
                 </div>
                 <div class="mt-2">
                     <label class="block mb-1 text-gray-600" for="cus_phone">Phone</label>
-                    <input class="w-full pl-3 py-2 text-gray-700 bg-gray-100 rounded" id="cus_phone" name="cus_phone" type="text" required="" placeholder="Your Email" aria-label="Email">
+                    <input class="w-full pl-3 py-3 text-gray-700 bg-gray-100 rounded" id="cus_phone" name="cus_phone" type="text" required="" placeholder="Your Email" aria-label="Email">
                 </div>
                 <div class="mt-2">
                     <label class=" block mb-1 text-gray-600" for="cus_addr">Address</label>
-                    <input class="w-full pl-3 py-2 text-gray-700 bg-gray-100 rounded" id="cus_addr" name="cus_addr" type="text" required="" placeholder="Address" aria-label="Email">
+                    <input class="w-full pl-3 py-3 text-gray-700 bg-gray-100 rounded" id="cus_addr" name="cus_addr" type="text" required="" placeholder="Address" aria-label="Email">
                 </div>
                 <p class="mt-4 my-2 text-gray-800 font-medium">Payment information</p>
                 <div class="">
                     <label class="block mb-1 text-gray-600" for="cus_card">Card</label>
-                    <input class="w-full pl-3 py-2 text-gray-700 bg-gray-100 rounded" id="cus_card" name="cus_card" type="text" required="" placeholder="Card Number MM/YY CVC" aria-label="Name">
+                    <input class="w-full pl-3 py-3 text-gray-700 bg-gray-100 rounded" id="cus_card" name="cus_card" type="text" required="" placeholder="Card Number MM/YY CVC" aria-label="Name">
                 </div>
                 <div class="mt-4">
-                    <button class="px-4 py-2 text-white font-semibold tracking-wider bg-blue-600 hover:bg-blue-700 rounded" type="submit">Checkout</button>
+                    <a href="@Url.Action("", "Home")" class="btn btn-primary hover:bg-blue-800 w-full rounded-md text-center text-xs font-medium py-2">Checkout</a>
                 </div>
             </form>
         </div>
