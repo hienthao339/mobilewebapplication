@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "_LayoutCustomer";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>W.REX</title>
+    <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/wwwroot/css/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/wwwroot/css/styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+
+
+</head>
+<body>
+    <header class="flex-col">
+        @*icon-bar*@
+        <nav id="navbar">
+            <nav class="relative px-4 py-2 flex justify-between items-center bg-white">
+                <a class="text-xl font-extrabold leading-none fst-italic text-black" href="/Home/Index">
+                    W.REX
+                </a>
+                <div class="flex gap-2">
+                    <div>
+                        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                            <li class="nav-item d-flex flex-row">
+                                <a class="nav-link text-decoration-none text-light">
+                                    <i class="fas fa-user fa-fw"></i>
+                                </a>
+                                @if (Session["email"] != null)
+                                {
+                                    <a class="nav-link text-decoration-none text-dark font-bold mx-2" @*href="/User/User"*@>
+                                        @(((WebApplication1.Models.user)Session["email"]).id_user)
+                                    </a>
+                                }
+                                else if (Session["email"]==null)
+                                {
+                                    <a class="nav-link text-decoration-none text-dark font-bold" style="margin-left: .5em" href="/User/SignIn">
+                                        LogIn/LogUp
+                                    </a>
+                                }
+
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
+                       href="@Url.Action("ShowToCart", "Shoppingcart")"><i class="fa-solid fa-cart-shopping text-black"></i>
+                        @Html.Action("BagCart","ShoppingCart")
+                    </a>
+                    <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
+                       href="#" onclick="openSearch()"><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
+                    <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
+                       href="#" onclick="openMenu()"><i class="fa-solid fa-bars text-black"></i></a>
+                </div>
+            </nav>
+        </nav>
+        @if (Session["email"] != null)
+        {
+            @*menu-bar*@
+            <nav class="h-screen font-light text-center text-xs hidden relative top-0 bg-white flex flex-col text-decoration-none z-10 text-center ease-in-out"
+                 id="menu-bar">
+                <a href="#" onclick="closeMenu()" class="text-dark mb-lg-3 text-lg">╳</a>
+                <div class="my-4 text-2xl">
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="@Url.Action("Index", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">HOME</a></li>
+                        <li class="mb-3"><a href="@Url.Action("About", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">ABOUT</a></li>
+                        <li class="mb-3"><a href="@Url.Action("ProductList", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">EXPLORE</a></li>
+                        <li class="mb-3"><a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">COMPARE</a></li>
+                        <li class="mb-3"><a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">YOUR ORDERS</a></li>
+                        <li class="mb-3"><a href="@Url.Action("SignIn", "User")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">ACCOUNT</a></li>
+                        <li class="mb-3"> <a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">CHAT WITH US</a></li>
+                        <li class="mb-3"><a href="/User/Logout" class="py-2 px-3 text-dark hover:italic hover:font-semibold">LOGOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
+        }
+        else
+        {
+            @*menu-bar*@
+            <nav class="h-screen font-light text-center text-xs hidden relative top-0 bg-white flex flex-col text-decoration-none z-10 text-center ease-in-out"
+                 id="menu-bar">
+                <a href="#" onclick="closeMenu()" class="text-dark mb-lg-3 text-lg">╳</a>
+                <div class="my-4 text-2xl">
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="@Url.Action("Index", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">HOME</a></li>
+                        <li class="mb-3"><a href="@Url.Action("About", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">ABOUT</a></li>
+                        <li class="mb-3"><a href="@Url.Action("ProductList", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">EXPLORE</a></li>
+                        <li class="mb-3"><a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">COMPARE</a></li>
+                        <li class="mb-3"><a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">YOUR ORDERS</a></li>
+                        <li class="mb-3"><a href="@Url.Action("SignIn", "User")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">ACCOUNT</a></li>
+                        <li class="mb-3"> <a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">CHAT WITH US</a></li>
+
+                    </ul>
+                </div>
+            </nav>
+        }
+
+        @*menu-bar*@
+        <!--<nav class="h-screen font-light text-center text-xs hidden relative top-0 bg-white flex flex-col text-decoration-none z-10 text-center ease-in-out"
+             id="menu-bar">
+            <a href="#" onclick="closeMenu()" class="text-dark mb-lg-3 text-lg">╳</a>
+            <div class="my-4 text-2xl">
+                <ul class="list-unstyled">
+                    <li class="mb-3"><a href="@Url.Action("Index", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">HOME</a></li>
+                    <li class="mb-3"><a href="@Url.Action("About", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">ABOUT</a></li>
+                    <li class="mb-3"><a href="@Url.Action("ProductList", "Home")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">EXPLORE</a></li>
+                    <li class="mb-3"><a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">COMPARE</a></li>
+                    <li class="mb-3"><a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">YOUR ORDERS</a></li>
+                    <li class="mb-3"><a href="@Url.Action("SignIn", "User")" class="py-2 px-3 text-dark hover:italic hover:font-semibold">ACCOUNT</a></li>
+                    <li class="mb-3"> <a href="#" class="py-2 px-3 text-dark hover:italic hover:font-semibold">CHAT WITH US</a></li>
+                    <li class="mb-3"><a href="/User/Logout" class="py-2 px-3 text-dark hover:italic hover:font-semibold">LOGOUT</a></li>
+                </ul>
+            </div>
+        </nav>-->
+        @*search-bar*@
+
+        <nav class="flex flex-col h-screen text-center text-lg text-dark font-semibold hidden relative top-0 bg-white text-decoration-none z-10 text-center ease-in-out"
+             id="search-bar">
+            <a href="#" onclick="closeSearch()" class="text-dark mb-lg-5">╳</a>
+            <div class="text-3xl font-bold mt-4 mb-2">What are you searching for?</div>
+            <div class="font-light mb-4 text-md-center">Let's join with us and enjoy your aesthetic new-born discovery.</div>
+            @using (Html.BeginForm("SearchPage", "Home", FormMethod.Get))
+            {
+                @Html.TextBox("searching")
+                <input type="submit" value="Search" />
+            }
+            <form class="mx-auto flex align-items-center ">
+                <input type="text" class="font-light text-gray-400 bg-white border-b py-2" style="padding-right: 300px" placeholder="  Search" />
+                <div class="p-2 mx-2 text-center font-light text-xs">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+            </form>
+        </nav>
+
+    </header>
+
+    <div class="w-full mb-lg-5">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="flex w-full justify-between p-5">
+        <div class="text-start">
+            <div class="text-lg font-bold my-4">SHOP</div>
+            <ul class="list-unstyled mt-3 font-light text-sm">
+                <li class="mb-2">Apple</li>
+                <li class="mb-2">Samsung</li>
+                <li class="mb-2">Huawei</li>
+                <li class="mb-2">Xiaomi</li>
+                <li class="mb-2">Google</li>
+                <li class="mb-2">Oppo</li>
+            </ul>
+        </div>
+        <div class="text-start">
+            <div class="text-lg font-bold my-4">SUPPORT</div>
+            <ul class="list-unstyled mt-3 font-light text-sm">
+                <li class="mb-2">Product Support</li>
+                <li class="mb-2">Order Support</li>
+                <li class="mb-2">Account Support</li>
+                <li class="mb-2">Register For Admin</li>
+                <li class="mb-2">Community</li>
+                <li class="mb-2">Services</li>
+            </ul>
+        </div>
+        <div class="text-start">
+            <div class="text-lg font-bold my-4">SOCIAL</div>
+            <ul class="list-unstyled mt-3 font-light text-sm">
+                <li class="mb-2">Twitter</li>
+                <li class="mb-2">Facebook</li>
+                <li class="mb-2">Instagram</li>
+            </ul>
+        </div>
+        <div class="text-start">
+            <div class="text-lg font-bold my-4">MEMBERS</div>
+            <ul class="list-unstyled mt-3 font-light text-sm">
+                <li class="mb-2">Tran Hien Thao</li>
+                <li class="mb-2">Pham Thieu Chau</li>
+                <li class="mb-2">Nguyen Quang Nhat</li>
+                <li class="mb-2">Dang The Nghia</li>
+            </ul>
+        </div>
+    </div>
+    <footer class="p-4 bg-white rounded-lg shadow flex">
+        <span class="text-sm text-gray-500 sm:text-center">
+            © 2023. All Rights Reserved.
+        </span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li class="mb-2">
+                <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+            </li>
+            <li class="mb-2">
+                <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+            </li>
+            <li class="mb-2">
+                <a href="#" class="mr-4 hover:underline md:mr-6">License</a>
+            </li>
+            <li class="mb-2">
+                <a href="#" class="hover:underline">Contact</a>
+            </li>
+        </ul>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <script>
+        const menubar = document.getElementById('menu-bar');
+
+        function openMenu() {
+            menubar.classList.remove('hidden');
+        }
+        function closeMenu() {
+            menubar.classList.add('hidden');
+        }</script>
+    <script>
+        const searchbar = document.getElementById('search-bar');
+
+        function openSearch() {
+            searchbar.classList.remove('hidden');
+        }
+        function closeSearch() {
+            searchbar.classList.add('hidden');
+        }</script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
