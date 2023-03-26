@@ -9,6 +9,7 @@ namespace WebApplication1.Models.ViewModels
 {
     public class ProductVM
     {
+        public brand brand { get; set; }
         public int id_product { get; set; }
         public string names { get; set; }
         public string images { get; set; }
@@ -20,9 +21,8 @@ namespace WebApplication1.Models.ViewModels
         public string processor { get; set; }
         public string battery { get; set; }
         public string ram { get; set; }
-        public string rom { get; set; }
-        public string brand { get; set; }
-        public string color { get; set; }
+        public Nullable<int> id_brand { get; set; }
+        public Nullable<int> id_color { get; set; }
         public Nullable<int> quantity { get; set; }
         public Nullable<decimal> rate { get; set; }
         public Nullable<decimal> discount_price { get; set; }

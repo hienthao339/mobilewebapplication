@@ -33,10 +33,6 @@ namespace WebApplication1.Models.Functions
             users.email = model.email;
             users.passwords = model.passwords;
             users.is_admin = model.is_admin;
-            users.addresss = model.addresss;
-            users.names = model.names;
-            users.ranks = model.ranks;
-            users.phone = model.phone;
             users.avatar = model.avatar;
             db.SaveChanges();
             return model.id_user;

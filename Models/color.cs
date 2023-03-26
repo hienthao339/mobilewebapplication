@@ -12,21 +12,18 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class color
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public color()
         {
-            this.chats = new HashSet<chat>();
+            this.products = new HashSet<product>();
         }
     
-        public int id_user { get; set; }
-        public Nullable<bool> is_admin { get; set; }
-        public string email { get; set; }
-        public string passwords { get; set; }
-        public string avatar { get; set; }
+        public int id_color { get; set; }
+        public string names { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chat> chats { get; set; }
+        public virtual ICollection<product> products { get; set; }
     }
 }

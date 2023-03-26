@@ -20,17 +20,16 @@ namespace WebApplication1.Models.Functions
         {
             db.orders.Add(model);
             db.SaveChanges();
-            return model.id;
+            return model.id_order;
         }
         public int Update(order model)
         {
-            order order = db.orders.Find(model.id);
+            order order = db.orders.Find(model.id_order);
             if (order == null)
             {
                 return -1;
             }
-            order.id = model.id;
-            order.id_user = model.id_user;
+            order.id_order = model.id_order;
             order.pending = model.pending;
             order.payment_type = model.payment_type;
             order.total_price = model.total_price;
@@ -43,7 +42,7 @@ namespace WebApplication1.Models.Functions
             order.started_at = model.started_at;
             order.successed = model.successed;
             order.paid = model.paid;
-            return model.id;
+            return model.id_order;
         }
         public int Delete(int id)
         {

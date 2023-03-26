@@ -2131,9 +2131,9 @@
   function getUAString() {
     var uaData = navigator.userAgentData;
 
-    if (uaData != null && uaData.brands) {
-      return uaData.brands.map(function (item) {
-        return item.brand + "/" + item.version;
+    if (uaData != null && uaData.id_brands) {
+      return uaData.id_brands.map(function (item) {
+        return item.id_brand + "/" + item.version;
       }).join(' ');
     }
 

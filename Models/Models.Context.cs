@@ -25,8 +25,11 @@ namespace WebApplication1.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<brand> brands { get; set; }
         public virtual DbSet<cart> carts { get; set; }
         public virtual DbSet<chat> chats { get; set; }
+        public virtual DbSet<color> colors { get; set; }
+        public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<feedback> feedbacks { get; set; }
         public virtual DbSet<order_item> order_item { get; set; }
         public virtual DbSet<order> orders { get; set; }
