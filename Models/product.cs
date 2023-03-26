@@ -32,15 +32,16 @@ namespace WebApplication1.Models
         public string processor { get; set; }
         public string battery { get; set; }
         public string ram { get; set; }
-        public string rom { get; set; }
-        public string brand { get; set; }
-        public string color { get; set; }
+        public Nullable<int> id_brand { get; set; }
+        public Nullable<int> id_color { get; set; }
         public Nullable<int> quantity { get; set; }
         public Nullable<decimal> rate { get; set; }
         public Nullable<decimal> discount_price { get; set; }
     
+        public virtual brand brand { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cart> carts { get; set; }
+        public virtual color color { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_item> order_item { get; set; }
     }

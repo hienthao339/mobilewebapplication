@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>W.REX</title>
     <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/wwwroot/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/wwwroot/css/styles.css" asp-append-version="true" />
 
@@ -14,7 +15,7 @@
 
 
 </head>
-<body class="subpixel-antialiased">
+<body>
     <header class="flex-col">
         @*icon-bar*@
         <nav id="navbar">
@@ -26,7 +27,7 @@
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                        href="@Url.Action("Cart", "Home")"><i class="fa-solid fa-cart-shopping text-black"></i></a>
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
-                       href="@Url.Action("Search", "Home")" ><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
+                       href="#" ><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                        href="#" onclick="openMenu()"><i class="fa-solid fa-bars text-black"></i></a>
                 </div>
@@ -76,20 +77,18 @@
 
     <div class="flex w-full justify-between p-5">
         <div class="text-start">
-            <div class="text-lg font-medium my-4">SHOP</div>
+            <div class="text-lg font-bold my-4">SHOP</div>
             <ul class="list-unstyled mt-3 font-light text-sm">
                 <li class="mb-2">Apple</li>
                 <li class="mb-2">Samsung</li>
+                <li class="mb-2">Huawei</li>
+                <li class="mb-2">Xiaomi</li>
                 <li class="mb-2">Google</li>
                 <li class="mb-2">Oppo</li>
             </ul>
-            <div class="mt-4 font-semibold text-sm flex">
-                <input type="text" class="border-b py-2 pl-3 mr-4 text-xs" placeholder="Enter your email" />
-                <div class="bg-black py-2 px-3 text-uppercase rounded-md text-white font-semibold text-xs">send</div>
-            </div>
         </div>
         <div class="text-start">
-            <div class="text-lg font-medium my-4">SUPPORT</div>
+            <div class="text-lg font-bold my-4">SUPPORT</div>
             <ul class="list-unstyled mt-3 font-light text-sm">
                 <li class="mb-2">Product Support</li>
                 <li class="mb-2">Order Support</li>
@@ -100,7 +99,7 @@
             </ul>
         </div>
         <div class="text-start">
-            <div class="text-lg font-medium my-4">SOCIAL</div>
+            <div class="text-lg font-bold my-4">SOCIAL</div>
             <ul class="list-unstyled mt-3 font-light text-sm">
                 <li class="mb-2">Twitter</li>
                 <li class="mb-2">Facebook</li>
@@ -108,7 +107,7 @@
             </ul>
         </div>
         <div class="text-start">
-            <div class="text-lg font-medium my-4">MEMBERS</div>
+            <div class="text-lg font-bold my-4">MEMBERS</div>
             <ul class="list-unstyled mt-3 font-light text-sm">
                 <li class="mb-2">Tran Hien Thao</li>
                 <li class="mb-2">Pham Thieu Chau</li>

@@ -18,7 +18,6 @@ namespace WebApplication1.Models
         public user()
         {
             this.chats = new HashSet<chat>();
-            this.orders = new HashSet<order>();
         }
     
         public int id_user { get; set; }
@@ -26,15 +25,8 @@ namespace WebApplication1.Models
         public string email { get; set; }
         public string passwords { get; set; }
         public string avatar { get; set; }
-        public string names { get; set; }
-        public string phone { get; set; }
-        public string addresss { get; set; }
-        public Nullable<int> ranks { get; set; }
     
-        public virtual cart cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chat> chats { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<order> orders { get; set; }
     }
 }

@@ -18,6 +18,12 @@ namespace WebApplication1
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Add Cart",
+                url: "AddCart",
+                defaults: new { Controller = "Cart", action = "AddItem", id = UrlParameter.Optional }
+
+                );
         }
     }
 }

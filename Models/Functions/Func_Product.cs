@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Management;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using WebApplication1.Models.ViewModels;
 
 namespace WebApplication1.Models.Functions
@@ -18,6 +23,11 @@ namespace WebApplication1.Models.Functions
         public IQueryable<product> products
         {
             get { return db.products; }
+        }
+        public int Detail(int id)
+        {
+            product product = db.products.Find(id);
+            return product.id_product;
         }
         public int Insert(product product)
         {
@@ -35,12 +45,11 @@ namespace WebApplication1.Models.Functions
             products.id_product = product.id_product;
             products.names = product.names;
             products.price = product.price;
-            products.rom = product.rom;
             products.ram = product.ram;
             products.quantity = product.quantity;
             products.images = product.images;
             products.color = product.color;
-            products.brand = product.brand;
+            products.id_brand = product.id_brand;
             products.battery = product.battery;
             products.display = product.display;
             products.water_resistance = product.water_resistance;
@@ -72,12 +81,11 @@ namespace WebApplication1.Models.Functions
                             id_product = pro.id_product,
                             names = pro.names,
                             price = pro.price,
-                            rom = pro.rom,
                             ram = pro.ram,
                             quantity = pro.quantity,
                             images = pro.images,
-                            color = pro.color,
-                            brand = pro.brand,
+                            id_color = pro.id_color,
+                            id_brand = pro.id_brand,
                             battery = pro.battery,
                             display = pro.display,
                             water_resistance = pro.water_resistance,
@@ -99,12 +107,11 @@ namespace WebApplication1.Models.Functions
                             id_product = pro.id_product,
                             names = pro.names,
                             price = pro.price,
-                            rom = pro.rom,
                             ram = pro.ram,
                             quantity = pro.quantity,
                             images = pro.images,
-                            color = pro.color,
-                            brand = pro.brand,
+                            id_color = pro.id_color,
+                            id_brand = pro.id_brand,
                             battery = pro.battery,
                             display = pro.display,
                             water_resistance = pro.water_resistance,
@@ -114,10 +121,10 @@ namespace WebApplication1.Models.Functions
                             rate = pro.rate,
                             operating_system = pro.operating_system,
                         };
-            if (loaiTimKiem == "Brand")
+            if (loaiTimKiem == "id_brand")
             {
-                if (mucTimKiem == "==") listproductview = query.Where(m => m.brand == tenTiemKiem).ToList();
-                else listproductview = query.Where(m => m.brand == tenTiemKiem).ToList();
+                if (mucTimKiem == "==") listproductview = query.Where(m => m.brand.names == tenTiemKiem).ToList();
+                else listproductview = query.Where(m => m.brand.names == tenTiemKiem).ToList();
             }
             else if (loaiTimKiem == "Price")
             {
@@ -129,11 +136,6 @@ namespace WebApplication1.Models.Functions
                 if (mucTimKiem == "==") listproductview = query.Where(m => m.ram == tenTiemKiem).ToList();
                 else listproductview = query.Where(m => m.ram == tenTiemKiem).ToList();
             }
-            else if (loaiTimKiem == "Rom")
-            {
-                if (mucTimKiem == "==") listproductview = query.Where(m => m.rom == tenTiemKiem).ToList();
-                else listproductview = query.Where(m => m.rom == tenTiemKiem).ToList();
-            }
             else
             {
                 if (mucTimKiem == "==") listproductview = query.Where(m => m.names == tenTiemKiem).ToList();
@@ -141,6 +143,9 @@ namespace WebApplication1.Models.Functions
             }
             return listproductview;
         }
+
+      
+
         internal void Update()
         {
             throw new NotImplementedException();

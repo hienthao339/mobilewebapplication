@@ -14,11 +14,10 @@ namespace WebApplication1.Models
     
     public partial class cart
     {
-        public int id_user_cart { get; set; }
+        public int id_cart { get; set; }
         public Nullable<int> id_product { get; set; }
         public Nullable<int> quantity { get; set; }
     
         public virtual product product { get; set; }
-        public virtual user user { get; set; }
     }
 }

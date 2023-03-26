@@ -20,8 +20,8 @@ namespace WebApplication1.Models
             this.order_item = new HashSet<order_item>();
         }
     
-        public int id { get; set; }
-        public Nullable<int> id_user { get; set; }
+        public int id_order { get; set; }
+        public Nullable<int> id_customer { get; set; }
         public Nullable<bool> payment_type { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> started_at { get; set; }
@@ -34,9 +34,10 @@ namespace WebApplication1.Models
         public Nullable<bool> successed { get; set; }
         public Nullable<bool> canceled { get; set; }
         public Nullable<bool> paid { get; set; }
+        public string addresss { get; set; }
     
+        public virtual customer customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_item> order_item { get; set; }
-        public virtual user user { get; set; }
     }
 }
