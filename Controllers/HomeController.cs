@@ -58,5 +58,17 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        public ActionResult Order()
+        {
+            return View();
+        }
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+        public ActionResult Chats()
+        {
+            return View();
+        }
     }
 }
