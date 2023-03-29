@@ -6,31 +6,31 @@
 <main>
     <div class="flex justify-start p-5">
         <aside class="w-48" aria-label="Sidebar">
-            <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 @*dark:bg-gray-800*@">
+            <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50">
                 <ul class="space-y-2">
                     <li>
-                        <div href="#" class="items-center p-2 text-base font-normal text-gray-900 rounded-lg @*dark:text-white*@">
-                            <img class="relative h-75 w-75 ms-2 mb-3 rounded-lg" alt="Image placeholder" src="https://i.pinimg.com/564x/64/cf/6f/64cf6f2685b6939f1a9418289c3dd647.jpg" />
-                            <span class="ml-3">Name</span>
+                        <div href="#" class="items-center p-2 text-base font-normal text-gray-900 rounded-lg">
+                            <img class="relative h-75 w-75 ms-2 mb-3 rounded-lg" src="https://i.pinimg.com/564x/64/cf/6f/64cf6f2685b6939f1a9418289c3dd647.jpg" />
+                            <div class="ml-3">Name</div>
                         </div>
                     </li>
                     <li class="mt-5">
-                        <a href="@Url.Action("Dashboard", "Home")" class="flex items-center p-2 text-base  font-normal text-gray-900 rounded-lg @*dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700*@">
-                            <span class="ml-3">Dashboard</span>
+                        <a href="@Url.Action("Dashboard", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-blue-100 hover:text-blue-500">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-2 text-base  font-bold text-gray-900 rounded-lg @*dark:text-white*@">
+                        <a href="@Url.Action("Order", "Home")" class="flex items-center p-2 text-base font-medium text-blue-600 rounded-lg bg-blue-100 hover:bg-blue-200">
                             <span class="flex-1 ml-3 whitespace-nowrap">Orders</span>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Chats", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg @*dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700*@">
+                        <a href="@Url.Action("Chats", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-blue-100 hover:text-blue-500">
                             <span class="flex-1 ml-3 whitespace-nowrap">Chats</span>
                         </a>
                     </li>
                     <li class="mt-5">
-                        <a href="@Url.Action("Index", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg @*dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700*@">
+                        <a href="@Url.Action("Index", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 hover:text-blue-500">
                             <span class="flex-1 ml-3 whitespace-nowrap">Logout</span>
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         </a>
@@ -52,7 +52,7 @@
                 </li>
             </ul>
             <div id="defaultTabContent">
-                @*On process*@
+                @*On Process Tab*@
                 <div class="hidden bg-white rounded-lg" id="about" role="tabpanel" aria-labelledby="about-tab">
                     <div class="grid grid-cols-2 gap-4 p-3">
                         <div class="container border-solid border-black shadow-sm rounded">
@@ -65,9 +65,9 @@
                                 </div>
                                 <div class="flex">
                                     <span class="text-neutral-500 text-md">Mar 20, 2023</span>
-                                    <span class="text-neutral-500 text-md ms-4">Waiting</span>
+                                    <span class="text-neutral-500 text-sm ml-4">Waiting</span>
                                 </div>
-                                <ul class="list-disc list-inside my-3">
+                                <ul class="list-unstyled my-3">
                                     <li>Purple</li>
                                     <li>256GB</li>
                                 </ul>
@@ -75,8 +75,7 @@
                                     <span class="w-60 text-xl font-bold">$1,204.99</span>
                                     <div class="text-end">
                                         <a class="inline-flex text-neutral-500 text-md ms-4">
-                                            View More
-                                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                            View More 🡥
                                         </a>
                                     </div>
                                 </div>
@@ -92,9 +91,9 @@
                                 </div>
                                 <div class="flex">
                                     <span class="text-neutral-500 text-md">Mar 20, 2023</span>
-                                    <span class="text-neutral-500 text-md ms-4">Waiting</span>
+                                    <span class="text-neutral-500 text-sm ml-4">Waiting</span>
                                 </div>
-                                <ul class="list-disc list-inside my-3">
+                                <ul class="list-unstyled my-3">
                                     <li>Purple</li>
                                     <li>256GB</li>
                                 </ul>
@@ -102,23 +101,16 @@
                                     <span class="w-60 text-xl font-bold">$1,204.99</span>
                                     <div class="text-end">
                                         <a class="inline-flex text-neutral-500 text-md ms-4">
-                                            View More
-                                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                            View More 🡥
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-100 text-center">
-                        <a class="inline-flex text-neutral-500 text-md ms-4">
-                            View More
-                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        </a>
-                    </div>
                 </div>
 
-                @*Completed*@
+                @*Completed Tab*@
                 <div class="hidden bg-white rounded-lg" id="services" role="tabpanel" aria-labelledby="services-tab">
                     <div class="grid grid-cols-2 gap-4 p-3">
                         <div class="container border-solid border-black shadow-sm rounded">
@@ -131,9 +123,9 @@
                                 </div>
                                 <div class="flex">
                                     <span class="text-neutral-500 text-md">Mar 20, 2023</span>
-                                    <span class="text-neutral-500 text-md ms-4">Completed</span>
+                                    <span class="text-neutral-500 text-sm ml-4">Completed</span>
                                 </div>
-                                <ul class="list-disc list-inside my-3">
+                                <ul class="list-unstyled my-3">
                                     <li>Purple</li>
                                     <li>256GB</li>
                                 </ul>
@@ -141,8 +133,7 @@
                                     <span class="w-60 text-xl font-bold">$1,204.99</span>
                                     <div class="text-end">
                                         <a class="inline-flex text-neutral-500 text-md ms-4">
-                                            View More
-                                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                            View More 🡥
                                         </a>
                                     </div>
                                 </div>
@@ -158,9 +149,9 @@
                                 </div>
                                 <div class="flex">
                                     <span class="text-neutral-500 text-md">Mar 20, 2023</span>
-                                    <span class="text-neutral-500 text-md ms-4">Completed</span>
+                                    <span class="text-neutral-500 text-sm ml-4">Completed</span>
                                 </div>
-                                <ul class="list-disc list-inside my-3">
+                                <ul class="list-unstyled my-3">
                                     <li>Purple</li>
                                     <li>256GB</li>
                                 </ul>
@@ -168,23 +159,16 @@
                                     <span class="w-60 text-xl font-bold">$1,204.99</span>
                                     <div class="text-end">
                                         <a class="inline-flex text-neutral-500 text-md ms-4">
-                                            View More
-                                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                            View More 🡥
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-100 text-center">
-                        <a class="inline-flex text-neutral-500 text-md ms-4">
-                            View More
-                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        </a>
-                    </div>
                 </div>
 
-                @*Canceled*@
+                @*Canceled Tab*@
                 <div class="hidden bg-white rounded-lg" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
                     <div class="grid grid-cols-2 gap-4 p-3">
                         <div class="container border-solid border-black shadow-sm rounded">
@@ -197,9 +181,9 @@
                                 </div>
                                 <div class="flex">
                                     <span class="text-neutral-500 text-md">Mar 20, 2023</span>
-                                    <span class="text-neutral-500 text-md ms-4">Canceled</span>
+                                    <span class="text-neutral-500 text-sm ml-4">Canceled</span>
                                 </div>
-                                <ul class="list-disc list-inside my-3">
+                                <ul class="list-unstyled my-3">
                                     <li>Purple</li>
                                     <li>256GB</li>
                                 </ul>
@@ -207,8 +191,8 @@
                                     <span class="w-60 text-xl font-bold">$1,204.99</span>
                                     <div class="text-end">
                                         <a class="inline-flex text-neutral-500 text-md ms-4">
-                                            View More
-                                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                            View More 🡥
+                                            
                                         </a>
                                     </div>
                                 </div>
@@ -224,9 +208,9 @@
                                 </div>
                                 <div class="flex">
                                     <span class="text-neutral-500 text-md">Mar 20, 2023</span>
-                                    <span class="text-neutral-500 text-md ms-4">Canceled</span>
+                                    <span class="text-neutral-500 text-sm ml-4">Canceled</span>
                                 </div>
-                                <ul class="list-disc list-inside my-3">
+                                <ul class="list-unstyled my-3">
                                     <li>Purple</li>
                                     <li>256GB</li>
                                 </ul>
@@ -234,19 +218,13 @@
                                     <span class="w-60 text-xl font-bold">$1,204.99</span>
                                     <div class="text-end">
                                         <a class="inline-flex text-neutral-500 text-md ms-4">
-                                            View More
-                                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                            View More 🡥
+                                            
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="w-100 text-center">
-                        <a class="inline-flex text-neutral-500 text-md ms-4">
-                            View More
-                            <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                        </a>
                     </div>
                 </div>
             </div>

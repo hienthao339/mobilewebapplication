@@ -23,10 +23,19 @@
                     W.REX
                 </a>
                 <div class="flex gap-2">
+                    @*Dashboard -- temp*@
+                    <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
+                       href="@Url.Action("Dashboard", "Home")"><i class="fa-solid fa-user text-black"></i></a>
+
+                    @*Cart*@
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                        href="@Url.Action("Cart", "Home")"><i class="fa-solid fa-cart-shopping text-black"></i></a>
+
+                    @*Search*@
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
-                       href="@Url.Action("Search", "Home")" ><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
+                       href="@Url.Action("Search", "Home")"><i class="fa-solid fa-magnifying-glass text-black px-3"></i></a>
+
+                    @*Menu*@
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                        href="#" onclick="openMenu()"><i class="fa-solid fa-bars text-black"></i></a>
                 </div>
