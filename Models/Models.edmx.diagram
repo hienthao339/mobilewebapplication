@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="95232da1d5e146f89a719e17baaaafa5" Name="Diagram1">
+        <EntityTypeShape EntityType="MobileShoppingModel.brand" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.cart" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.chat" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.color" Width="1.5" PointX="3.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.feedback" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.order_item" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.order" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.product" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.promocode" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.rank" Width="1.5" PointX="1.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.user" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_brand_product" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_product_cart" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_user_cart" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_user_chat" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_color_product" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_feedback_order_item" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_order_order_item" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_product_order_item" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_promo_order" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_user_order" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_promo_product" ManuallyRouted="false" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_users_user" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

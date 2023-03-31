@@ -1,0 +1,862 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MobileShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="brand">
+          <Key>
+            <PropertyRef Name="id_brand" />
+          </Key>
+          <Property Name="id_brand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="names" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="id_cart" />
+          </Key>
+          <Property Name="id_cart" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="id_product" Type="int" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="chat">
+          <Key>
+            <PropertyRef Name="id_chat" />
+          </Key>
+          <Property Name="id_chat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="content" Type="varchar" MaxLength="500" />
+          <Property Name="create_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="color">
+          <Key>
+            <PropertyRef Name="id_color" />
+          </Key>
+          <Property Name="id_color" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="names" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="feedbacks">
+          <Key>
+            <PropertyRef Name="id_feedback_order_item" />
+          </Key>
+          <Property Name="id_feedback_order_item" Type="int" Nullable="false" />
+          <Property Name="content" Type="varchar" MaxLength="500" />
+          <Property Name="rate" Type="int" />
+          <Property Name="created_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="order_item">
+          <Key>
+            <PropertyRef Name="id_order_item" />
+          </Key>
+          <Property Name="id_order_item" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_order" Type="int" />
+          <Property Name="id_product" Type="int" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="payment_type" Type="bit" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="started_at" Type="datetime" />
+          <Property Name="finished_at" Type="datetime" />
+          <Property Name="shipping_fee" Type="int" />
+          <Property Name="total_price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="id_promo" Type="int" />
+          <Property Name="pending" Type="bit" />
+          <Property Name="delivering" Type="bit" />
+          <Property Name="successed" Type="bit" />
+          <Property Name="canceled" Type="bit" />
+          <Property Name="paid" Type="bit" />
+          <Property Name="addresss" Type="nvarchar" MaxLength="100" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" />
+          <Property Name="district" Type="nvarchar" MaxLength="100" />
+          <Property Name="ward" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="names" Type="varchar" MaxLength="100" />
+          <Property Name="images" Type="varchar" MaxLength="100" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="display" Type="varchar" MaxLength="100" />
+          <Property Name="weights" Type="varchar" MaxLength="100" />
+          <Property Name="water_resistance" Type="varchar" MaxLength="100" />
+          <Property Name="operating_system" Type="varchar" MaxLength="100" />
+          <Property Name="processor" Type="varchar" MaxLength="100" />
+          <Property Name="battery" Type="varchar" MaxLength="100" />
+          <Property Name="ram" Type="varchar" MaxLength="15" />
+          <Property Name="id_brand" Type="int" />
+          <Property Name="id_color" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="rate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="id_promo" Type="int" />
+        </EntityType>
+        <EntityType Name="promocode">
+          <Key>
+            <PropertyRef Name="id_promo" />
+          </Key>
+          <Property Name="id_promo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="10" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="started_at" Type="datetime" />
+          <Property Name="finished_at" Type="datetime" />
+          <Property Name="discount_price" Type="int" />
+        </EntityType>
+        <EntityType Name="ranks">
+          <Key>
+            <PropertyRef Name="id_rank" />
+          </Key>
+          <Property Name="id_rank" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="discount" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="is_admin" Type="bit" />
+          <Property Name="names" Type="nvarchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="passwords" Type="varchar" MaxLength="100" />
+          <Property Name="avatar" Type="varchar" MaxLength="100" />
+          <Property Name="phone" Type="varchar" MaxLength="10" />
+          <Property Name="id_rank" Type="int" />
+        </EntityType>
+        <Association Name="FK_id_brand_product">
+          <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="brand">
+              <PropertyRef Name="id_brand" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="id_brand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_color_product">
+          <End Role="color" Type="Self.color" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="color">
+              <PropertyRef Name="id_color" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="id_color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_feedback_order_item">
+          <End Role="order_item" Type="Self.order_item" Multiplicity="1" />
+          <End Role="feedbacks" Type="Self.feedbacks" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="order_item">
+              <PropertyRef Name="id_order_item" />
+            </Principal>
+            <Dependent Role="feedbacks">
+              <PropertyRef Name="id_feedback_order_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_order_order_item">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_product_cart">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_product_order_item">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_promo_order">
+          <End Role="promocode" Type="Self.promocode" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="promocode">
+              <PropertyRef Name="id_promo" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_promo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_promo_product">
+          <End Role="promocode" Type="Self.promocode" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="promocode">
+              <PropertyRef Name="id_promo" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="id_promo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_user_cart">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_user_chat">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="chat" Type="Self.chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="chat">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_user_order">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_users_user">
+          <End Role="ranks" Type="Self.ranks" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ranks">
+              <PropertyRef Name="id_rank" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="id_rank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MobileShoppingModelStoreContainer">
+          <EntitySet Name="brand" EntityType="Self.brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="chat" EntityType="Self.chat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="color" EntityType="Self.color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feedbacks" EntityType="Self.feedbacks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_item" EntityType="Self.order_item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="promocode" EntityType="Self.promocode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ranks" EntityType="Self.ranks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_id_brand_product" Association="Self.FK_id_brand_product">
+            <End Role="brand" EntitySet="brand" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_color_product" Association="Self.FK_id_color_product">
+            <End Role="color" EntitySet="color" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_feedback_order_item" Association="Self.FK_id_feedback_order_item">
+            <End Role="order_item" EntitySet="order_item" />
+            <End Role="feedbacks" EntitySet="feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_order_order_item" Association="Self.FK_id_order_order_item">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_product_cart" Association="Self.FK_id_product_cart">
+            <End Role="product" EntitySet="product" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_product_order_item" Association="Self.FK_id_product_order_item">
+            <End Role="product" EntitySet="product" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_promo_order" Association="Self.FK_id_promo_order">
+            <End Role="promocode" EntitySet="promocode" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_promo_product" Association="Self.FK_id_promo_product">
+            <End Role="promocode" EntitySet="promocode" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_user_cart" Association="Self.FK_id_user_cart">
+            <End Role="users" EntitySet="users" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_user_chat" Association="Self.FK_id_user_chat">
+            <End Role="users" EntitySet="users" />
+            <End Role="chat" EntitySet="chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_user_order" Association="Self.FK_id_user_order">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_users_user" Association="Self.FK_id_users_user">
+            <End Role="ranks" EntitySet="ranks" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MobileShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="brand">
+          <Key>
+            <PropertyRef Name="id_brand" />
+          </Key>
+          <Property Name="id_brand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="names" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK_id_brand_product" FromRole="brand" ToRole="product" />
+        </EntityType>
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="id_cart" />
+          </Key>
+          <Property Name="id_cart" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="id_product" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="product" Relationship="Self.FK_id_product_cart" FromRole="cart" ToRole="product" />
+          <NavigationProperty Name="user" Relationship="Self.FK_id_user_cart" FromRole="cart" ToRole="users" />
+        </EntityType>
+        <EntityType Name="chat">
+          <Key>
+            <PropertyRef Name="id_chat" />
+          </Key>
+          <Property Name="id_chat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="content" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="create_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="user" Relationship="Self.FK_id_user_chat" FromRole="chat" ToRole="users" />
+        </EntityType>
+        <EntityType Name="color">
+          <Key>
+            <PropertyRef Name="id_color" />
+          </Key>
+          <Property Name="id_color" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="names" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK_id_color_product" FromRole="color" ToRole="product" />
+        </EntityType>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="id_feedback_order_item" />
+          </Key>
+          <Property Name="id_feedback_order_item" Type="Int32" Nullable="false" />
+          <Property Name="content" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="rate" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="order_item" Relationship="Self.FK_id_feedback_order_item" FromRole="feedbacks" ToRole="order_item" />
+        </EntityType>
+        <EntityType Name="order_item">
+          <Key>
+            <PropertyRef Name="id_order_item" />
+          </Key>
+          <Property Name="id_order_item" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_order" Type="Int32" />
+          <Property Name="id_product" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="feedback" Relationship="Self.FK_id_feedback_order_item" FromRole="order_item" ToRole="feedbacks" />
+          <NavigationProperty Name="order" Relationship="Self.FK_id_order_order_item" FromRole="order_item" ToRole="orders" />
+          <NavigationProperty Name="product" Relationship="Self.FK_id_product_order_item" FromRole="order_item" ToRole="product" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="payment_type" Type="Boolean" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="started_at" Type="DateTime" Precision="3" />
+          <Property Name="finished_at" Type="DateTime" Precision="3" />
+          <Property Name="shipping_fee" Type="Int32" />
+          <Property Name="total_price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id_promo" Type="Int32" />
+          <Property Name="pending" Type="Boolean" />
+          <Property Name="delivering" Type="Boolean" />
+          <Property Name="successed" Type="Boolean" />
+          <Property Name="canceled" Type="Boolean" />
+          <Property Name="paid" Type="Boolean" />
+          <Property Name="addresss" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ward" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="order_item" Relationship="Self.FK_id_order_order_item" FromRole="orders" ToRole="order_item" />
+          <NavigationProperty Name="promocode" Relationship="Self.FK_id_promo_order" FromRole="orders" ToRole="promocode" />
+          <NavigationProperty Name="user" Relationship="Self.FK_id_user_order" FromRole="orders" ToRole="users" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="names" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="images" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="display" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="weights" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="water_resistance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="operating_system" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="processor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="battery" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ram" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="id_brand" Type="Int32" />
+          <Property Name="id_color" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="rate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id_promo" Type="Int32" />
+          <NavigationProperty Name="brand" Relationship="Self.FK_id_brand_product" FromRole="product" ToRole="brand" />
+          <NavigationProperty Name="carts" Relationship="Self.FK_id_product_cart" FromRole="product" ToRole="cart" />
+          <NavigationProperty Name="color" Relationship="Self.FK_id_color_product" FromRole="product" ToRole="color" />
+          <NavigationProperty Name="order_item" Relationship="Self.FK_id_product_order_item" FromRole="product" ToRole="order_item" />
+          <NavigationProperty Name="promocode" Relationship="Self.FK_id_promo_product" FromRole="product" ToRole="promocode" />
+        </EntityType>
+        <EntityType Name="promocode">
+          <Key>
+            <PropertyRef Name="id_promo" />
+          </Key>
+          <Property Name="id_promo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="started_at" Type="DateTime" Precision="3" />
+          <Property Name="finished_at" Type="DateTime" Precision="3" />
+          <Property Name="discount_price" Type="Int32" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_id_promo_order" FromRole="promocode" ToRole="orders" />
+          <NavigationProperty Name="products" Relationship="Self.FK_id_promo_product" FromRole="promocode" ToRole="product" />
+        </EntityType>
+        <EntityType Name="rank">
+          <Key>
+            <PropertyRef Name="id_rank" />
+          </Key>
+          <Property Name="id_rank" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="discount" Type="Int32" />
+          <NavigationProperty Name="users" Relationship="Self.FK_id_users_user" FromRole="ranks" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="is_admin" Type="Boolean" />
+          <Property Name="names" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="passwords" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="id_rank" Type="Int32" />
+          <NavigationProperty Name="carts" Relationship="Self.FK_id_user_cart" FromRole="users" ToRole="cart" />
+          <NavigationProperty Name="chats" Relationship="Self.FK_id_user_chat" FromRole="users" ToRole="chat" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_id_user_order" FromRole="users" ToRole="orders" />
+          <NavigationProperty Name="rank" Relationship="Self.FK_id_users_user" FromRole="users" ToRole="ranks" />
+        </EntityType>
+        <Association Name="FK_id_brand_product">
+          <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="brand">
+              <PropertyRef Name="id_brand" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="id_brand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_product_cart">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_user_cart">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_user_chat">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="chat" Type="Self.chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="chat">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_color_product">
+          <End Role="color" Type="Self.color" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="color">
+              <PropertyRef Name="id_color" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="id_color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_feedback_order_item">
+          <End Role="order_item" Type="Self.order_item" Multiplicity="1" />
+          <End Role="feedbacks" Type="Self.feedback" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="order_item">
+              <PropertyRef Name="id_order_item" />
+            </Principal>
+            <Dependent Role="feedbacks">
+              <PropertyRef Name="id_feedback_order_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_order_order_item">
+          <End Role="orders" Type="Self.order" Multiplicity="0..1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_product_order_item">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="order_item">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_promo_order">
+          <End Role="promocode" Type="Self.promocode" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="promocode">
+              <PropertyRef Name="id_promo" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_promo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_user_order">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_promo_product">
+          <End Role="promocode" Type="Self.promocode" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="promocode">
+              <PropertyRef Name="id_promo" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="id_promo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_users_user">
+          <End Role="ranks" Type="Self.rank" Multiplicity="0..1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ranks">
+              <PropertyRef Name="id_rank" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="id_rank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MobileShoppingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="brands" EntityType="Self.brand" />
+          <EntitySet Name="carts" EntityType="Self.cart" />
+          <EntitySet Name="chats" EntityType="Self.chat" />
+          <EntitySet Name="colors" EntityType="Self.color" />
+          <EntitySet Name="feedbacks" EntityType="Self.feedback" />
+          <EntitySet Name="order_item" EntityType="Self.order_item" />
+          <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="promocodes" EntityType="Self.promocode" />
+          <EntitySet Name="ranks" EntityType="Self.rank" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_id_brand_product" Association="Self.FK_id_brand_product">
+            <End Role="brand" EntitySet="brands" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_product_cart" Association="Self.FK_id_product_cart">
+            <End Role="product" EntitySet="products" />
+            <End Role="cart" EntitySet="carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_user_cart" Association="Self.FK_id_user_cart">
+            <End Role="users" EntitySet="users" />
+            <End Role="cart" EntitySet="carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_user_chat" Association="Self.FK_id_user_chat">
+            <End Role="users" EntitySet="users" />
+            <End Role="chat" EntitySet="chats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_color_product" Association="Self.FK_id_color_product">
+            <End Role="color" EntitySet="colors" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_feedback_order_item" Association="Self.FK_id_feedback_order_item">
+            <End Role="order_item" EntitySet="order_item" />
+            <End Role="feedbacks" EntitySet="feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_order_order_item" Association="Self.FK_id_order_order_item">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_product_order_item" Association="Self.FK_id_product_order_item">
+            <End Role="product" EntitySet="products" />
+            <End Role="order_item" EntitySet="order_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_promo_order" Association="Self.FK_id_promo_order">
+            <End Role="promocode" EntitySet="promocodes" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_user_order" Association="Self.FK_id_user_order">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_promo_product" Association="Self.FK_id_promo_product">
+            <End Role="promocode" EntitySet="promocodes" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_users_user" Association="Self.FK_id_users_user">
+            <End Role="ranks" EntitySet="ranks" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MobileShoppingModelStoreContainer" CdmEntityContainer="MobileShoppingEntities">
+          <EntitySetMapping Name="brands">
+            <EntityTypeMapping TypeName="MobileShoppingModel.brand">
+              <MappingFragment StoreEntitySet="brand">
+                <ScalarProperty Name="id_brand" ColumnName="id_brand" />
+                <ScalarProperty Name="names" ColumnName="names" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carts">
+            <EntityTypeMapping TypeName="MobileShoppingModel.cart">
+              <MappingFragment StoreEntitySet="cart">
+                <ScalarProperty Name="id_cart" ColumnName="id_cart" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chats">
+            <EntityTypeMapping TypeName="MobileShoppingModel.chat">
+              <MappingFragment StoreEntitySet="chat">
+                <ScalarProperty Name="id_chat" ColumnName="id_chat" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="colors">
+            <EntityTypeMapping TypeName="MobileShoppingModel.color">
+              <MappingFragment StoreEntitySet="color">
+                <ScalarProperty Name="id_color" ColumnName="id_color" />
+                <ScalarProperty Name="names" ColumnName="names" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feedbacks">
+            <EntityTypeMapping TypeName="MobileShoppingModel.feedback">
+              <MappingFragment StoreEntitySet="feedbacks">
+                <ScalarProperty Name="id_feedback_order_item" ColumnName="id_feedback_order_item" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_item">
+            <EntityTypeMapping TypeName="MobileShoppingModel.order_item">
+              <MappingFragment StoreEntitySet="order_item">
+                <ScalarProperty Name="id_order_item" ColumnName="id_order_item" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="MobileShoppingModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="started_at" ColumnName="started_at" />
+                <ScalarProperty Name="finished_at" ColumnName="finished_at" />
+                <ScalarProperty Name="shipping_fee" ColumnName="shipping_fee" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="id_promo" ColumnName="id_promo" />
+                <ScalarProperty Name="pending" ColumnName="pending" />
+                <ScalarProperty Name="delivering" ColumnName="delivering" />
+                <ScalarProperty Name="successed" ColumnName="successed" />
+                <ScalarProperty Name="canceled" ColumnName="canceled" />
+                <ScalarProperty Name="paid" ColumnName="paid" />
+                <ScalarProperty Name="addresss" ColumnName="addresss" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="ward" ColumnName="ward" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="MobileShoppingModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="names" ColumnName="names" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="display" ColumnName="display" />
+                <ScalarProperty Name="weights" ColumnName="weights" />
+                <ScalarProperty Name="water_resistance" ColumnName="water_resistance" />
+                <ScalarProperty Name="operating_system" ColumnName="operating_system" />
+                <ScalarProperty Name="processor" ColumnName="processor" />
+                <ScalarProperty Name="battery" ColumnName="battery" />
+                <ScalarProperty Name="ram" ColumnName="ram" />
+                <ScalarProperty Name="id_brand" ColumnName="id_brand" />
+                <ScalarProperty Name="id_color" ColumnName="id_color" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="id_promo" ColumnName="id_promo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="promocodes">
+            <EntityTypeMapping TypeName="MobileShoppingModel.promocode">
+              <MappingFragment StoreEntitySet="promocode">
+                <ScalarProperty Name="id_promo" ColumnName="id_promo" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="started_at" ColumnName="started_at" />
+                <ScalarProperty Name="finished_at" ColumnName="finished_at" />
+                <ScalarProperty Name="discount_price" ColumnName="discount_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ranks">
+            <EntityTypeMapping TypeName="MobileShoppingModel.rank">
+              <MappingFragment StoreEntitySet="ranks">
+                <ScalarProperty Name="id_rank" ColumnName="id_rank" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="MobileShoppingModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+                <ScalarProperty Name="names" ColumnName="names" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="passwords" ColumnName="passwords" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="id_rank" ColumnName="id_rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
