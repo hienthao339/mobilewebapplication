@@ -56,6 +56,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,15 +130,89 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CustomerHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\ShoppingController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\brand.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cart.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Carts.cs" />
+    <Compile Include="Models\chat.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\color.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\feedback.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Functions\Func_Cart.cs" />
+    <Compile Include="Models\Functions\Func_Order.cs" />
+    <Compile Include="Models\Functions\Func_Product.cs" />
+    <Compile Include="Models\Functions\Func_User.cs" />
+    <Compile Include="Models\Models.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Models.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Models.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Models.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\order.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\order_item.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\promocode.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rank.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\CartVM.cs" />
+    <Compile Include="Models\ViewModels\CustomerVM.cs" />
+    <Compile Include="Models\ViewModels\ProductVM.cs" />
+    <Compile Include="Models\ViewModels\SignInVM.cs" />
+    <Compile Include="Models\ViewModels\SignUpVM.cs" />
+    <Compile Include="Models\ViewModels\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Models\Models.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -247,6 +323,13 @@
     <Content Include="wwwroot\lib\jquery\dist\jquery.js" />
     <Content Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <Content Include="wwwroot\lib\jquery\LICENSE.txt" />
+    <EntityDeploy Include="Models\Models.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -309,10 +392,23 @@
     <Content Include="Views\Home\Chats.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Products\Detail.cshtml" />
+    <Content Include="Views\ShoppingCart\BagCart.cshtml" />
+    <Content Include="Views\ShoppingCart\ShoppingSuccess.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowToCart.cshtml" />
+    <Content Include="Views\User\SignIn.cshtml" />
+    <Content Include="Views\User\SignUp.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowToCart2.cshtml" />
+    <Content Include="Views\Cart\Cart_User.cshtml" />
+    <Content Include="Views\Cart\Add_Items.cshtml" />
+    <Content Include="Views\User\Details_Info.cshtml" />
+    <Content Include="Views\User\Edit_Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
+    <Folder Include="Views\Shopping\" />
     <Folder Include="wwwroot\Images\Avatars\" />
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +421,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

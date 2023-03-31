@@ -3,15 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Models;
+using WebApplication1.Models.Functions;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
+        private MobileShoppingEntities db = new MobileShoppingEntities();
         public ActionResult Index()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            if (Session["Account"] == null)
+            {
+                if (Request.Cookies["NameAccount"] != null)
+                {
+                    HttpCookie Email = Request.Cookies["NameAccount"];
+                    HttpCookie Password = Request.Cookies["Password"];
+                    var listAcc = db.users.Where(m => m.email == Email.Value && m.passwords == Password.Value).ToList();
+                    if (listAcc.Count != 0)
+                    {
+                        user Account = listAcc.First();
+                        Session["email"] = Account;
+                    }
+                }
+            }
+            List<product> products = db.products.ToList();
+            return View(products);
         }
+        public ActionResult SearchPage(string searching)
+        {
+            return View(db.products.Where(x => x.names.Contains(searching) || x.brand.names.Contains(searching) || searching == null).ToList());
+        }
+      
 
         public ActionResult About()
         {
@@ -55,18 +82,6 @@ namespace WebApplication1.Controllers
             return View();
         }
         public ActionResult Search()
-        {
-            return View();
-        }
-        public ActionResult Order()
-        {
-            return View();
-        }
-        public ActionResult Dashboard()
-        {
-            return View();
-        }
-        public ActionResult Chats()
         {
             return View();
         }
