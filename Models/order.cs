@@ -34,14 +34,12 @@ namespace WebApplication1.Models
         public Nullable<bool> successed { get; set; }
         public Nullable<bool> canceled { get; set; }
         public Nullable<bool> paid { get; set; }
-        public string addresss { get; set; }
-        public string city { get; set; }
-        public string district { get; set; }
-        public string ward { get; set; }
+        public Nullable<int> id_customer { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_item> order_item { get; set; }
         public virtual promocode promocode { get; set; }
         public virtual user user { get; set; }
+        public virtual customer customer { get; set; }
     }
 }

@@ -75,7 +75,8 @@ namespace WebApplication1.Controllers
         }
         public ActionResult ProductList()
         {
-            return View();
+            List<product> products = db.products.ToList();
+            return View(products);
         }
         public ActionResult Checkout()
         {

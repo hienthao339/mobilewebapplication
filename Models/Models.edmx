@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MobileShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MobileShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="brand">
           <Key>
             <PropertyRef Name="id_brand" />
@@ -36,6 +36,18 @@
           </Key>
           <Property Name="id_color" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="names" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id_customer" />
+          </Key>
+          <Property Name="id_customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="varchar" MaxLength="10" />
+          <Property Name="addresss" Type="nvarchar" MaxLength="100" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" />
+          <Property Name="district" Type="nvarchar" MaxLength="100" />
+          <Property Name="ward" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="feedbacks">
           <Key>
@@ -73,10 +85,7 @@
           <Property Name="successed" Type="bit" />
           <Property Name="canceled" Type="bit" />
           <Property Name="paid" Type="bit" />
-          <Property Name="addresss" Type="nvarchar" MaxLength="100" />
-          <Property Name="city" Type="nvarchar" MaxLength="100" />
-          <Property Name="district" Type="nvarchar" MaxLength="100" />
-          <Property Name="ward" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_customer" Type="int" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -151,6 +160,18 @@
             </Principal>
             <Dependent Role="product">
               <PropertyRef Name="id_color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_customer_oders">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="id_customer" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_customer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -279,6 +300,7 @@
           <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="chat" EntityType="Self.chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="color" EntityType="Self.color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="feedbacks" EntityType="Self.feedbacks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_item" EntityType="Self.order_item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
@@ -293,6 +315,10 @@
           <AssociationSet Name="FK_id_color_product" Association="Self.FK_id_color_product">
             <End Role="color" EntitySet="color" />
             <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_customer_oders" Association="Self.FK_id_customer_oders">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="orders" EntitySet="orders" />
           </AssociationSet>
           <AssociationSet Name="FK_id_feedback_order_item" Association="Self.FK_id_feedback_order_item">
             <End Role="order_item" EntitySet="order_item" />
@@ -335,8 +361,7 @@
             <End Role="users" EntitySet="users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MobileShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -417,13 +442,11 @@
           <Property Name="successed" Type="Boolean" />
           <Property Name="canceled" Type="Boolean" />
           <Property Name="paid" Type="Boolean" />
-          <Property Name="addresss" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ward" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="order_item" Relationship="Self.FK_id_order_order_item" FromRole="orders" ToRole="order_item" />
           <NavigationProperty Name="promocode" Relationship="Self.FK_id_promo_order" FromRole="orders" ToRole="promocode" />
           <NavigationProperty Name="user" Relationship="Self.FK_id_user_order" FromRole="orders" ToRole="users" />
+          <Property Name="id_customer" Type="Int32" />
+          <NavigationProperty Name="customer" Relationship="MobileShoppingModel.FK_id_customer_oders" FromRole="order" ToRole="customer" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -693,7 +716,37 @@
             <End Role="ranks" EntitySet="ranks" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
+          <EntitySet Name="customers" EntityType="MobileShoppingModel.customer" />
+          <AssociationSet Name="FK_id_customer_oders" Association="MobileShoppingModel.FK_id_customer_oders">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id_customer" />
+          </Key>
+          <Property Name="id_customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="addresss" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ward" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="orders" Relationship="MobileShoppingModel.FK_id_customer_oders" FromRole="customer" ToRole="order" />
+        </EntityType>
+        <Association Name="FK_id_customer_oders">
+          <End Type="MobileShoppingModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="MobileShoppingModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="id_customer" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -759,6 +812,7 @@
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="MobileShoppingModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
                 <ScalarProperty Name="id_order" ColumnName="id_order" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
                 <ScalarProperty Name="payment_type" ColumnName="payment_type" />
@@ -773,11 +827,7 @@
                 <ScalarProperty Name="successed" ColumnName="successed" />
                 <ScalarProperty Name="canceled" ColumnName="canceled" />
                 <ScalarProperty Name="paid" ColumnName="paid" />
-                <ScalarProperty Name="addresss" ColumnName="addresss" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="district" ColumnName="district" />
-                <ScalarProperty Name="ward" ColumnName="ward" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="products">
@@ -833,6 +883,19 @@
                 <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="id_rank" ColumnName="id_rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="MobileShoppingModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="ward" ColumnName="ward" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="addresss" ColumnName="addresss" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

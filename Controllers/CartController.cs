@@ -20,81 +20,35 @@ namespace WebApplication1.Controllers
         //Add_Items
         public ActionResult Add_Items(int id, int add_quantity = 1)
         {
-            if (Session["email"] != null)
-            {
-                user cus = Session["email"] as user;
-                var carts = db.carts.Where(x => x.id_user == cus.id_user).ToList();
-                var pro = db.products.Where(x => x.id_product == id).First();
-                if (pro != null || pro.quantity >= add_quantity)
-                {
-                    var cart = db.carts.Where(x => x.id_product == id && x.id_user == cus.id_user).FirstOrDefault();
-                    if (cart != null)
-                    {
-                        cart cart_user = new cart()
-                        {
-                            id_product = id,
-                            id_user = cus.id_user,
-                            quantity = add_quantity + 1,
-                        };
-                        var fcart = new Func_Cart();
-                        fcart.Update(cart_user);
-                    }
-                    if (cart == null)
-                    {
 
-                        cart cart_user = new cart()
-                        {
-                            id_product = id,
-                            id_user = cus.id_user,
-                            quantity = add_quantity,
-                        };
-                        var fcart = new Func_Cart();
-                        fcart.Insert(cart_user);
-                    }
-                }
-            }
-            else
+            user cus = Session["email"] as user;
+            var carts = db.carts.Where(x => x.id_user == cus.id_user).ToList();
+            var pro = db.products.Where(x => x.id_product == id).First();
+            if (pro != null || pro.quantity >= add_quantity)
             {
-                if (Session["gust"] == null)
+                var cart = db.carts.Where(x => x.id_product == id && x.id_user == cus.id_user).FirstOrDefault();
+                if (cart != null)
                 {
-                    user user = new user()
+                    cart cart_user = new cart()
                     {
-                        //user_type = "gust"
+                        id_product = id,
+                        id_user = cus.id_user,
+                        quantity = add_quantity + 1,
                     };
-                    db.users.Add(user);
-                    db.SaveChanges();
-                    Session["gust"] = user;
-                    var cart_user = db.carts.Where(x => x.id_user == user.id_user).ToList();
+                    var fcart = new Func_Cart();
+                    fcart.Update(cart_user);
                 }
-                user cus = Session["gust"] as user;
-                var carts = db.carts.Where(x => x.id_user == cus.id_user).ToList();
-
-                var pro = db.products.Where(x => x.id_product == id).First();
-                if (pro != null || pro.quantity >= add_quantity)
+                if (cart == null)
                 {
-                    var cart = db.carts.Where(x => x.id_product == id && x.id_user == cus.id_user).FirstOrDefault();
-                    if (cart != null)
+
+                    cart cart_user = new cart()
                     {
-                        cart cart_gust = new cart()
-                        {
-                            id_product = id,
-                            id_user = cus.id_user,
-                            quantity = add_quantity + 1,
-                        };
-                        var fcart = new Func_Cart();
-                        fcart.Update(cart_gust);
-                    }
-                    if (cart == null)
-                    {
-                        cart cart_gust = new cart()
-                        {
-                            id_product = id,
-                            id_user = cus.id_user,
-                            quantity = add_quantity,
-                        };
-                        var fcart = new Func_Cart();
-                        fcart.Insert(cart_gust);
-                    }
+                        id_product = id,
+                        id_user = cus.id_user,
+                        quantity = add_quantity,
+                    };
+                    var fcart = new Func_Cart();
+                    fcart.Insert(cart_user);
                 }
             }
             return RedirectToAction("Cart_User", "Cart");
@@ -108,18 +62,7 @@ namespace WebApplication1.Controllers
                 var cart_user = db.carts.Where(x => x.id_user == cus.id_user).ToList();
                 return View(cart_user);
             }
-            else
-            {
-                user user = new user()  
-                {
-                    //user_type = "gust"
-                };
-                db.users.Add(user);
-                db.SaveChanges();
-                Session["gust"] = user;
-                var cart_user = db.carts.Where(x => x.id_user == user.id_user).ToList();
-                return View(cart_user);
-            }
+           return RedirectToAction("Cart_User","Cart");
         }
         //Update_Quantity
         public ActionResult UpdateQuanity(FormCollection form)
@@ -128,7 +71,7 @@ namespace WebApplication1.Controllers
             int new_quantity = int.Parse(form["NEW_QUANTITY"]);
             int id_user = int.Parse(form["ID_USER"]);
             cart item = db.carts.Where(x => x.id_product == id && x.id_user == id_user).FirstOrDefault();
-            if( item != null && item.quantity >= new_quantity)
+            if (item != null && item.quantity >= new_quantity)
             {
                 cart carts = db.carts.Find(item.id_cart);
                 carts.id_product = item.id_product;
@@ -186,10 +129,7 @@ namespace WebApplication1.Controllers
                     canceled = false,
                     paid = false,
                     created_at = DateTime.Now,
-                    city = form["CITY"],
-                    district = form["DISTRICT"],
-                    ward = form["WARD"],
-                    addresss = form["ADDRESS"],
+                   
                 };
                 var forder = new Func_Order();
                 forder.Insert(orders);

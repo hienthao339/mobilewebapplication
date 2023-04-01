@@ -28,6 +28,8 @@
         <AssociationConnector Association="MobileShoppingModel.FK_id_user_order" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_promo_product" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_users_user" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MobileShoppingModel.customer" Width="1.5" PointX="8.375" PointY="9" />
+        <AssociationConnector Association="MobileShoppingModel.FK_id_customer_oders" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

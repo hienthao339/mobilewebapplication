@@ -4,7 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>W.REX</title>
 <link rel="stylesheet" href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/wwwroot/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/wwwroot/css/styles.css" asp-append-version="true" />
 
@@ -19,14 +18,10 @@
         <button onclick="sidebar_close()" class="w-full text-center py-4">
             <i class="fa-solid fa-x"></i>
         </button>
-        <ul class="list-unstyled font-medium">
-            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Dashboard</li>
-            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Product</li>
-            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Order</li>
-            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Chatbox</li>
-            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Discount</li>
-            <li class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer mt-6" style="border-radius: 50px 0 0 50px;"><a href="#"></a>Logout</li>
-        </ul>
+        <div class="list-unstyled font-medium">
+            <a class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer row" style="border-radius: 50px 0 0 50px;" href="/users/Index">Dashboard</a>
+            <a class="ml-4 px-4 py-3 hover:bg-gray-100 cursor-pointer row" style="border-radius: 50px 0 0 50px;" href="/products/Index">Product</a>
+        </div>
     </div>
 
     <div id="main">
@@ -35,7 +30,7 @@
             <button id="openNav" class="text-xl p-3" onclick="sidebar_open()"><i class="fa-solid fa-bars"></i></button>
         </div>
 
-        <div class="w-full mb-lg-5">
+        <div class="w-full mb-lg-5 overflow-scroll collapse-horizontal">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
@@ -64,17 +59,17 @@
     </div>
 
     <script>
-            function sidebar_open() {
-                document.getElementById("main").style.marginLeft = "25%";
-                document.getElementById("mySidebar").style.width = "25%";
-                document.getElementById("mySidebar").style.display = "block";
-                document.getElementById("openNav").style.display = 'none';
-            }
-            function sidebar_close() {
-                document.getElementById("main").style.marginLeft = "0%";
-                document.getElementById("mySidebar").style.display = "none";
-                document.getElementById("openNav").style.display = "inline-block";
-            }
+        function sidebar_open() {
+            document.getElementById("main").style.marginLeft = "20%";
+            document.getElementById("mySidebar").style.width = "20%";
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("openNav").style.display = 'none';
+        }
+        function sidebar_close() {
+            document.getElementById("main").style.marginLeft = "0%";
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("openNav").style.display = "inline-block";
+        }
     </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

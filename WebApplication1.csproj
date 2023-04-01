@@ -130,7 +130,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Admin\brandsController.cs" />
+    <Compile Include="Controllers\Admin\colorsController.cs" />
+    <Compile Include="Controllers\Admin\customersController.cs" />
+    <Compile Include="Controllers\Admin\ordersController.cs" />
+    <Compile Include="Controllers\Admin\order_itemController.cs" />
+    <Compile Include="Controllers\Admin\productsController.cs" />
+    <Compile Include="Controllers\Admin\promocodesController.cs" />
+    <Compile Include="Controllers\Admin\ranksController.cs" />
+    <Compile Include="Controllers\Admin\usersController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\CustomerHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -150,6 +160,9 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\color.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\feedback.cs">
@@ -193,6 +206,7 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\CartVM.cs" />
+    <Compile Include="Models\ViewModels\CheckOutVM.cs" />
     <Compile Include="Models\ViewModels\CustomerVM.cs" />
     <Compile Include="Models\ViewModels\ProductVM.cs" />
     <Compile Include="Models\ViewModels\SignInVM.cs" />
@@ -394,21 +408,68 @@
     <Content Include="Views\Home\Order.cshtml" />
     <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\ShoppingCart\BagCart.cshtml" />
-    <Content Include="Views\ShoppingCart\ShoppingSuccess.cshtml" />
     <Content Include="Views\ShoppingCart\ShowToCart.cshtml" />
     <Content Include="Views\User\SignIn.cshtml" />
     <Content Include="Views\User\SignUp.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
-    <Content Include="Views\ShoppingCart\ShowToCart2.cshtml" />
     <Content Include="Views\Cart\Cart_User.cshtml" />
     <Content Include="Views\Cart\Add_Items.cshtml" />
     <Content Include="Views\User\Details_Info.cshtml" />
     <Content Include="Views\User\Edit_Info.cshtml" />
+    <Content Include="Views\Shopping\ShowToCart.cshtml" />
+    <Content Include="Views\Shopping\Details_Pro.cshtml" />
+    <Content Include="Views\Shopping\ShoppingSuccess.cshtml" />
+    <Content Include="Views\CheckOut\CheckOut.cshtml" />
+    <Content Include="Views\Shopping\CheckOut.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\users\Create.cshtml" />
+    <Content Include="Views\users\Delete.cshtml" />
+    <Content Include="Views\users\Details.cshtml" />
+    <Content Include="Views\users\Edit.cshtml" />
+    <Content Include="Views\users\Index.cshtml" />
+    <Content Include="Views\customers\Create.cshtml" />
+    <Content Include="Views\customers\Delete.cshtml" />
+    <Content Include="Views\customers\Details.cshtml" />
+    <Content Include="Views\customers\Edit.cshtml" />
+    <Content Include="Views\customers\Index.cshtml" />
+    <Content Include="Views\brands\Create.cshtml" />
+    <Content Include="Views\brands\Delete.cshtml" />
+    <Content Include="Views\brands\Details.cshtml" />
+    <Content Include="Views\brands\Edit.cshtml" />
+    <Content Include="Views\brands\Index.cshtml" />
+    <Content Include="Views\colors\Create.cshtml" />
+    <Content Include="Views\colors\Delete.cshtml" />
+    <Content Include="Views\colors\Details.cshtml" />
+    <Content Include="Views\colors\Edit.cshtml" />
+    <Content Include="Views\colors\Index.cshtml" />
+    <Content Include="Views\orders\Create.cshtml" />
+    <Content Include="Views\orders\Delete.cshtml" />
+    <Content Include="Views\orders\Details.cshtml" />
+    <Content Include="Views\orders\Edit.cshtml" />
+    <Content Include="Views\orders\Index.cshtml" />
+    <Content Include="Views\order_item\Create.cshtml" />
+    <Content Include="Views\order_item\Delete.cshtml" />
+    <Content Include="Views\order_item\Details.cshtml" />
+    <Content Include="Views\order_item\Edit.cshtml" />
+    <Content Include="Views\order_item\Index.cshtml" />
+    <Content Include="Views\promocodes\Create.cshtml" />
+    <Content Include="Views\promocodes\Delete.cshtml" />
+    <Content Include="Views\promocodes\Details.cshtml" />
+    <Content Include="Views\promocodes\Edit.cshtml" />
+    <Content Include="Views\promocodes\Index.cshtml" />
+    <Content Include="Views\ranks\Create.cshtml" />
+    <Content Include="Views\ranks\Delete.cshtml" />
+    <Content Include="Views\ranks\Details.cshtml" />
+    <Content Include="Views\ranks\Edit.cshtml" />
+    <Content Include="Views\ranks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\Shopping\" />
     <Folder Include="wwwroot\Images\Avatars\" />
   </ItemGroup>
   <ItemGroup>

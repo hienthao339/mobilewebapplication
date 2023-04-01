@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication1.Models.Functions;
 
 namespace WebApplication1.Models.ViewModels
 {
-   
+    public partial class cartItem
+    { 
+        public Nullable<int> id_user { get; set; }
+        public Nullable<int> quantity { get; set; }
+
+        public virtual product product { get; set; }
+        public virtual user user { get; set; }
+    }
     public class CartVM
     {
-        List<cart> items = new List<cart>();
-        public IEnumerable<cart> Items { get { return items; } }
+        List<cartItem> items = new List<cartItem>();
+        public IEnumerable<cartItem> Items { get { return items; } }
 
         MobileShoppingEntities db = new MobileShoppingEntities();
 
@@ -19,12 +27,12 @@ namespace WebApplication1.Models.ViewModels
             if (item == null)
             {
                 // neu chua co thi them moi san pham voi so luong = 1
-                items.Add(new cart
+                items.Add(new cartItem
                 {
                     id_user = id_user,
                     product = pro,
                     quantity = quantity,
-                }) ;
+                });
             }
             else
             {
@@ -38,7 +46,7 @@ namespace WebApplication1.Models.ViewModels
             if (item == null)
             {
                 // neu chua co thi them moi san pham voi so luong = 1
-                items.Add(new cart
+                items.Add(new cartItem
                 {
                     product = pro,
                     quantity = quantity,

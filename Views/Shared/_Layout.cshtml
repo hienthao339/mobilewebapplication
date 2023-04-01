@@ -35,7 +35,7 @@
                         </a>
                         @*Cart*@
                         <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
-                           href="@Url.Action("Cart_User", "Cart", new {id = ((WebApplication1.Models.user)Session["email"]).id_user})"><i class="fa-solid fa-cart-shopping text-black"></i></a>
+                           href="@Url.Action("ShowToCart", "Shopping", new {id = ((WebApplication1.Models.user)Session["email"]).id_user})"><i class="fa-solid fa-cart-shopping text-black"></i></a>
                     }
                     else if (Session["email"] == null)
                     {
@@ -47,7 +47,7 @@
 
                         @*Cart*@
                         <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
-                           href="@Url.Action("Cart_User", "Cart")"><i class="fa-solid fa-cart-shopping text-black"></i></a>
+                           href="@Url.Action("ShowToCart", "ShoppingCart")"><i class="fa-solid fa-cart-shopping text-black"></i></a>
                     }
                     @*Search*@
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
