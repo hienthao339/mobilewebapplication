@@ -1,0 +1,112 @@
+﻿@model IEnumerable<WebApplication1.Models.order>
+
+@{
+    ViewBag.Title = "Index";
+      Layout = "../../Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.payment_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.started_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.finished_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.shipping_fee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pending)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.delivering)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.successed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.canceled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.promocode.code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.names)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer.email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.payment_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_at)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.started_at)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.finished_at)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shipping_fee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pending)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.delivering)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.successed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.canceled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.promocode.code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.names)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer.email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_order }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_order }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_order })
+        </td>
+    </tr>
+}
+
+</table>

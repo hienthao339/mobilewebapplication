@@ -1,0 +1,75 @@
+﻿@model WebApplication1.Models.user
+
+@{
+    ViewBag.Title = "Details";
+      Layout = "../../Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>user</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.is_admin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.is_admin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.names)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.names)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passwords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passwords)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.avatar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.avatar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rank.id_rank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rank.id_rank)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_user }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
