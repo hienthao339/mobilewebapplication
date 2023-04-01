@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApplication1.Models.order_item>
+
+@{
+    ViewBag.Title = "ShoppingSuccess";
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.product.names)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.product.names)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+        </tr>
+    }
+
+</table>
