@@ -1,4 +1,0 @@
-Step 1. Right click on Solution Explorer
-Step 2. Choose Restore Nuget Packages
-Step 3. Rebuild Solution
-Step 4. Run
