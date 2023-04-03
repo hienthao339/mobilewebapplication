@@ -111,15 +111,14 @@
             Crafted in part with recycled glass and ocean-bound plastic,
             each phone comes in a recycled paper box.
         </div>
-        <div class="btn py-2 px-3 mx-autobg-black text-white rounded-full cursor-pointer mt-3 mb-4 font-semibold text-xs" style="width:fit-content;">
+        <a href="@Url.Action("ProductList", "Home")" class="btn py-2 px-3 mx-auto bg-black text-white rounded-full cursor-pointer mt-3 mb-4 font-semibold text-xs " style="width:fit-content;">
             View More 🡥
-        </div>
+        </a>
     </div>
 
 
 
     @*product-mini-list*@
-
     <div class="grid grid-cols-4 gap-4 justify-content-between mx-auto mt-lg-5 px-4">
         @foreach (var item in Model)
         {
@@ -127,36 +126,38 @@
             {
                 <div class="flex justify-center text-md">
                     <div class="block max-w-sm rounded-lg bg-white shadow-lg">
-                        <a href="#!">
+                        <a href="/Shopping/Details_Pro/@item.id_product">
+                            @*<a href="#!">*@
                             <img class="rounded-t-lg"
                                  src="~/@Html.DisplayFor(modelItem => item.images)"
                                  alt="" />
-                        </a>
-                        <div class="p-3 font-medium">
-                            <div class="flex flex-row justify-between pb-3 border-bottom">
-                                <p>$@Html.DisplayFor(modelItem => item.price)</p>
-                                <div class="flex flex-row">
-                                    <p class="px-2">@Html.DisplayFor(modelItem => item.rate)</p>
-                                    <i class="fa-solid fa-star text-warning"></i>
+                            @*</a>*@
+                            <div class="p-3 font-medium">
+                                <div class="flex flex-row justify-between pb-3 border-bottom">
+                                    <p>$@Html.DisplayFor(modelItem => item.price)</p>
+                                    <div class="flex flex-row">
+                                        <p class="px-2">@Html.DisplayFor(modelItem => item.rate)</p>
+                                        <i class="fa-solid fa-star text-warning"></i>
+                                    </div>
                                 </div>
+
+                                <h5 class="mt-4 mb-3  leading-tight text-neutral-800 dark:text-neutral-50">
+                                    @Html.DisplayFor(modelItem => item.names)
+                                </h5>
+                                <p class="mb-4   text-neutral-500 font-light">
+                                    Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.
+                                </p>
+
+                                @*<div class="flex flex-row justify-between align-items-center font-semibold">
+                                        <a class="py-2 px-3 py-2 px-3 rounded-2xl bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-xs" href="/Shopping/Details_Pro/@item.id_product">
+                                            Details
+                                        </a>
+                                        <a href="#" class="text-blue-600 font-light">Learn More 🡥</a>
+                                    </div>*@
+
                             </div>
-
-                            <h5 class="mt-4 mb-3  leading-tight text-neutral-800 dark:text-neutral-50">
-                                @Html.DisplayFor(modelItem => item.names)
-                            </h5>
-                            <p class="mb-4   text-neutral-500 font-light">
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </p>
-
-                            <div class="flex flex-row justify-between align-items-center font-semibold">
-                                <a class="py-2 px-3 py-2 px-3 rounded-2xl bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-xs" href="/Shopping/Details_Pro/@item.id_product">
-                                    Details
-                                </a>
-                                <a href="#" class="text-blue-600 font-light">Learn More 🡥</a>
-                            </div>
-
-                        </div>
+                        </a>
                     </div>
                 </div>
             }

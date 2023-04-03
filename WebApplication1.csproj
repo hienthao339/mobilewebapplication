@@ -139,13 +139,13 @@
     <Compile Include="Controllers\Admin\promocodesController.cs" />
     <Compile Include="Controllers\Admin\ranksController.cs" />
     <Compile Include="Controllers\Admin\usersController.cs" />
-    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\CustomerHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -412,8 +412,6 @@
     <Content Include="Views\User\SignIn.cshtml" />
     <Content Include="Views\User\SignUp.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
-    <Content Include="Views\Cart\Cart_User.cshtml" />
-    <Content Include="Views\Cart\Add_Items.cshtml" />
     <Content Include="Views\User\Details_Info.cshtml" />
     <Content Include="Views\User\Edit_Info.cshtml" />
     <Content Include="Views\Shopping\ShowToCart.cshtml" />
@@ -466,6 +464,9 @@
     <Content Include="Views\ranks\Details.cshtml" />
     <Content Include="Views\ranks\Edit.cshtml" />
     <Content Include="Views\ranks\Index.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\Shopping\BagCart.cshtml" />
+    <Content Include="Views\Shopping\Buy_now.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

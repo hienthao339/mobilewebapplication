@@ -40,7 +40,7 @@ namespace WebApplication1.Models.ViewModels
                 item.quantity += quantity;
             }
         }
-        public void Add_Gust(product pro, int quantity = 1)
+        public void Add_guest(product pro, int quantity = 1)
         {
             var item = items.FirstOrDefault(x => x.product.id_product == pro.id_product);
             if (item == null)
@@ -67,7 +67,7 @@ namespace WebApplication1.Models.ViewModels
                 item.quantity = quantity;
             }
         }
-        public void Update_Quantity_Gust(int id, int quantity)
+        public void Update_Quantity_guest(int id, int quantity)
         {
             var item = items.Find(x => x.product.id_product == id );
             if (item != null)

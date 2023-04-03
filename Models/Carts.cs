@@ -42,12 +42,20 @@ namespace WebApplication1.Models
             }
         }
         // update lai so luong trong gio hang
-        public void Update_Quantity_Shopping(int id, int quantity)
+        public void btn_Decrease(int id)
         {
             var item = items.Find(x => x.Shopping_product.id_product == id);
-            if (item != null)
+            if (item != null && item.Shopping_quantity > 1 )
             {
-                item.Shopping_quantity = quantity;
+                item.Shopping_quantity = item.Shopping_quantity - 1;
+            }
+        }
+        public void btn_Increase(int id)
+        {
+            var item = items.Find(x => x.Shopping_product.id_product == id);
+            if (item != null &&   item.Shopping_product.quantity >= 1 && item.Shopping_quantity <= item.Shopping_product.quantity)
+            {
+                item.Shopping_quantity = item.Shopping_quantity + 1;
             }
         }
         public double Total_Price()

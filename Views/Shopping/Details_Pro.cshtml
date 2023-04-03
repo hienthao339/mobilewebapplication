@@ -4,6 +4,7 @@
     ViewBag.Title = "Details_Pro";
 }
 
+@Html.Partial("_Notifications")
 <main>
     <div>
         <div class="text-xs">
@@ -59,7 +60,6 @@
                             <fieldset class="mt-2">
                                 <legend class="sr-only">Choose a color</legend>
                                 <div class="flex items-center space-x-3">
-
                                     <label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
                                         <input type="radio" name="color-choice" value="White" class="sr-only" aria-labelledby="color-choice-0-label">
                                         <span id="color-choice-0-label" class="sr-only"> White </span>
@@ -98,25 +98,22 @@
                         </div>
                         @if (Session["email"] != null)
                         {
-                            <a class="py-2 px-3 py-2 px-3 rounded-2xl bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-xs" href="/Shopping/AddToCart/@Html.DisplayFor(model => model.id_product)">
-                                Add To Cart
-                            </a>
-                            @*<button class="w-full py-3 rounded-md bg-gray-100 hover:bg-gray-200 mb-2 mt-6 font-medium" href="/Shopping/AddToCart/@Html.DisplayFor(model => model.id_product)">Add To Cart</button>
-            <button class="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium">Buy</button>*@
 
-
-                            @*<a class="py-3 row text-center rounded-md bg-gray-100 hover:bg-gray-200 cursor-pointer text-white text-xs" href="/Shopping/AddToCart/@Html.DisplayFor(model => model.id_product)">
-                                Add To Cart
+                            <a href="/Shopping/AddToCart/@Html.DisplayFor(model => model.id_product)">
+                                <div style="text-decoration:none; color:black;text-align:center" class="w-full py-3 rounded-md bg-gray-100 hover:bg-gray-200 mb-2 mt-6 font-medium" )">Add To Cart</div>
                             </a>
-                            <a href="#" class="row text-center py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium">Buy</a>*@
+                            <a href="/Shopping/BuyNow/@Html.DisplayFor(model => model.id_product)">
+                                <div style="text-decoration:none; color:black;text-align:center" class="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium" )">Buy</div>
+                            </a>
                         }
                         else
                         {
-                            <a class="py-2 px-3 py-2 px-3 rounded-2xl bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-xs" href="/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.id_product)">
-                                Details
+                            <a href="/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.id_product)">
+                                <div style="text-decoration:none; color:black;text-align:center" class="w-full py-3 rounded-md bg-gray-100 hover:bg-gray-200 mb-2 mt-6 font-medium" )">Add To Cart</div>
                             </a>
-                            <button class="w-full py-3 rounded-md bg-gray-100 hover:bg-gray-200 mb-2 mt-6 font-medium" href="/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.id_product)">Add To Cart</button>
-                            <button class="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium">Buy</button>
+                            <a href="/ShoppingCart/BuyNow/@Html.DisplayFor(model => model.id_product)">
+                                <div style="text-decoration:none; color:black;text-align:center" class="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium" )">Buy</div>
+                            </a>
                         }
                     </form>
                 </div>
@@ -126,7 +123,7 @@
                         <div class="space-y-1 font-medium dark:text-white">
                             <p>
                                 Jese Leos <time datetime="2014-08-16 19:00"
-                                                class="block text-gray-500 dark:text-gray-400">Joined on August 2014</time>
+                                                class="block text-gray-500 dark:text-gray-400">Joined on Auguest 2014</time>
                             </p>
                         </div>
                     </div>
@@ -150,6 +147,8 @@
                         </div>
                     </aside>
                 </div>
+
+
                 <div class="col-span-2 m-4">
                     <div class="row">
                         <div class="flex items-center mb-3">
