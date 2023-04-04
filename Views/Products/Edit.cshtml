@@ -98,18 +98,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.id_brand, "id_brand", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.brand, "brand", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id_brand", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.id_brand, "", new { @class = "text-danger" })
+                @Html.DropDownList("brand", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.brand, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.id_color, "id_color", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.color, "color", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id_color", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.id_color, "", new { @class = "text-danger" })
+                @Html.DropDownList("color", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.color, "", new { @class = "text-danger" })
             </div>
         </div>
 

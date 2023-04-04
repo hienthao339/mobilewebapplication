@@ -130,8 +130,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\Admin\brandsController.cs" />
-    <Compile Include="Controllers\Admin\colorsController.cs" />
     <Compile Include="Controllers\Admin\customersController.cs" />
     <Compile Include="Controllers\Admin\ordersController.cs" />
     <Compile Include="Controllers\Admin\order_itemController.cs" />
@@ -139,8 +137,6 @@
     <Compile Include="Controllers\Admin\promocodesController.cs" />
     <Compile Include="Controllers\Admin\ranksController.cs" />
     <Compile Include="Controllers\Admin\usersController.cs" />
-    <Compile Include="Controllers\CheckOutController.cs" />
-    <Compile Include="Controllers\CustomerHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
@@ -149,17 +145,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\brand.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\cart.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Carts.cs" />
     <Compile Include="Models\chat.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\color.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\customer.cs">
@@ -196,10 +186,16 @@
     <Compile Include="Models\product.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\product_seri.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\promocode.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rank.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
@@ -238,68 +234,64 @@
     <Content Include="wwwroot\Images\Others\Frame 32.png" />
     <Content Include="wwwroot\Images\Others\Group 51.png" />
     <Content Include="wwwroot\Images\Others\Group 52.png" />
-    <Content Include="wwwroot\Images\Products\find-n2-flip-black.png" />
-    <Content Include="wwwroot\Images\Products\find-n2-flip-purple.png" />
-    <Content Include="wwwroot\Images\Products\find-x5-black.png" />
-    <Content Include="wwwroot\Images\Products\find-x5-white.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s22+_black.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s22+_green.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s22+_pink.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s22+_white.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s23+_black.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s23+_cream.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s23+_green.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s23+_purple.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s23_ultra_black.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s23_ultra_cream.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s23_ultra_green.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_s23_ultra_purple.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_z_flip_4_blue.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_z_flip_4_gold.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_z_flip_4_grey.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_z_flip_4_purple.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_z_fold_4_beige.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_z_fold_4_black.png" />
-    <Content Include="wwwroot\Images\Products\galaxy_z_fold_4_green.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-black.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-blue.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-green.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-mini-blue.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-mini-green.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-mini-pink.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-mini-red.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-mini-white.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-pink.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-red.png" />
-    <Content Include="wwwroot\Images\Products\iphone-13-white.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-black.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-blue.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-pro-black.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-pro-gold.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-pro-max-black.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-pro-max-gold.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-pro-max-purple.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-pro-max-silver.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-pro-purple.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-pro-silver.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-red.png" />
-    <Content Include="wwwroot\Images\Products\iphone-14-white.png" />
-    <Content Include="wwwroot\Images\Products\iphone14-purple.png" />
-    <Content Include="wwwroot\Images\Products\pixel-6a-black.png" />
-    <Content Include="wwwroot\Images\Products\pixel-6a-green.png" />
-    <Content Include="wwwroot\Images\Products\pixel-6a-white.png" />
-    <Content Include="wwwroot\Images\Products\pixel-7-black.png" />
-    <Content Include="wwwroot\Images\Products\pixel-7-green.png" />
-    <Content Include="wwwroot\Images\Products\pixel-7-pro-black.png" />
-    <Content Include="wwwroot\Images\Products\pixel-7-pro-green.png" />
-    <Content Include="wwwroot\Images\Products\pixel-7-pro-white.png" />
-    <Content Include="wwwroot\Images\Products\pixel-7-white.png" />
-    <Content Include="wwwroot\Images\Products\reno8-black.png" />
-    <Content Include="wwwroot\Images\Products\reno8-gold.png" />
-    <Content Include="wwwroot\Images\Products\xiaomi-12t-all.png" />
-    <Content Include="wwwroot\Images\Products\xiaomi-12t-black.png" />
-    <Content Include="wwwroot\Images\Products\xiaomi-13-pro-all.png" />
-    <Content Include="wwwroot\Images\Products\xiaomi-note-11-pro-all.png" />
+    <Content Include="wwwroot\Images\Products\1.png" />
+    <Content Include="wwwroot\Images\Products\10.png" />
+    <Content Include="wwwroot\Images\Products\11.png" />
+    <Content Include="wwwroot\Images\Products\12.png" />
+    <Content Include="wwwroot\Images\Products\13.png" />
+    <Content Include="wwwroot\Images\Products\14.png" />
+    <Content Include="wwwroot\Images\Products\15.png" />
+    <Content Include="wwwroot\Images\Products\16.png" />
+    <Content Include="wwwroot\Images\Products\17.png" />
+    <Content Include="wwwroot\Images\Products\18.png" />
+    <Content Include="wwwroot\Images\Products\19.png" />
+    <Content Include="wwwroot\Images\Products\2.png" />
+    <Content Include="wwwroot\Images\Products\20.png" />
+    <Content Include="wwwroot\Images\Products\21.png" />
+    <Content Include="wwwroot\Images\Products\22.png" />
+    <Content Include="wwwroot\Images\Products\23.png" />
+    <Content Include="wwwroot\Images\Products\24.png" />
+    <Content Include="wwwroot\Images\Products\25.png" />
+    <Content Include="wwwroot\Images\Products\26.png" />
+    <Content Include="wwwroot\Images\Products\27.png" />
+    <Content Include="wwwroot\Images\Products\28.png" />
+    <Content Include="wwwroot\Images\Products\29.png" />
+    <Content Include="wwwroot\Images\Products\3.png" />
+    <Content Include="wwwroot\Images\Products\30.png" />
+    <Content Include="wwwroot\Images\Products\31.png" />
+    <Content Include="wwwroot\Images\Products\32.png" />
+    <Content Include="wwwroot\Images\Products\33.png" />
+    <Content Include="wwwroot\Images\Products\34.png" />
+    <Content Include="wwwroot\Images\Products\35.png" />
+    <Content Include="wwwroot\Images\Products\36.png" />
+    <Content Include="wwwroot\Images\Products\37.png" />
+    <Content Include="wwwroot\Images\Products\38.png" />
+    <Content Include="wwwroot\Images\Products\39.png" />
+    <Content Include="wwwroot\Images\Products\4.png" />
+    <Content Include="wwwroot\Images\Products\40.png" />
+    <Content Include="wwwroot\Images\Products\41.png" />
+    <Content Include="wwwroot\Images\Products\42.png" />
+    <Content Include="wwwroot\Images\Products\43.png" />
+    <Content Include="wwwroot\Images\Products\44.png" />
+    <Content Include="wwwroot\Images\Products\45.png" />
+    <Content Include="wwwroot\Images\Products\46.png" />
+    <Content Include="wwwroot\Images\Products\47.png" />
+    <Content Include="wwwroot\Images\Products\48.png" />
+    <Content Include="wwwroot\Images\Products\49.png" />
+    <Content Include="wwwroot\Images\Products\5.png" />
+    <Content Include="wwwroot\Images\Products\50.png" />
+    <Content Include="wwwroot\Images\Products\51.png" />
+    <Content Include="wwwroot\Images\Products\52.png" />
+    <Content Include="wwwroot\Images\Products\53.png" />
+    <Content Include="wwwroot\Images\Products\54.png" />
+    <Content Include="wwwroot\Images\Products\55.png" />
+    <Content Include="wwwroot\Images\Products\56.png" />
+    <Content Include="wwwroot\Images\Products\57.png" />
+    <Content Include="wwwroot\Images\Products\58.png" />
+    <Content Include="wwwroot\Images\Products\6.png" />
+    <Content Include="wwwroot\Images\Products\7.png" />
+    <Content Include="wwwroot\Images\Products\8.png" />
+    <Content Include="wwwroot\Images\Products\9.png" />
     <Content Include="wwwroot\Images\Slides\apple.png" />
     <Content Include="wwwroot\Images\Slides\google.png" />
     <Content Include="wwwroot\Images\Slides\oppo.png" />
@@ -417,7 +409,6 @@
     <Content Include="Views\Shopping\ShowToCart.cshtml" />
     <Content Include="Views\Shopping\Details_Pro.cshtml" />
     <Content Include="Views\Shopping\ShoppingSuccess.cshtml" />
-    <Content Include="Views\CheckOut\CheckOut.cshtml" />
     <Content Include="Views\Shopping\CheckOut.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
@@ -467,6 +458,11 @@
     <Content Include="Views\Shared\_Notifications.cshtml" />
     <Content Include="Views\Shopping\BagCart.cshtml" />
     <Content Include="Views\Shopping\Buy_now.cshtml" />
+    <Content Include="Views\Home\SearchPage.cshtml" />
+    <Content Include="Views\Home\SearchOrders.cshtml" />
+    <Content Include="Views\Home\YourOrders.cshtml" />
+    <Content Include="Views\Home\SearchOrderPage.cshtml" />
+    <Content Include="Views\Home\Details_Pro_Seri.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -31,22 +31,41 @@ namespace WebApplication1.Controllers
                     }
                 }
             }
-            List<product> products = db.products.ToList();
-            return View(products);
+            List<product_seri> product_Seris = db.product_seri.ToList();
+            return View(product_Seris);
         }
         public ActionResult SearchPage(string searching)
         {
-            return View(db.products.Where(x => x.names.Contains(searching) || x.brand.names.Contains(searching) || searching == null).ToList());
+            return View(db.product_seri.Where(x => x.name_seri.Contains(searching) || x.brand.Contains(searching) || searching == null).ToList());
         }
-      
-
+        public ActionResult SearchOrders(string searchOrders)
+        {
+            var cus = db.customers.Where(x=>x.phone == searchOrders || x.email == searchOrders).FirstOrDefault();
+            return RedirectToAction("YourOrders", "Home", new { id = cus.id_customer });
+        }
+        public ActionResult SearchOrderPage()
+        {
+            return View();
+        }
+        public ActionResult YourOrders(int id)
+        {
+            var cus = db.customers.Where(x=>x.id_customer == id).FirstOrDefault();
+            Session["Customer"] = cus;
+            var order_items = db.order_item.Where(x=>x.order.id_customer == id).ToList();
+            return View(order_items);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
+        public ActionResult Details_Pro_Seri(int id)
+        {
+            var pro_seri = db.product_seri.Where(x=>x.id_product_seri == id).FirstOrDefault();
+            var pro = db.products.Where(x => x.names == pro_seri.name_seri).ToList();
+            return View(pro);
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

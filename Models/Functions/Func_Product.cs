@@ -49,7 +49,7 @@ namespace WebApplication1.Models.Functions
             products.quantity = product.quantity;
             products.images = product.images;
             products.color = product.color;
-            products.id_brand = product.id_brand;
+            products.brand = product.brand;
             products.battery = product.battery;
             products.display = product.display;
             products.water_resistance = product.water_resistance;
@@ -84,8 +84,8 @@ namespace WebApplication1.Models.Functions
                             ram = pro.ram,
                             quantity = pro.quantity,
                             images = pro.images,
-                            id_color = pro.id_color,
-                            id_brand = pro.id_brand,
+                            color = pro.color,
+                            brand = pro.brand,
                             battery = pro.battery,
                             display = pro.display,
                             water_resistance = pro.water_resistance,
@@ -110,8 +110,8 @@ namespace WebApplication1.Models.Functions
                             ram = pro.ram,
                             quantity = pro.quantity,
                             images = pro.images,
-                            id_color = pro.id_color,
-                            id_brand = pro.id_brand,
+                            color = pro.color,
+                            brand = pro.brand,
                             battery = pro.battery,
                             display = pro.display,
                             water_resistance = pro.water_resistance,
@@ -123,8 +123,8 @@ namespace WebApplication1.Models.Functions
                         };
             if (loaiTimKiem == "brand")
             {
-                if (mucTimKiem == "==") listproductview = query.Where(m => m.brand.names == tenTiemKiem).ToList();
-                else listproductview = query.Where(m => m.brand.names == tenTiemKiem).ToList();
+                if (mucTimKiem == "==") listproductview = query.Where(m => m.brand == tenTiemKiem).ToList();
+                else listproductview = query.Where(m => m.brand == tenTiemKiem).ToList();
             }
             else
             {

@@ -39,8 +39,6 @@ namespace WebApplication1.Controllers.Admin
         // GET: products/Create
         public ActionResult Create()
         {
-            ViewBag.id_brand = new SelectList(db.brands, "id_brand", "names");
-            ViewBag.id_color = new SelectList(db.colors, "id_color", "names");
             ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code");
             return View();
         }
@@ -50,7 +48,7 @@ namespace WebApplication1.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,id_brand,id_color,quantity,rate,id_promo")] product product)
+        public ActionResult Create([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,brand,color,quantity,rate,id_promo")] product product)
         {
             if (ModelState.IsValid)
             {
@@ -59,8 +57,6 @@ namespace WebApplication1.Controllers.Admin
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_brand = new SelectList(db.brands, "id_brand", "names", product.id_brand);
-            ViewBag.id_color = new SelectList(db.colors, "id_color", "names", product.id_color);
             ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
             return View(product);
         }
@@ -77,8 +73,6 @@ namespace WebApplication1.Controllers.Admin
             {
                 return HttpNotFound();
             }
-            ViewBag.id_brand = new SelectList(db.brands, "id_brand", "names", product.id_brand);
-            ViewBag.id_color = new SelectList(db.colors, "id_color", "names", product.id_color);
             ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
             return View(product);
         }
@@ -88,7 +82,7 @@ namespace WebApplication1.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,id_brand,id_color,quantity,rate,id_promo")] product product)
+        public ActionResult Edit([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,brand,color,quantity,rate,id_promo")] product product)
         {
             if (ModelState.IsValid)
             {
@@ -96,8 +90,7 @@ namespace WebApplication1.Controllers.Admin
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_brand = new SelectList(db.brands, "id_brand", "names", product.id_brand);
-            ViewBag.id_color = new SelectList(db.colors, "id_color", "names", product.id_color);
+      
             ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
             return View(product);
         }
