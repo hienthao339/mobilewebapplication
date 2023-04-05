@@ -1,0 +1,118 @@
+﻿@model IEnumerable<WebApplication1.Models.product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.names)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.images)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.display)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.weights)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.water_resistance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.operating_system)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.processor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.battery)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ram)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.promocode.code)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.names)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.images)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.display)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.weights)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.water_resistance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.operating_system)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.processor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.battery)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ram)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.promocode.code)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_product }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_product }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_product })
+        </td>
+    </tr>
+}
+
+</table>

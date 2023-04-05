@@ -1,0 +1,139 @@
+﻿@model WebApplication1.Models.product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.names)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.names)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.images)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.images)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.display)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.display)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weights)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weights)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.water_resistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.water_resistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.operating_system)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.operating_system)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.processor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.processor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.battery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.battery)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.promocode.code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.promocode.code)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_product }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
