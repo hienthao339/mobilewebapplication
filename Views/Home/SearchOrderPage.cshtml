@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "SearchOrderPage";
+}
+
+@using (Html.BeginForm("SearchOrders", "Home", FormMethod.Get))
+{
+    <div class="text-center my-lg-4 mx-auto justify-center">
+        <div class="text-[48px] font-semibold">What are you searching for</div>
+        <p>Surf for more</p>
+
+        <div class="align-content-center align-self-center">
+            <input type="text" class="font-light text-gray-400 bg-white border-b py-2" style="padding-right: 400px; padding-left:20px" placeholder="Search" name="searchOrders" />
+            <input class="p-3 mx-2 text-center font-medium text-xs fa-solid fa-search" type="submit" value="Search">
+            @*<i class="fa-solid fa-search"></i>
+                <input type="submit" value="Search" />*@
+        </div>
+    </div>
+    @*@Html.TextBox("searching")
+        <input type="submit" value="Search" />*@
+}
+
