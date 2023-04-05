@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -44,22 +45,20 @@ namespace WebApplication1.Controllers.Admin
         }
 
         // POST: products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,quantity,rate,id_promo,color,brand")] product product)
-        {
-            if (ModelState.IsValid)
-            {
-                db.products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,quantity,rate,id_promo,color,brand")] product product)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.products.Add(product);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
-            return View(product);
-        }
+        //    ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
+        //    return View(product);
+        //}
 
         // GET: products/Edit/5
         public ActionResult Edit(int? id)
@@ -78,21 +77,19 @@ namespace WebApplication1.Controllers.Admin
         }
 
         // POST: products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,quantity,rate,id_promo,color,brand")] product product)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
-            return View(product);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,quantity,rate,id_promo,color,brand")] product product)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(product).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
+        //    return View(product);
+        //}
 
         // GET: products/Delete/5
         public ActionResult Delete(int? id)
@@ -128,5 +125,71 @@ namespace WebApplication1.Controllers.Admin
             }
             base.Dispose(disposing);
         }
+
+        //Tải hình ảnh
+        #region UploadImage
+        [HttpPost]
+        public ActionResult Create(product product, HttpPostedFileBase uploadimage)
+        {
+            db.products.Add(product);
+            db.SaveChanges();
+
+            if (uploadimage != null && uploadimage.ContentLength > 0)
+            {
+                int id = int.Parse(db.products.ToList().Last().id_product.ToString());
+
+                string _FileName = "";
+                int index = uploadimage.FileName.IndexOf('.');
+                _FileName = id.ToString() + "." + uploadimage.FileName.Substring(index + 1);
+                string _path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products/"), _FileName);
+                uploadimage.SaveAs(_path);
+
+                product pd = db.products.FirstOrDefault(x => x.id_product == id);
+                pd.images = _FileName;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(product product, HttpPostedFileBase uploadimage)
+        {
+            //t cũng k biết m để làm gì, t để zo cho đủ tụ
+            ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
+
+            product upd = db.products.FirstOrDefault(x => x.id_product == product.id_product);
+            upd.names = product.names;
+            upd.price = product.price;
+            upd.display = product.display;
+            upd.weights = product.weights;
+            upd.water_resistance = product.water_resistance;
+            upd.operating_system = product.operating_system;
+            upd.processor = product.processor;
+            upd.battery = product.battery;
+            upd.ram = product.ram;
+            upd.quantity = product.quantity;
+            upd.rate = product.rate;
+            upd.rate = product.rate;
+            upd.color = product.color;
+            upd.brand = product.brand;
+            upd.id_promo = product.id_promo;
+
+            if (uploadimage != null && uploadimage.ContentLength > 0)
+            {
+                int id = product.id_product;
+
+                string _FileName = "";
+                int index = uploadimage.FileName.IndexOf('.');
+                _FileName = id.ToString() + "." + uploadimage.FileName.Substring(index + 1);
+                string _path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products/"), _FileName);
+                uploadimage.SaveAs(_path);
+                upd.images = _FileName;
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
 }
