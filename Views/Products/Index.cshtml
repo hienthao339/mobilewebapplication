@@ -2,10 +2,10 @@
 
 @{
     ViewBag.Title = "Index";
-      Layout = "../../Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Product Manager</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,28 +13,49 @@
 <table class="table">
     <tr>
         <th>
-            Names
+            @Html.DisplayNameFor(model => model.names)
         </th>
         <th>
-            Image
+            @Html.DisplayNameFor(model => model.images)
         </th>
         <th>
-            Price
+            @Html.DisplayNameFor(model => model.price)
         </th>
         <th>
-            Quantity
+            @Html.DisplayNameFor(model => model.display)
         </th>
         <th>
-            Rate
+            @Html.DisplayNameFor(model => model.weights)
         </th>
         <th>
-            Brand
+            @Html.DisplayNameFor(model => model.water_resistance)
         </th>
         <th>
-            Color
+            @Html.DisplayNameFor(model => model.operating_system)
         </th>
         <th>
-            Ram
+            @Html.DisplayNameFor(model => model.processor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.battery)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ram)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.promocode.code)
         </th>
         <th></th>
     </tr>
@@ -45,12 +66,31 @@
             @Html.DisplayFor(modelItem => item.names)
         </td>
         <td>
-            <img class="h-10"
-                 src="~/@Html.DisplayFor(modelItem => item.images)"
-                 alt="" />
+            @Html.DisplayFor(modelItem => item.images)
         </td>
         <td>
-            $@Html.DisplayFor(modelItem => item.price)
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.display)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.weights)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.water_resistance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.operating_system)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.processor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.battery)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ram)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.quantity)
@@ -59,18 +99,18 @@
             @Html.DisplayFor(modelItem => item.rate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.brand.names)
+            @Html.DisplayFor(modelItem => item.color)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.color.names)
+            @Html.DisplayFor(modelItem => item.brand)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ram)
+            @Html.DisplayFor(modelItem => item.promocode.code)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id_product }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id_product }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id_product })
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_product }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_product }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_product })
         </td>
     </tr>
 }

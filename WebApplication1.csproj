@@ -398,23 +398,16 @@
     <Content Include="Views\Home\Chats.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
-    <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\ShoppingCart\BagCart.cshtml" />
     <Content Include="Views\ShoppingCart\ShowToCart.cshtml" />
     <Content Include="Views\User\SignIn.cshtml" />
     <Content Include="Views\User\SignUp.cshtml" />
-    <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\User\Details_Info.cshtml" />
     <Content Include="Views\User\Edit_Info.cshtml" />
     <Content Include="Views\Shopping\ShowToCart.cshtml" />
     <Content Include="Views\Shopping\Details_Pro.cshtml" />
     <Content Include="Views\Shopping\ShoppingSuccess.cshtml" />
     <Content Include="Views\Shopping\CheckOut.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Products\Edit.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\users\Create.cshtml" />
     <Content Include="Views\users\Delete.cshtml" />
     <Content Include="Views\users\Details.cshtml" />
@@ -463,6 +456,12 @@
     <Content Include="Views\Home\YourOrders.cshtml" />
     <Content Include="Views\Home\SearchOrderPage.cshtml" />
     <Content Include="Views\Home\Details_Pro_Seri.cshtml" />
+    <Content Include="Views\Admin\Pending.cshtml" />
+    <Content Include="Views\products\Create.cshtml" />
+    <Content Include="Views\products\Delete.cshtml" />
+    <Content Include="Views\products\Details.cshtml" />
+    <Content Include="Views\products\Edit.cshtml" />
+    <Content Include="Views\products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

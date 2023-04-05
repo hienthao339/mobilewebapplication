@@ -17,7 +17,7 @@ namespace WebApplication1.Controllers.Admin
         // GET: products
         public ActionResult Index()
         {
-            var products = db.products.Include(p => p.brand).Include(p => p.color).Include(p => p.promocode);
+            var products = db.products.Include(p => p.promocode);
             return View(products.ToList());
         }
 
@@ -48,7 +48,7 @@ namespace WebApplication1.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,brand,color,quantity,rate,id_promo")] product product)
+        public ActionResult Create([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,quantity,rate,id_promo,color,brand")] product product)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace WebApplication1.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,brand,color,quantity,rate,id_promo")] product product)
+        public ActionResult Edit([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,quantity,rate,id_promo,color,brand")] product product)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,6 @@ namespace WebApplication1.Controllers.Admin
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-      
             ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
             return View(product);
         }

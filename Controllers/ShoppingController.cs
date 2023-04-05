@@ -223,7 +223,7 @@ namespace WebApplication1.Controllers
                 orders.shipping_fee = Convert.ToInt32(Session["Shipping"]);
                 orders.total_price = Convert.ToDecimal(Session["Total_order"]);
                 orders.id_promo = null;
-                orders.pending = true;
+                orders.pending = false;
                 orders.delivering = false;
                 orders.successed = false;
                 orders.canceled = false;
