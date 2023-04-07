@@ -3,7 +3,8 @@
     ViewBag.Title = "SearchOrderPage";
 }
 
-@using (Html.BeginForm("SearchOrders", "Home", FormMethod.Get))
+@Html.Partial("_Notifications")
+@using (Html.BeginForm("SearchOrders", "Home"))
 {
     <div class="text-center my-lg-4 mx-auto justify-center">
         <div class="text-[48px] font-semibold">What are you searching for</div>
@@ -19,4 +20,3 @@
     @*@Html.TextBox("searching")
         <input type="submit" value="Search" />*@
 }
-

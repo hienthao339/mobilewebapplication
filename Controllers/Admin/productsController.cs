@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Models.Functions;
 
 namespace WebApplication1.Controllers.Admin
 {
@@ -17,7 +19,7 @@ namespace WebApplication1.Controllers.Admin
         // GET: products
         public ActionResult Index()
         {
-            var products = db.products.Include(p => p.promocode);
+            var products = db.products.ToList();
             return View(products.ToList());
         }
 
@@ -39,7 +41,6 @@ namespace WebApplication1.Controllers.Admin
         // GET: products/Create
         public ActionResult Create()
         {
-            ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code");
             return View();
         }
 
@@ -48,16 +49,45 @@ namespace WebApplication1.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,quantity,rate,id_promo,color,brand")] product product)
+        public ActionResult Create(product product, HttpPostedFileBase images)
         {
             if (ModelState.IsValid)
             {
-                db.products.Add(product);
-                db.SaveChanges();
+                product pro = new product();
+                pro.id_product = product.id_product;
+                pro.price = product.price;
+                pro.quantity = product.quantity;
+                pro.rate = product.rate;
+                pro.water_resistance = product.water_resistance;
+                pro.operating_system = product.operating_system;
+                pro.weights = product.weights;
+                pro.battery = product.battery;
+                pro.brand = product.brand;
+                pro.color = product.color;
+                pro.ram = product.ram;
+                pro.display = product.display;
+                pro.id_promo = product.id_promo;
+                pro.processor = product.processor;
+                pro.names = product.names;
+                if (images != null && images.ContentLength > 0)
+                {
+                    int id = product.id_product;
+                    string name = product.names;
+                    string color = product.color;
+                    string ram = product.ram;
+
+                    string File_name = "";
+                    int index = images.FileName.IndexOf('.');
+                    File_name = "pro" + "_" + id.ToString() + "." + images.FileName.Substring(index + 1);
+                    string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
+                    images.SaveAs(path);
+
+                    pro.images = File_name;
+                }
+                var fpro = new Func_Product();
+                fpro.Insert(pro);
                 return RedirectToAction("Index");
             }
-
-            ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
             return View(product);
         }
 
@@ -73,7 +103,6 @@ namespace WebApplication1.Controllers.Admin
             {
                 return HttpNotFound();
             }
-            ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
             return View(product);
         }
 
@@ -82,15 +111,42 @@ namespace WebApplication1.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_product,names,images,price,display,weights,water_resistance,operating_system,processor,battery,ram,quantity,rate,id_promo,color,brand")] product product)
+        public ActionResult Edit(product product, HttpPostedFileBase images)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                product pro = new product();
+                pro.id_product = product.id_product;
+                pro.price = product.price;
+                pro.quantity = product.quantity;
+                pro.rate = product.rate;
+                pro.water_resistance = product.water_resistance;
+                pro.operating_system = product.operating_system;
+                pro.weights = product.weights;
+                pro.battery = product.battery;
+                pro.brand = product.brand;
+                pro.color = product.color;
+                pro.ram = product.ram;
+                pro.display = product.display;
+                pro.id_promo = product.id_promo;
+                pro.processor = product.processor;
+                pro.names = product.names;
+                if (images != null && images.ContentLength > 0)
+                {
+                    int id = product.id_product;
+
+                    string File_name = "";
+                    int index = images.FileName.IndexOf('.');
+                    File_name = "pro" +"_"+ id.ToString()+"." + images.FileName.Substring(index + 1);
+                    string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
+                    images.SaveAs(path);
+
+                    pro.images = File_name;
+                }
+                var fpro = new Func_Product();
+                fpro.Update(pro);
                 return RedirectToAction("Index");
             }
-            ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", product.id_promo);
             return View(product);
         }
 

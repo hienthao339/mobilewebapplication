@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model WebApplication1.Models.Carts
-
+@Html.Partial("_Notifications")
 <main class="p-6">
     <div class="text-neutral-500 text-xs px-4">
         (@Session["Quantity_pro"] items)
@@ -37,7 +37,7 @@
                     <div class="row flex my-3 py-4 pr-4 shadow-sm">
                         @*Product*@
                         <div class="col flex flex-wrap w-50">
-                            <img src="~/@item.Shopping_product.images"
+                            <img src="~/wwwroot/Images/Products/@item.Shopping_product.images"
                                  class="h-15" />
                         </div>
                         <div class="col flex flex-wrap w-50">
@@ -204,7 +204,7 @@
                                    class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                    @*id="exampleFormControlInputText"*@
                                    placeholder="Enter your promo code"
-                                   value="" name="promocode" />
+                                   value="" name="code" />
                             <label for="exampleFormControlInputText"
                                    class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
                                 Promo Code
