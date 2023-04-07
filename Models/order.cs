@@ -11,7 +11,8 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,9 @@ namespace WebApplication1.Models
         public Nullable<int> id_user { get; set; }
         public Nullable<bool> payment_type { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> started_at { get; set; }
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> finished_at { get; set; }
         public Nullable<int> shipping_fee { get; set; }
         public Nullable<decimal> total_price { get; set; }

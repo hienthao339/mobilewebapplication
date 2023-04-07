@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -39,7 +40,7 @@ namespace WebApplication1.Controllers
             };
             return View(TaiKhoanAccount);
         }
-     
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -120,13 +121,34 @@ namespace WebApplication1.Controllers
             return View(user);
         }
         [HttpPost]
-        public ActionResult Edit_Info(user model)
+        public ActionResult Edit_Info(user model, HttpPostedFileBase avatar)
         {
             if (ModelState.IsValid)
             {
                 Session["email"] = model;
+                user edituser = new user();
+
+                edituser.id_user = model.id_user;
+                edituser.is_admin = model.is_admin;
+                edituser.names = model.names;
+                edituser.email = model.email;
+                edituser.passwords = model.passwords;
+                edituser.phone = model.phone;
+                edituser.id_rank = model.id_rank;
+                if (avatar != null && avatar.ContentLength > 0)
+                {
+                    int id = model.id_user;
+
+                    string File_name = "";
+                    int index = avatar.FileName.IndexOf('.');
+                    File_name = "user" + id.ToString() + "." + avatar.FileName.Substring(index + 1);
+                    string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Avatars"), File_name);
+                    avatar.SaveAs(path);
+
+                    edituser.avatar = File_name;
+                }
                 var fuser = new Func_User();
-                fuser.Update(model);
+                fuser.Update(edituser);
                 return RedirectToAction("Details_Info", "User", new { id = model.id_user });
             }
             return View(model);
@@ -135,6 +157,11 @@ namespace WebApplication1.Controllers
         {
             user user = db.users.Find(id);
             return View(user);
+        }
+        public ActionResult Orders(int id)
+        {
+            var orders = db.orders.Where(x => x.id_user == id).ToList();
+            return View(orders);
         }
     }
 }

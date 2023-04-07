@@ -57,7 +57,7 @@ namespace WebApplication1.Models.Functions
             products.processor = product.processor;
             products.operating_system = product.operating_system;
             products.rate = product.rate;
-            products.promocode.code = product.promocode.code;
+            products.id_promo= product.id_promo;
             db.SaveChanges();
             return products.id_product;
         }

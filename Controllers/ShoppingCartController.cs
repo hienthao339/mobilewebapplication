@@ -115,6 +115,12 @@ namespace WebApplication1.Controllers
         {
             try
             {
+                if (form["code"] != null)
+                {
+                    this.AddNotification("You must SIGNIN to user promocode", NotificationType.WARNING);
+                    return RedirectToAction("ShowToCart", "ShoppingCart");
+                }
+
                 Carts cart = Session["Cart"] as Carts;
                 customer customer = new customer();
 

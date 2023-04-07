@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Extensions;
 using WebApplication1.Models;
 using WebApplication1.Models.Functions;
 
@@ -38,10 +39,27 @@ namespace WebApplication1.Controllers
         {
             return View(db.product_seri.Where(x => x.name_seri.Contains(searching) || x.brand.Contains(searching) || searching == null).ToList());
         }
-        public ActionResult SearchOrders(string searchOrders)
+        public ActionResult SearchOrders(FormCollection form)
         {
-            var cus = db.customers.Where(x=>x.phone == searchOrders || x.email == searchOrders).FirstOrDefault();
-            return RedirectToAction("YourOrders", "Home", new { id = cus.id_customer });
+            if (form["searchOrders"] != null)
+            {
+                var input = form["searchOrders"].ToString();
+                var cus = db.customers.Where(x => x.phone == input || x.email == input).FirstOrDefault();
+                if(cus != null)
+                {
+                    return RedirectToAction("YourOrders", "Home", new { id = cus.id_customer });
+                }
+                else
+                {
+                    this.AddNotification("We can not find your orders!", NotificationType.ERROR);
+                    return RedirectToAction("SearchOrderPage", "Home");
+                }
+            }
+            else
+            {
+                this.AddNotification("Please enter the email or phone number of the order !! ", NotificationType.WARNING);
+                return RedirectToAction("SearchOrderPage", "Home");
+            }
         }
         public ActionResult SearchOrderPage()
         {
@@ -51,8 +69,9 @@ namespace WebApplication1.Controllers
         {
             var cus = db.customers.Where(x=>x.id_customer == id).FirstOrDefault();
             Session["Customer"] = cus;
-            var order_items = db.order_item.Where(x=>x.order.id_customer == id).ToList();
-            return View(order_items);
+            var orders = db.orders.Where(x => x.id_customer == cus.id_customer).ToList();
+            //var order_items = db.order_item.Where(x=>x.order.id_customer == id).ToList();
+            return View(orders);
         }
         public ActionResult About()
         {
