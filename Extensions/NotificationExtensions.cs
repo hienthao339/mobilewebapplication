@@ -38,7 +38,6 @@ namespace WebApplication1.Extensions
 
             messages.Add(message);
         }
-
         public static IEnumerable<String> GetNotifications(this HtmlHelper htmlHelper, String notificationType)
         {
             string NotificationKey = getNotificationKeyByType(notificationType);

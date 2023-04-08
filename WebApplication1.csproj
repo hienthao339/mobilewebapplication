@@ -201,9 +201,6 @@
     <Compile Include="Models\rank.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

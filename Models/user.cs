@@ -11,8 +11,7 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class user
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,9 +27,6 @@ namespace WebApplication1.Models
         public string names { get; set; }
         public string email { get; set; }
         public string passwords { get; set; }
-        [DataType(DataType.Upload)]
-        [Display(Name = "Upload File")]
-        [Required(ErrorMessage = "Please choose file to upload.")]
         public string avatar { get; set; }
         public string phone { get; set; }
         public Nullable<int> id_rank { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4eece213777d49cb963501741792c431" Name="Diagram1">
+      <Diagram DiagramId="4eece213777d49cb963501741792c431" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="MobileShoppingModel.cart" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.chat" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.customer" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="MobileShoppingModel.product_seri" Width="1.5" PointX="8.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.promocode" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.rank" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.sysdiagram" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.user" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_product_cart" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_user_cart" ManuallyRouted="false" />

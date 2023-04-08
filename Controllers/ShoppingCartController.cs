@@ -115,7 +115,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                if (form["code"] != null)
+                if (form["code"] != "Null")
                 {
                     this.AddNotification("You must SIGNIN to user promocode", NotificationType.WARNING);
                     return RedirectToAction("ShowToCart", "ShoppingCart");
@@ -169,7 +169,8 @@ namespace WebApplication1.Controllers
                 }
                 db.SaveChanges();
                 cart.ClearCart();
-                return RedirectToAction("ShoppingSuccess", "Shopping", new {id = orders.id_order});
+                return RedirectToAction("ShoppingSuccess", "Shopping", new { id = orders.id_order });
+
             }
             catch
             {

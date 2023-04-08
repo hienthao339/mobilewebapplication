@@ -121,16 +121,6 @@
           <Property Name="id_rank" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="discount" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="users">
           <Key>
             <PropertyRef Name="id_user" />
@@ -287,7 +277,6 @@
           <EntitySet Name="product_seri" EntityType="Self.product_seri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="promocode" EntityType="Self.promocode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ranks" EntityType="Self.ranks" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_id_customer_oders" Association="Self.FK_id_customer_oders">
             <End Role="customer" EntitySet="customer" />
@@ -473,16 +462,6 @@
           <Property Name="discount" Type="Int32" />
           <NavigationProperty Name="users" Relationship="Self.FK_id_users_user" FromRole="ranks" ToRole="users" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="id_user" />
@@ -643,7 +622,6 @@
           <EntitySet Name="product_seri" EntityType="Self.product_seri" />
           <EntitySet Name="promocodes" EntityType="Self.promocode" />
           <EntitySet Name="ranks" EntityType="Self.rank" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="users" EntityType="Self.user" />
           <AssociationSet Name="FK_id_product_cart" Association="Self.FK_id_product_cart">
             <End Role="product" EntitySet="products" />
@@ -819,17 +797,6 @@
               <MappingFragment StoreEntitySet="ranks">
                 <ScalarProperty Name="id_rank" ColumnName="id_rank" />
                 <ScalarProperty Name="discount" ColumnName="discount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MobileShoppingModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

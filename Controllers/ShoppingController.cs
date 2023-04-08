@@ -28,6 +28,15 @@ namespace WebApplication1.Controllers
         {
             user user = Session["email"] as user;
             List<cart> cart = db.carts.Where(x => x.id_user == user.id_user).ToList();
+            foreach(var item in cart)
+            {
+                var pro = db.products.Where(x => x.id_product == item.id_product).FirstOrDefault();
+                if(item.quantity > pro.quantity)
+                {
+                    this.AddNotification("Product out of stock", NotificationType.WARNING);
+                }
+            }
+          
             if (cart != null)
             {
                 var pro = cart.Sum(x => x.quantity);
