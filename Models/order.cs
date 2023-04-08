@@ -21,7 +21,7 @@ namespace WebApplication1.Models
         }
     
         public int id_order { get; set; }
-        public Nullable<int> id_user { get; set; }
+        public Nullable<int> id_customer { get; set; }
         public Nullable<bool> payment_type { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> started_at { get; set; }
@@ -30,11 +30,11 @@ namespace WebApplication1.Models
         public Nullable<decimal> total_price { get; set; }
         public Nullable<int> id_promo { get; set; }
         public Nullable<bool> pending { get; set; }
-        public Nullable<bool> delivering { get; set; }
-        public Nullable<bool> successed { get; set; }
+        public Nullable<bool> onprocess { get; set; }
+        public Nullable<bool> completed { get; set; }
         public Nullable<bool> canceled { get; set; }
         public Nullable<bool> paid { get; set; }
-        public Nullable<int> id_customer { get; set; }
+        public Nullable<int> id_user { get; set; }
     
         public virtual customer customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

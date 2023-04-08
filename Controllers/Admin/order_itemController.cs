@@ -17,7 +17,7 @@ namespace WebApplication1.Controllers.Admin
         // GET: order_item
         public ActionResult Index()
         {
-            var order_item = db.order_item.Include(o => o.feedback).Include(o => o.order).Include(o => o.product);
+            var order_item = db.order_item.ToList();
             return View(order_item.ToList());
         }
 

@@ -30,6 +30,7 @@ namespace WebApplication1.Models
         public string avatar { get; set; }
         public string phone { get; set; }
         public Nullable<int> id_rank { get; set; }
+        public Nullable<double> totalspend { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cart> carts { get; set; }

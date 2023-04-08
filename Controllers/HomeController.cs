@@ -32,12 +32,12 @@ namespace WebApplication1.Controllers
                     }
                 }
             }
-            List<product_seri> product_Seris = db.product_seri.ToList();
-            return View(product_Seris);
+           var products = db.products.ToList();
+            return View(products);
         }
         public ActionResult SearchPage(string searching)
         {
-            return View(db.product_seri.Where(x => x.name_seri.Contains(searching) || x.brand.Contains(searching) || searching == null).ToList());
+            return View(db.products.Where(x => x.names.Contains(searching) || x.brand.Contains(searching) || searching == null).ToList());
         }
         public ActionResult SearchOrders(FormCollection form)
         {
@@ -79,11 +79,10 @@ namespace WebApplication1.Controllers
 
             return View();
         }
-        public ActionResult Details_Pro_Seri(int id)
+        public ActionResult Details_Pro(int id)
         {
-            var pro_seri = db.product_seri.Where(x=>x.id_product_seri == id).FirstOrDefault();
-            var pro = db.products.Where(x => x.names == pro_seri.name_seri).ToList();
-            return View(pro);
+            var pro_seri = db.products.Where(x=>x.id_product == id).FirstOrDefault();
+            return View(pro_seri);
         }
         public ActionResult Contact()
         {

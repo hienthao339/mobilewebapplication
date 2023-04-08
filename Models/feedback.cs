@@ -14,11 +14,9 @@ namespace WebApplication1.Models
     
     public partial class feedback
     {
-        public int id_feedback_order_item { get; set; }
+        public int id_feedback { get; set; }
         public string content { get; set; }
         public Nullable<int> rate { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
-    
-        public virtual order_item order_item { get; set; }
     }
 }

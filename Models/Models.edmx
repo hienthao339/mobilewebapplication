@@ -37,9 +37,9 @@
         </EntityType>
         <EntityType Name="feedbacks">
           <Key>
-            <PropertyRef Name="id_feedback_order_item" />
+            <PropertyRef Name="id_feedback" />
           </Key>
-          <Property Name="id_feedback_order_item" Type="int" Nullable="false" />
+          <Property Name="id_feedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="content" Type="varchar" MaxLength="500" />
           <Property Name="rate" Type="int" />
           <Property Name="created_at" Type="datetime" />
@@ -58,7 +58,7 @@
             <PropertyRef Name="id_order" />
           </Key>
           <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_user" Type="int" />
+          <Property Name="id_customer" Type="int" />
           <Property Name="payment_type" Type="bit" />
           <Property Name="created_at" Type="datetime" />
           <Property Name="started_at" Type="datetime" />
@@ -67,11 +67,11 @@
           <Property Name="total_price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="id_promo" Type="int" />
           <Property Name="pending" Type="bit" />
-          <Property Name="delivering" Type="bit" />
-          <Property Name="successed" Type="bit" />
+          <Property Name="onprocess" Type="bit" />
+          <Property Name="completed" Type="bit" />
           <Property Name="canceled" Type="bit" />
           <Property Name="paid" Type="bit" />
-          <Property Name="id_customer" Type="int" />
+          <Property Name="id_user" Type="int" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -89,19 +89,10 @@
           <Property Name="battery" Type="varchar" MaxLength="100" />
           <Property Name="ram" Type="varchar" MaxLength="15" />
           <Property Name="quantity" Type="int" />
-          <Property Name="rate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="rate" Type="float" />
           <Property Name="id_promo" Type="int" />
-          <Property Name="color" Type="varchar" MaxLength="100" />
-          <Property Name="brand" Type="varchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="product_seri">
-          <Key>
-            <PropertyRef Name="id_product_seri" />
-          </Key>
-          <Property Name="id_product_seri" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name_seri" Type="varchar" MaxLength="100" />
-          <Property Name="brand" Type="varchar" MaxLength="100" />
-          <Property Name="images" Type="varchar" MaxLength="100" />
+          <Property Name="color" Type="varchar" MaxLength="20" />
+          <Property Name="brand" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="promocode">
           <Key>
@@ -133,6 +124,7 @@
           <Property Name="avatar" Type="varchar" MaxLength="100" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="id_rank" Type="int" />
+          <Property Name="totalspend" Type="float" />
         </EntityType>
         <Association Name="FK_id_customer_oders">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
@@ -143,18 +135,6 @@
             </Principal>
             <Dependent Role="orders">
               <PropertyRef Name="id_customer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_id_feedback_order_item">
-          <End Role="order_item" Type="Self.order_item" Multiplicity="1" />
-          <End Role="feedbacks" Type="Self.feedbacks" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="order_item">
-              <PropertyRef Name="id_order_item" />
-            </Principal>
-            <Dependent Role="feedbacks">
-              <PropertyRef Name="id_feedback_order_item" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,7 +222,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_id_user_order">
+        <Association Name="FK_id_user_orders">
           <End Role="users" Type="Self.users" Multiplicity="0..1" />
           <End Role="orders" Type="Self.orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -254,7 +234,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_id_users_user">
+        <Association Name="FK_id_users_rank">
           <End Role="ranks" Type="Self.ranks" Multiplicity="0..1" />
           <End Role="users" Type="Self.users" Multiplicity="*" />
           <ReferentialConstraint>
@@ -274,17 +254,12 @@
           <EntitySet Name="order_item" EntityType="Self.order_item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="product_seri" EntityType="Self.product_seri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="promocode" EntityType="Self.promocode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ranks" EntityType="Self.ranks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_id_customer_oders" Association="Self.FK_id_customer_oders">
             <End Role="customer" EntitySet="customer" />
             <End Role="orders" EntitySet="orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_id_feedback_order_item" Association="Self.FK_id_feedback_order_item">
-            <End Role="order_item" EntitySet="order_item" />
-            <End Role="feedbacks" EntitySet="feedbacks" />
           </AssociationSet>
           <AssociationSet Name="FK_id_order_order_item" Association="Self.FK_id_order_order_item">
             <End Role="orders" EntitySet="orders" />
@@ -314,11 +289,11 @@
             <End Role="users" EntitySet="users" />
             <End Role="chat" EntitySet="chat" />
           </AssociationSet>
-          <AssociationSet Name="FK_id_user_order" Association="Self.FK_id_user_order">
+          <AssociationSet Name="FK_id_user_orders" Association="Self.FK_id_user_orders">
             <End Role="users" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_id_users_user" Association="Self.FK_id_users_user">
+          <AssociationSet Name="FK_id_users_rank" Association="Self.FK_id_users_rank">
             <End Role="ranks" EntitySet="ranks" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
@@ -364,13 +339,12 @@
         </EntityType>
         <EntityType Name="feedback">
           <Key>
-            <PropertyRef Name="id_feedback_order_item" />
+            <PropertyRef Name="id_feedback" />
           </Key>
-          <Property Name="id_feedback_order_item" Type="Int32" Nullable="false" />
+          <Property Name="id_feedback" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="content" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="rate" Type="Int32" />
           <Property Name="created_at" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="order_item" Relationship="Self.FK_id_feedback_order_item" FromRole="feedbacks" ToRole="order_item" />
         </EntityType>
         <EntityType Name="order_item">
           <Key>
@@ -380,7 +354,6 @@
           <Property Name="id_order" Type="Int32" />
           <Property Name="id_product" Type="Int32" />
           <Property Name="quantity" Type="Int32" />
-          <NavigationProperty Name="feedback" Relationship="Self.FK_id_feedback_order_item" FromRole="order_item" ToRole="feedbacks" />
           <NavigationProperty Name="order" Relationship="Self.FK_id_order_order_item" FromRole="order_item" ToRole="orders" />
           <NavigationProperty Name="product" Relationship="Self.FK_id_product_order_item" FromRole="order_item" ToRole="product" />
         </EntityType>
@@ -389,7 +362,7 @@
             <PropertyRef Name="id_order" />
           </Key>
           <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_user" Type="Int32" />
+          <Property Name="id_customer" Type="Int32" />
           <Property Name="payment_type" Type="Boolean" />
           <Property Name="created_at" Type="DateTime" Precision="3" />
           <Property Name="started_at" Type="DateTime" Precision="3" />
@@ -398,15 +371,15 @@
           <Property Name="total_price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="id_promo" Type="Int32" />
           <Property Name="pending" Type="Boolean" />
-          <Property Name="delivering" Type="Boolean" />
-          <Property Name="successed" Type="Boolean" />
+          <Property Name="onprocess" Type="Boolean" />
+          <Property Name="completed" Type="Boolean" />
           <Property Name="canceled" Type="Boolean" />
           <Property Name="paid" Type="Boolean" />
-          <Property Name="id_customer" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
           <NavigationProperty Name="customer" Relationship="Self.FK_id_customer_oders" FromRole="orders" ToRole="customer" />
           <NavigationProperty Name="order_item" Relationship="Self.FK_id_order_order_item" FromRole="orders" ToRole="order_item" />
           <NavigationProperty Name="promocode" Relationship="Self.FK_id_promo_order" FromRole="orders" ToRole="promocode" />
-          <NavigationProperty Name="user" Relationship="Self.FK_id_user_order" FromRole="orders" ToRole="users" />
+          <NavigationProperty Name="user" Relationship="Self.FK_id_user_orders" FromRole="orders" ToRole="users" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -424,22 +397,13 @@
           <Property Name="battery" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ram" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="quantity" Type="Int32" />
-          <Property Name="rate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="rate" Type="Double" />
           <Property Name="id_promo" Type="Int32" />
-          <Property Name="color" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="brand" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="brand" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="carts" Relationship="Self.FK_id_product_cart" FromRole="product" ToRole="cart" />
           <NavigationProperty Name="order_item" Relationship="Self.FK_id_product_order_item" FromRole="product" ToRole="order_item" />
           <NavigationProperty Name="promocode" Relationship="Self.FK_id_promo_product" FromRole="product" ToRole="promocode" />
-        </EntityType>
-        <EntityType Name="product_seri">
-          <Key>
-            <PropertyRef Name="id_product_seri" />
-          </Key>
-          <Property Name="id_product_seri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name_seri" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="brand" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="images" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="promocode">
           <Key>
@@ -460,7 +424,7 @@
           </Key>
           <Property Name="id_rank" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="discount" Type="Int32" />
-          <NavigationProperty Name="users" Relationship="Self.FK_id_users_user" FromRole="ranks" ToRole="users" />
+          <NavigationProperty Name="users" Relationship="Self.FK_id_users_rank" FromRole="ranks" ToRole="users" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -474,10 +438,11 @@
           <Property Name="avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="id_rank" Type="Int32" />
+          <Property Name="totalspend" Type="Double" />
           <NavigationProperty Name="carts" Relationship="Self.FK_id_user_cart" FromRole="users" ToRole="cart" />
           <NavigationProperty Name="chats" Relationship="Self.FK_id_user_chat" FromRole="users" ToRole="chat" />
-          <NavigationProperty Name="orders" Relationship="Self.FK_id_user_order" FromRole="users" ToRole="orders" />
-          <NavigationProperty Name="rank" Relationship="Self.FK_id_users_user" FromRole="users" ToRole="ranks" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_id_user_orders" FromRole="users" ToRole="orders" />
+          <NavigationProperty Name="rank" Relationship="Self.FK_id_users_rank" FromRole="users" ToRole="ranks" />
         </EntityType>
         <Association Name="FK_id_product_cart">
           <End Role="product" Type="Self.product" Multiplicity="0..1" />
@@ -527,18 +492,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_id_feedback_order_item">
-          <End Role="order_item" Type="Self.order_item" Multiplicity="1" />
-          <End Role="feedbacks" Type="Self.feedback" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="order_item">
-              <PropertyRef Name="id_order_item" />
-            </Principal>
-            <Dependent Role="feedbacks">
-              <PropertyRef Name="id_feedback_order_item" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_id_order_order_item">
           <End Role="orders" Type="Self.order" Multiplicity="0..1" />
           <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
@@ -575,7 +528,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_id_user_order">
+        <Association Name="FK_id_user_orders">
           <End Role="users" Type="Self.user" Multiplicity="0..1" />
           <End Role="orders" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -599,7 +552,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_id_users_user">
+        <Association Name="FK_id_users_rank">
           <End Role="ranks" Type="Self.rank" Multiplicity="0..1" />
           <End Role="users" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
@@ -619,7 +572,6 @@
           <EntitySet Name="order_item" EntityType="Self.order_item" />
           <EntitySet Name="orders" EntityType="Self.order" />
           <EntitySet Name="products" EntityType="Self.product" />
-          <EntitySet Name="product_seri" EntityType="Self.product_seri" />
           <EntitySet Name="promocodes" EntityType="Self.promocode" />
           <EntitySet Name="ranks" EntityType="Self.rank" />
           <EntitySet Name="users" EntityType="Self.user" />
@@ -639,10 +591,6 @@
             <End Role="customer" EntitySet="customers" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_id_feedback_order_item" Association="Self.FK_id_feedback_order_item">
-            <End Role="order_item" EntitySet="order_item" />
-            <End Role="feedbacks" EntitySet="feedbacks" />
-          </AssociationSet>
           <AssociationSet Name="FK_id_order_order_item" Association="Self.FK_id_order_order_item">
             <End Role="orders" EntitySet="orders" />
             <End Role="order_item" EntitySet="order_item" />
@@ -655,7 +603,7 @@
             <End Role="promocode" EntitySet="promocodes" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_id_user_order" Association="Self.FK_id_user_order">
+          <AssociationSet Name="FK_id_user_orders" Association="Self.FK_id_user_orders">
             <End Role="users" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
@@ -663,7 +611,7 @@
             <End Role="promocode" EntitySet="promocodes" />
             <End Role="product" EntitySet="products" />
           </AssociationSet>
-          <AssociationSet Name="FK_id_users_user" Association="Self.FK_id_users_user">
+          <AssociationSet Name="FK_id_users_rank" Association="Self.FK_id_users_rank">
             <End Role="ranks" EntitySet="ranks" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
@@ -710,7 +658,7 @@
           <EntitySetMapping Name="feedbacks">
             <EntityTypeMapping TypeName="MobileShoppingModel.feedback">
               <MappingFragment StoreEntitySet="feedbacks">
-                <ScalarProperty Name="id_feedback_order_item" ColumnName="id_feedback_order_item" />
+                <ScalarProperty Name="id_feedback" ColumnName="id_feedback" />
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="rate" ColumnName="rate" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
@@ -731,7 +679,7 @@
             <EntityTypeMapping TypeName="MobileShoppingModel.order">
               <MappingFragment StoreEntitySet="orders">
                 <ScalarProperty Name="id_order" ColumnName="id_order" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
                 <ScalarProperty Name="payment_type" ColumnName="payment_type" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="started_at" ColumnName="started_at" />
@@ -740,11 +688,11 @@
                 <ScalarProperty Name="total_price" ColumnName="total_price" />
                 <ScalarProperty Name="id_promo" ColumnName="id_promo" />
                 <ScalarProperty Name="pending" ColumnName="pending" />
-                <ScalarProperty Name="delivering" ColumnName="delivering" />
-                <ScalarProperty Name="successed" ColumnName="successed" />
+                <ScalarProperty Name="onprocess" ColumnName="onprocess" />
+                <ScalarProperty Name="completed" ColumnName="completed" />
                 <ScalarProperty Name="canceled" ColumnName="canceled" />
                 <ScalarProperty Name="paid" ColumnName="paid" />
-                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -767,16 +715,6 @@
                 <ScalarProperty Name="id_promo" ColumnName="id_promo" />
                 <ScalarProperty Name="color" ColumnName="color" />
                 <ScalarProperty Name="brand" ColumnName="brand" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="product_seri">
-            <EntityTypeMapping TypeName="MobileShoppingModel.product_seri">
-              <MappingFragment StoreEntitySet="product_seri">
-                <ScalarProperty Name="id_product_seri" ColumnName="id_product_seri" />
-                <ScalarProperty Name="name_seri" ColumnName="name_seri" />
-                <ScalarProperty Name="brand" ColumnName="brand" />
-                <ScalarProperty Name="images" ColumnName="images" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -811,6 +749,7 @@
                 <ScalarProperty Name="avatar" ColumnName="avatar" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="id_rank" ColumnName="id_rank" />
+                <ScalarProperty Name="totalspend" ColumnName="totalspend" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

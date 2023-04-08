@@ -33,7 +33,7 @@ namespace WebApplication1.Models
         public string battery { get; set; }
         public string ram { get; set; }
         public Nullable<int> quantity { get; set; }
-        public Nullable<decimal> rate { get; set; }
+        public Nullable<double> rate { get; set; }
         public Nullable<int> id_promo { get; set; }
         public string color { get; set; }
         public string brand { get; set; }

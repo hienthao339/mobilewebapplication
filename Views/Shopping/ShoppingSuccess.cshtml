@@ -4,54 +4,63 @@
     ViewBag.Title = "ShoppingSuccess";
 }
 
-<div>Email: @(((WebApplication1.Models.customer)Session["Customer"]).email)</div>
-<div>Address: @(((WebApplication1.Models.customer)Session["Customer"]).addresss) @(((WebApplication1.Models.customer)Session["Customer"]).ward) @(((WebApplication1.Models.customer)Session["Customer"]).district) @(((WebApplication1.Models.customer)Session["Customer"]).city) </div>
-<div>Phone: @(((WebApplication1.Models.customer)Session["Customer"]).phone)</div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.product.names)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.quantity)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.product.names)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quantity)
-            </td>
-        </tr>
-    }
-</table>
-<div class="">
-    <div class="mb-2 font-medium pb-2 my-2 border-b">Order Summary</div>
-    <div class="d-flex justify-content-between my-2">
-        <p>Total</p>
-        <p>$@Session["TotalCost"].00</p>
+<div class="w-50 p-4 my-4 mx-auto shadow-md rounded-md text-md">
+    <div class="my-3 text-xl text-center">
+        <i class="fa-solid fa-check p-4 rounded-full bg-blue-600 text-white"></i>
+        <div class="font-semibold text-3xl mt-3 mb-4 text-blue-600">Order Success</div>
+    </div>
+    <div class="mb-3 text-lg font-medium pb-2 my-2 border-b">Shipping Info</div>
+    <div class="flex space-x-6">
+        <div class="font-semibold space-y-3">
+            <div>Email</div>
+            <div>Address</div>
+            <div>Phone</div>
+        </div>
+        <div class="font-light space-y-3">
+            <div>@(((WebApplication1.Models.customer)Session["Customer"]).email)</div>
+            <div>@(((WebApplication1.Models.customer)Session["Customer"]).addresss) @(((WebApplication1.Models.customer)Session["Customer"]).ward) @(((WebApplication1.Models.customer)Session["Customer"]).district) @(((WebApplication1.Models.customer)Session["Customer"]).city)</div>
+            <div>@(((WebApplication1.Models.customer)Session["Customer"]).phone)</div>
+        </div>
+    </div>
+    <div class="my-lg-5">
+        @foreach (var item in Model)
+        {
+            <div class="flex space-x-6 mb-4 pb-4 border-b">
+                <img src="~/wwwroot/Images/Products/@Html.DisplayFor(modelItem => item.product.images)" class="object-cover w-25" />
+                <div>
+                    <span class="font-semibold text-2xl">
+                        @Html.DisplayFor(modelItem => item.product.names)
+                    </span><br />
+                    <span class="font-light text-md">
+                        @Html.DisplayFor(modelItem => item.product.color)<br />
+                        @Html.DisplayFor(modelItem => item.quantity)
+                    </span>
+                </div>
+            </div>
+        }
     </div>
 
-    <div class="d-flex justify-content-between mb-2">
-        <p>Shipping</p>
-        <p>$@Session["Shipping"].00</p>
-    </div>
+    <div class="my-3">
+        <div class="mb-3 text-lg font-medium pb-2 my-2 border-b">Order Summary</div>
+        <div class="d-flex justify-content-between my-2">
+            <p>Total</p>
+            <p>$@Session["TotalCost"].00</p>
+        </div>
 
-    <div class="d-flex justify-content-between pb-2 mb-2 border-b">
-        <p>Discount</p>
-        <p>$@Session["discount"].00</p>
-    </div>
-    <div class="d-flex justify-content-between my-2">
-        <p>Subtotal</p>
-        <p>$@Session["Total_order_new"].00</p>
-    </div>
+        <div class="d-flex justify-content-between mb-2">
+            <p>Shipping</p>
+            <p>$@Session["Shipping"].00</p>
+        </div>
 
-    <a href="@Url.Action("Index", "Home")" class="px-6 text-white rounded-md bg-blue-600 hover:bg-blue-800 py-2 mx-auto font-medium text-sm">Continuos Shopping</a>
-
+        <div class="d-flex justify-content-between pb-2 mb-2 border-b">
+            <p>Discount</p>
+            <p>$@Session["discount"].00</p>
+        </div>
+        <div class="d-flex justify-content-between my-2">
+            <p>Subtotal</p>
+            <p>$@Session["Total_order_new"].00</p>
+        </div>
+        <div class="cursor-pointer w-full rounded-md text-center py-3 bg-yellow-300 text-md font-semibold my-3">Continuous Shopping</div><br />
+    </div>
 </div>
+

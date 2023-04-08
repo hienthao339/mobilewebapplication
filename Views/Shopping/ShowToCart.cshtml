@@ -3,13 +3,16 @@
 @{
     ViewBag.Title = "ShowToCart";
 }
-
+@Html.Partial("_Notifications")
 <main class="p-6">
-    <div class="text-neutral-500 text-xs px-4">
-        (@Session["Quantity_pro"] items)
+    <div class="flex space-x-2 mb-2">
+        <div class="text-4xl font-bold">Shopping</div>
+        <div class="text-neutral-500 text-xs px-4">
+            (@Session["Quantity_pro"] items)
+        </div>
     </div>
     <div class="flex mb-lg-5">
-        <a class="text-2xl font-bold" href="/Home/Index">Continue Shopping</a>
+        <a class="text-lg font-medium hover:text-gray-200" href="/Home/Index">Continue Shopping</a>
     </div>
 
 
@@ -98,156 +101,95 @@
                 {
 
                     @*Email*@
-                    <div class="flex justify-center mt-2">
+                    <div class="mt-2 text-black">
                         <div class="relative w-full" data-te-input-wrapper-init>
-                            <input type="text"
-                                   class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                   @*id="exampleFormControlInputText"*@
-                                   placeholder="Enter your email"
-                                   value=""
-                                   name="email" />
-                            <label for="exampleFormControlInputText"
-                                   class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
-                                Email
-                            </label>
+                            <label for="email" class="text-sm">Email</label><br />
+                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your email" name="email" />
                         </div>
                     </div>
-                    @*Phone*@
-                    <div class="flex justify-center mt-2">
+                    <div class="mt-2 text-black">
                         <div class="relative w-full" data-te-input-wrapper-init>
-                            <input type="text"
-                                   class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                   @*id="exampleFormControlInputText"*@
-                                   placeholder="Enter your phone number"
-                                   value=""
-                                   name="phone" required />
-                            <label for="exampleFormControlInputText"
-                                   class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
-                                Phone Number
-                            </label>
+                            <label for="phone" class="text-sm">Phone</label><br />
+                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your phone number" name="phone" />
                         </div>
                     </div>
-
-                    @*Address*@
-                    <div class="flex justify-center mt-2">
+                    <div class="mt-2 text-black">
                         <div class="relative w-full" data-te-input-wrapper-init>
-                            <input type="text"
-                                   class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                   @*id="exampleFormControlInputText"*@
-                                   placeholder="Enter your address"
-                                   value="" name="address" required />
-                            <label for="exampleFormControlInputText"
-                                   class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
-                                Address
-                            </label>
-                        </div>
-                    </div> <div class="flex justify-center mt-2">
-                        <div class="relative w-full" data-te-input-wrapper-init>
-                            <input type="text"
-                                   class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                   @*id="exampleFormControlInputText"*@
-                                   placeholder="Enter your address"
-                                   value="" name="district" required />
-                            <label for="exampleFormControlInputText"
-                                   class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
-                                District
-                            </label>
+                            <label for="street" class="text-sm">Street</label><br />
+                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your street" name="address" />
                         </div>
                     </div>
-                    <div class="flex justify-center mt-2">
+                    <div class="mt-2 text-black">
                         <div class="relative w-full" data-te-input-wrapper-init>
-                            <input type="text"
-                                   class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                   @*id="exampleFormControlInputText"*@
-                                   placeholder="Enter your address"
-                                   value="" name="ward" required />
-                            <label for="exampleFormControlInputText"
-                                   class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
-                                Ward
-                            </label>
+                            <label for="district" class="text-sm">District</label><br />
+                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your district" name="district" />
                         </div>
                     </div>
-                    <div class="flex justify-center mt-2">
+                    <div class="mt-2 text-black">
                         <div class="relative w-full" data-te-input-wrapper-init>
-                            <input type="text"
-                                   class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                   @*id="exampleFormControlInputText"*@
-                                   placeholder="Enter your address"
-                                   value="" name="city" required />
-                            <label for="exampleFormControlInputText"
-                                   class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
-                                City
-                            </label>
+                            <label for="ward" class="text-sm">Ward</label><br />
+                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your ward" name="ward" />
+                        </div>
+                    </div>
+                    <div class="mt-2 text-black">
+                        <div class="relative w-full" data-te-input-wrapper-init>
+                            <label for="city" class="text-sm">City</label><br />
+                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your city" name="city" />
+                        </div>
+                    </div>
+                    <div class="mt-2 text-black">
+                        <div class="relative w-full" data-te-input-wrapper-init>
+                            <label for="card-number" class="text-sm">Card</label><br />
+                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your card number" name="card-number" />
                         </div>
                     </div>
 
-                    @*Card Number*@
-                    <div class="flex justify-center my-2">
-                        <div class="relative w-full mb-4" data-te-input-wrapper-init>
-                            <input type="text"
-                                   class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                   @*id="exampleFormControlInputText"*@
-                                   placeholder="Enter your card number" />
-                            <label for="exampleFormControlInputText"
-                                   class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
-                                Paypal Card
-                            </label>
-                        </div>
-                    </div>
                     @*Promo Code*@
                     <div class="font-medium my-2">Apply Coupon</div>
                     <div class="text-gray-400 font-light text-xs">Using A Promo Code?</div>
 
                     @*Enter promo-code*@
-                    <div class="flex justify-center mt-2 mb-4 justify-between">
-                        <div class="relative w-75" data-te-input-wrapper-init>
-                            <input type="text"
-                                   class="font-light peer block min-h-[auto] w-full pb-2 border-b outline-none bg-transparent py-[0.32rem] px-3 leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                   @*id="exampleFormControlInputText"*@
-                                   placeholder="Enter your promo code"
-                                   value="" name="code" />
-                            <label for="exampleFormControlInputText"
-                                   class="pointer-events-none text-md absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-neutral-200">
-                                Promo Code
-                            </label>
+                    <div class="mt-2 text-black">
+                        <div class="relative w-full" data-te-input-wrapper-init>
+                            <label for="code" class="text-sm">Promocode</label><br />
+                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your promocode" name="code" />
                         </div>
-
-                        @*Apply Promo-Code*@
-                        <input type="submit" class="bg-yellow-300 py-2.5 px-3 text-black text-xs font-semibold ml-2 rounded-md" style="width:fit-content; height: fit-content;" value="Apply">
                     </div>
+
+                    @*Apply Promo-Code*@
+                    <!--<input type="submit" class="bg-yellow-300 py-2.5 px-3 text-black text-xs font-semibold ml-2 rounded-md" style="width:fit-content; height: fit-content;" value="Apply">-->
 
 
                     @*Order Sumamry*@
-            <div class="">
-                <div class="mb-2 font-medium pb-2 my-2 border-b">Order Summary</div>
-                <div class="d-flex justify-content-between my-2">
-                    <p>Total</p>
-                    <p>$@Session["TotalCost"].00</p>
-                </div>
+                    <div class="">
+                        <div class="mb-2 font-medium pb-2 my-2 border-b">Order Summary</div>
+                        <div class="d-flex justify-content-between my-2">
+                            <p>Total</p>
+                            <p>$@Session["TotalCost"].00</p>
+                        </div>
 
-                <div class="d-flex justify-content-between mb-2">
-                    <p>Shipping</p>
-                    <p>$@Session["Shipping"].00</p>
-                </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <p>Shipping</p>
+                            <p>$@Session["Shipping"].00</p>
+                        </div>
 
-                @*<div class="d-flex justify-content-between pb-2 mb-2 border-b">
-            <p>Discount</p>
-            <p>$0.00</p>
-        </div>*@
-                <div class="d-flex justify-content-between my-2">
-                    <p>Subtotal</p>
-                    <p>$@Session["Total_order"].00</p>
-                </div>
-
-
-
-                <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium py-2 mt-2" type="submit" value="Checkout" />
-                @Html.Partial("_Notifications")
-
-
-
-
-            </div>
+                        @*<div class="d-flex justify-content-between pb-2 mb-2 border-b">
+                                <p>Discount</p>
+                                <p>$0.00</p>
+                            </div>*@
+                        <div class="d-flex justify-content-between my-2">
+                            <p>Subtotal</p>
+                            <p>$@Session["Total_order"].00</p>
+                        </div>
+                        @if (Convert.ToInt32(Session["CheckQuantity1"]) != 0 || Convert.ToInt32(Session["CheckQuantity2"]) != 0)
+                        {
+                            <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-3" type="submit" value="Checkout" disabled="disabled" />
+                        }
+                        else
+                        {
+                            <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-3" type="submit" value="Checkout" />
+                        }
+                    </div>
                 }
             </div>
         </div>

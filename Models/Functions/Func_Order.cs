@@ -37,10 +37,10 @@ namespace WebApplication1.Models.Functions
             order.promocode.code = model.promocode.code;
             order.created_at = model.created_at;
             order.finished_at = model.finished_at;
-            order.delivering = model.delivering;
+           
             order.canceled = model.canceled;
             order.started_at = model.started_at;
-            order.successed = model.successed;
+            
             order.paid = model.paid;
             return model.id_order;
         }

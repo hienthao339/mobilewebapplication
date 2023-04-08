@@ -92,7 +92,7 @@ namespace WebApplication1.Models.Functions
                             weights = pro.weights,
                             processor = pro.processor,
                             id_promo = pro.id_promo,
-                            rate = pro.rate,
+                            rate = (decimal)pro.rate,
                             operating_system = pro.operating_system,
                         };
             listproductview = query.ToList();
@@ -118,7 +118,7 @@ namespace WebApplication1.Models.Functions
                             weights = pro.weights,
                             processor = pro.processor,
                             id_promo = pro.promocode.id_promo,
-                            rate = pro.rate,
+                            rate = (decimal)pro.rate,
                             operating_system = pro.operating_system,
                         };
             if (loaiTimKiem == "brand")

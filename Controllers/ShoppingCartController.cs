@@ -143,8 +143,7 @@ namespace WebApplication1.Controllers
                 orders.total_price = Convert.ToDecimal(Session["Total_order"]);
                 orders.id_promo = null;
                 orders.pending = false;
-                orders.delivering = false;
-                orders.successed = false;
+               
                 orders.canceled = false;
                 orders.paid = false;
                 db.orders.Add(orders);

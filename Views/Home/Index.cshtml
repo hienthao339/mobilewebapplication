@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model List<WebApplication1.Models.product_seri>
+@model List<WebApplication1.Models.product>
 <main>
     @*carousel*@
     <div id="default-carousel" class="relative" data-carousel="slide">
@@ -125,27 +125,27 @@
 
             <div class="flex justify-center text-md">
                 <div class="block max-w-sm rounded-lg bg-white shadow-lg">
-                    <a href="/Home/Details_Pro_Seri/@item.id_product_seri">
+                    <a href="/Home/Details_Pro/@item.id_product">
                         @*<a href="#!">*@
-                        <img class="rounded-t-lg"
-                             src="~/wwwroot/Images/Products/@item.images"
+                        <img class="rounded-t-lg h-50 mx-auto"
+                             src="~/wwwroot/Images/Products/@item.images" 
                              alt="" />
                         @*</a>*@
                         <div class="p-3 font-medium">
-                            @*<div class="flex flex-row justify-between pb-3 border-bottom">
+                            <div class="flex flex-row justify-between pb-3 border-bottom">
                                 <p>$@Html.DisplayFor(modelItem => item.price)</p>
                                 <div class="flex flex-row">
                                     <p class="px-2">@Html.DisplayFor(modelItem => item.rate)</p>
                                     <i class="fa-solid fa-star text-warning"></i>
                                 </div>
-                            </div>*@
+                            </div>
 
                             <h5 class="mt-4 mb-3  leading-tight text-neutral-800 dark:text-neutral-50">
-                                @Html.DisplayFor(modelItem => item.name_seri)
+                                @Html.DisplayFor(modelItem => item.names)
                             </h5>
                             <p class="mb-4   text-neutral-500 font-light">
                                 Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
+                                bulk of the card's content. 
                             </p>
 
                             <div class="flex flex-row justify-between align-items-center font-semibold">

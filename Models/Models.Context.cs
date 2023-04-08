@@ -32,7 +32,6 @@ namespace WebApplication1.Models
         public virtual DbSet<order_item> order_item { get; set; }
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<product_seri> product_seri { get; set; }
         public virtual DbSet<promocode> promocodes { get; set; }
         public virtual DbSet<rank> ranks { get; set; }
         public virtual DbSet<user> users { get; set; }

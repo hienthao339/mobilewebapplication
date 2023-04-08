@@ -19,7 +19,6 @@ namespace WebApplication1.Models
         public Nullable<int> id_product { get; set; }
         public Nullable<int> quantity { get; set; }
     
-        public virtual feedback feedback { get; set; }
         public virtual order order { get; set; }
         public virtual product product { get; set; }
     }

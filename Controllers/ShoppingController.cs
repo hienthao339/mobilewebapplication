@@ -28,15 +28,25 @@ namespace WebApplication1.Controllers
         {
             user user = Session["email"] as user;
             List<cart> cart = db.carts.Where(x => x.id_user == user.id_user).ToList();
-            foreach(var item in cart)
+            int a = 0;
+            int b = 0;
+            foreach (var item in cart)
             {
                 var pro = db.products.Where(x => x.id_product == item.id_product).FirstOrDefault();
-                if(item.quantity > pro.quantity)
+                if (pro.quantity == 0)
                 {
-                    this.AddNotification("Product out of stock", NotificationType.WARNING);
+                    a = a + 1;
+                    this.AddNotification("Product " + pro.names + " out of stock", NotificationType.WARNING);
+                }
+                if (pro.quantity < item.quantity)
+                {
+                    b = b + 1;
+                    this.AddNotification("Product " + pro.names + " Không đủ số lượng", NotificationType.WARNING);
                 }
             }
-          
+            Session["CheckQuantity1"] = a;
+            Session["CheckQuantity2"] = b;
+
             if (cart != null)
             {
                 var pro = cart.Sum(x => x.quantity);
@@ -275,8 +285,7 @@ namespace WebApplication1.Controllers
 
 
                 orders.pending = false;
-                orders.delivering = false;
-                orders.successed = false;
+              
                 orders.canceled = false;
                 orders.paid = false;
                 db.orders.Add(orders);
