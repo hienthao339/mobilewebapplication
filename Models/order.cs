@@ -33,6 +33,7 @@ namespace WebApplication1.Models
         public Nullable<bool> completed { get; set; }
         public Nullable<bool> canceled { get; set; }
         public Nullable<int> id_user { get; set; }
+        public Nullable<bool> request_cancel { get; set; }
     
         public virtual customer customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

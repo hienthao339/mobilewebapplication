@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
                 if (pro.quantity < item.quantity)
                 {
                     b = b + 1;
-                    this.AddNotification("Product " + pro.names + " Không đủ số lượng", NotificationType.WARNING);
+                    this.AddNotification("Product " + pro.names + " not enough quantity", NotificationType.WARNING);
                 }
             }
             Session["CheckQuantity1"] = a;

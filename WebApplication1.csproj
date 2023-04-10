@@ -204,6 +204,9 @@
     <Compile Include="Models\rank.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -450,7 +453,6 @@
     <Content Include="Views\Home\SearchOrders.cshtml" />
     <Content Include="Views\Home\YourOrders.cshtml" />
     <Content Include="Views\Home\SearchOrderPage.cshtml" />
-    <Content Include="Views\Home\Details_Pro.cshtml" />
     <Content Include="Views\products\Create.cshtml" />
     <Content Include="Views\products\Delete.cshtml" />
     <Content Include="Views\products\Details.cshtml" />
@@ -458,6 +460,7 @@
     <Content Include="Views\products\Index.cshtml" />
     <Content Include="Views\User\Orders.cshtml" />
     <Content Include="Views\orders\BagCartOrders.cshtml" />
+    <Content Include="Views\Home\Details_Pro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
