@@ -26,13 +26,7 @@
             Tình trạng xử lý
         </th>
         <th>
-            Tình trạng vận chuyển
-        </th>
-        <th>
-            Tình trạng đơn hàng
-        </th>
-        <th>
-            Tình trạng đổi trả
+            Tình trạng thành  công
         </th>
         <th>
             Huỷ đơn hàng
@@ -64,13 +58,7 @@
                 @Html.DisplayFor(modelItem => item.pending)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.delivering)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.successed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.paid)
+                @Html.DisplayFor(modelItem => item.completed)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.canceled)
@@ -80,9 +68,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.id_order }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id_order }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.id_order })
-
             </td>
         </tr>
 

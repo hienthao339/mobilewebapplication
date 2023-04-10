@@ -41,25 +41,22 @@ namespace WebApplication1.Controllers
         }
         public ActionResult SearchOrders(FormCollection form)
         {
-            if (form["searchOrders"] != null)
+            if (form["searchOrders"] != null && form["searchOrders"]!= "")
             {
                 var input = form["searchOrders"].ToString();
-                var cus = db.customers.Where(x => x.phone == input || x.email == input).FirstOrDefault();
+                var cus = db.customers.Where(x => x.phone == input || x.email == input).First();
                 if(cus != null)
                 {
                     return RedirectToAction("YourOrders", "Home", new { id = cus.id_customer });
                 }
-                else
+                else 
                 {
                     this.AddNotification("We can not find your orders!", NotificationType.ERROR);
                     return RedirectToAction("SearchOrderPage", "Home");
                 }
             }
-            else
-            {
-                this.AddNotification("Please enter the email or phone number of the order !! ", NotificationType.WARNING);
-                return RedirectToAction("SearchOrderPage", "Home");
-            }
+            this.AddNotification("Please enter the email or phone number of the order !! ", NotificationType.WARNING);
+            return RedirectToAction("SearchOrderPage", "Home");
         }
         public ActionResult SearchOrderPage()
         {

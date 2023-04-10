@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,11 +18,34 @@ namespace WebApplication1.Controllers.Admin
         private MobileShoppingEntities db = new MobileShoppingEntities();
 
         // GET: products
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var products = db.products.ToList();
-            return View(products.ToList());
+            // 1. Tham số int? dùng để thể hiện null và kiểu int( số nguyên)
+            // page có thể có giá trị là null ( rỗng) và kiểu int.
+
+            // 2. Nếu page = null thì đặt lại là 1.
+            if (page == null) page = 1;
+
+            // 3. Tạo truy vấn sql, lưu ý phải sắp xếp theo trường nào đó, ví dụ OrderBy
+            // theo Masp mới có thể phân trang.
+            var sp = db.products.OrderBy(x => x.id_product);
+
+            // 4. Tạo kích thước trang (pageSize) hay là số sản phẩm hiển thị trên 1 trang
+            int pageSize = 10;
+
+            // 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
+            // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
+            int pageNumber = (page ?? 1);
+
+            // 5. Trả về các sản phẩm được phân trang theo kích thước và số trang.
+            return View(sp.ToPagedList(pageNumber, pageSize));
         }
+
+        //public ActionResult Index()
+        //{
+        //    var products = db.products.ToList();
+        //    return View(products.ToList());
+        //}
 
         // GET: products/Details/5
         public ActionResult Details(int? id)
@@ -72,13 +96,11 @@ namespace WebApplication1.Controllers.Admin
                 if (images != null && images.ContentLength > 0)
                 {
                     int id = product.id_product;
-                    string name = product.names;
-                    string color = product.color;
-                    string ram = product.ram;
+                  
 
                     string File_name = "";
                     int index = images.FileName.IndexOf('.');
-                    File_name = "pro" + "_" + id.ToString() + "." + images.FileName.Substring(index + 1);
+                    File_name = "pro" + "_" +id.ToString() + "." + images.FileName.Substring(index + 1);
                     string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
                     images.SaveAs(path);
 

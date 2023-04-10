@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 
 namespace WebApplication1.Models.Functions
@@ -22,28 +23,30 @@ namespace WebApplication1.Models.Functions
             db.SaveChanges();
             return model.id_order;
         }
-        public int Update(order model)
+        public int Update(order order)
         {
-            order order = db.orders.Find(model.id_order);
+            order ord = db.orders.Find(order.id_order);
             if (order == null)
             {
                 return -1;
             }
-            order.id_order = model.id_order;
-            order.pending = model.pending;
-            order.payment_type = model.payment_type;
-            order.total_price = model.total_price;
-            order.shipping_fee = model.shipping_fee;
-            order.promocode.code = model.promocode.code;
-            order.created_at = model.created_at;
-            order.finished_at = model.finished_at;
-           
-            order.canceled = model.canceled;
-            order.started_at = model.started_at;
-            
-            order.paid = model.paid;
-            return model.id_order;
-        }
+            ord.id_order = order.id_order;
+            ord.total_price = order.total_price;
+         
+            ord.finished_at = order.finished_at;
+            ord.started_at = order.started_at;
+            ord.created_at = order.created_at;
+            ord.canceled = order.canceled;
+            ord.completed = order.completed;
+            ord.payment_type = order.payment_type;
+          
+            ord.shipping_fee = order.shipping_fee;
+            ord.id_customer = order.id_customer;
+            ord.id_user = order.id_user;
+            ord.pending = order.pending;
+            ord.id_promo = order.id_promo;
+            return order.id_order;
+        }   
         public int Delete(int id)
         {
             order model = db.orders.Find(id);

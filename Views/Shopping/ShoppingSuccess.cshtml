@@ -25,6 +25,7 @@
     <div class="my-lg-5">
         @foreach (var item in Model)
         {
+            double total = Convert.ToDouble(item.product.price.Value * item.quantity);
             <div class="flex space-x-6 mb-4 pb-4 border-b">
                 <img src="~/wwwroot/Images/Products/@Html.DisplayFor(modelItem => item.product.images)" class="object-cover w-25" />
                 <div>
@@ -33,7 +34,10 @@
                     </span><br />
                     <span class="font-light text-md">
                         @Html.DisplayFor(modelItem => item.product.color)<br />
-                        @Html.DisplayFor(modelItem => item.quantity)
+                        @Html.DisplayFor(modelItem => item.quantity)<br />
+                       $@Html.DisplayFor(modelItem => item.product.price)<br />
+                        <hr />
+                        $@total.00
                     </span>
                 </div>
             </div>
@@ -60,7 +64,10 @@
             <p>Subtotal</p>
             <p>$@Session["Total_order_new"].00</p>
         </div>
-        <div class="cursor-pointer w-full rounded-md text-center py-3 bg-yellow-300 text-md font-semibold my-3">Continuous Shopping</div><br />
+        <a href="/Home/Index">
+            <div class="cursor-pointer w-full rounded-md text-center py-3 bg-yellow-300 text-md font-semibold my-3">Continuous Shopping</div><br />
+        </a>
+       
     </div>
 </div>
 

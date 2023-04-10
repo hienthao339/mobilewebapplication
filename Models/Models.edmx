@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MobileShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MobileShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cart">
           <Key>
             <PropertyRef Name="id_cart" />
@@ -67,10 +67,8 @@
           <Property Name="total_price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="id_promo" Type="int" />
           <Property Name="pending" Type="bit" />
-          <Property Name="onprocess" Type="bit" />
           <Property Name="completed" Type="bit" />
           <Property Name="canceled" Type="bit" />
-          <Property Name="paid" Type="bit" />
           <Property Name="id_user" Type="int" />
         </EntityType>
         <EntityType Name="product">
@@ -298,8 +296,7 @@
             <End Role="users" EntitySet="users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MobileShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -371,10 +368,8 @@
           <Property Name="total_price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="id_promo" Type="Int32" />
           <Property Name="pending" Type="Boolean" />
-          <Property Name="onprocess" Type="Boolean" />
           <Property Name="completed" Type="Boolean" />
           <Property Name="canceled" Type="Boolean" />
-          <Property Name="paid" Type="Boolean" />
           <Property Name="id_user" Type="Int32" />
           <NavigationProperty Name="customer" Relationship="Self.FK_id_customer_oders" FromRole="orders" ToRole="customer" />
           <NavigationProperty Name="order_item" Relationship="Self.FK_id_order_order_item" FromRole="orders" ToRole="order_item" />
@@ -688,10 +683,8 @@
                 <ScalarProperty Name="total_price" ColumnName="total_price" />
                 <ScalarProperty Name="id_promo" ColumnName="id_promo" />
                 <ScalarProperty Name="pending" ColumnName="pending" />
-                <ScalarProperty Name="onprocess" ColumnName="onprocess" />
                 <ScalarProperty Name="completed" ColumnName="completed" />
                 <ScalarProperty Name="canceled" ColumnName="canceled" />
-                <ScalarProperty Name="paid" ColumnName="paid" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
               </MappingFragment>
             </EntityTypeMapping>

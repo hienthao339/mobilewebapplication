@@ -1,112 +1,101 @@
-﻿@model IEnumerable<WebApplication1.Models.order>
+﻿@model PagedList.IPagedList<WebApplication1.Models.order>
 
 @{
     ViewBag.Title = "Index";
-      Layout = "../../Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+@using PagedList;
+@using PagedList.Mvc;
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.payment_type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.started_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.finished_at)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.shipping_fee)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.total_price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.pending)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.delivering)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.successed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.canceled)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.paid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.promocode.code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.user.names)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.customer.email)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.payment_type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.started_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.finished_at)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.shipping_fee)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.total_price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pending)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.delivering)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.successed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.canceled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.paid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.promocode.code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.user.names)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.customer.email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_order }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_order }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_order })
-        </td>
-    </tr>
-}
-
+<table class="table m-3">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Payment Type</th>
+            <th scope="col">Create At</th>
+            <th scope="col">Start At</th>
+            <th scope="col">Finished At</th>
+            <th scope="col">Shipping Fee</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Pending</th>
+            <th scope="col">Completed</th>
+            <th scope="col">Canceled</th>
+            <th scope="col">Email</th>
+            <th scope="col">Promocode</th>
+            <th scope="col">Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payment_type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.created_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.started_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.finished_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.shipping_fee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total_price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pending)
+                </td>
+              
+                <td>
+                    @Html.DisplayFor(modelItem => item.completed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.canceled)
+                </td>
+            
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.promocode.code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.names)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_order }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_order }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_order })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<br />
+<div id='Paging' style="text-align: center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" href="@Url.Action("Index", "orders", new { page = 1 })">Previous</a>
+        </li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            int e = 0;
+            e += i;
+            Session["LastPage"] = e;
+            <li class="page-item"><a class="page-link" href="@Url.Action("Index", "orders", new { page = i })">@i</a></li>
+        }
+        <li class="page-item">
+            <a class="page-link" href="@Url.Action("Index", "orders", new { page = Session["LastPage"] })">Last</a>
+        </li>
+    </ul>
+</nav>

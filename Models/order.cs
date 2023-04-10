@@ -30,10 +30,8 @@ namespace WebApplication1.Models
         public Nullable<decimal> total_price { get; set; }
         public Nullable<int> id_promo { get; set; }
         public Nullable<bool> pending { get; set; }
-        public Nullable<bool> onprocess { get; set; }
         public Nullable<bool> completed { get; set; }
         public Nullable<bool> canceled { get; set; }
-        public Nullable<bool> paid { get; set; }
         public Nullable<int> id_user { get; set; }
     
         public virtual customer customer { get; set; }

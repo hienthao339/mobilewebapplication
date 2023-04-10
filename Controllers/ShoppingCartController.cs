@@ -1,16 +1,9 @@
-﻿using Microsoft.Ajax.Utilities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO.Ports;
+﻿using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using WebApplication1.Extensions;
 using WebApplication1.Models;
-using WebApplication1.Models.Functions;
-using WebGrease.ImageAssemble;
 
 namespace WebApplication1.Controllers
 {
@@ -37,7 +30,7 @@ namespace WebApplication1.Controllers
             {
                 GetCart().Add(pro);
             }
-            return RedirectToAction("Details_Pro", "Shopping", new { id = id });
+            return RedirectToAction("Details_Pro", "Home", new { id = id });
         }
         // trang gio hang
         // flashback
@@ -48,7 +41,7 @@ namespace WebApplication1.Controllers
                 Carts carts = Session["Cart"] as Carts;
                 return View(carts);
             }
-            Carts cart = Session["Cart"] as Carts; cart = Session["Cart"] as Carts;
+            Carts cart = Session["Cart"] as Carts;
             if (cart != null)
             {
                 var pro = cart.Items.Sum(x => x.Shopping_quantity);
@@ -58,7 +51,7 @@ namespace WebApplication1.Controllers
                 var shippingfee = 10 + cart.Items.Sum(x => x.Shopping_quantity * 2);
                 Session["Shipping"] = shippingfee;
                 var total_order = shippingfee + total_cost;
-                Session["Total_order"] = total_order;
+                Session["Total_order_new"] = total_order;
             }
             return View(cart);
         }
@@ -115,7 +108,8 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                if (form["code"] != "Null")
+                var code = form["code"];
+                if (code != null && code != "")
                 {
                     this.AddNotification("You must SIGNIN to user promocode", NotificationType.WARNING);
                     return RedirectToAction("ShowToCart", "ShoppingCart");
@@ -131,21 +125,28 @@ namespace WebApplication1.Controllers
                 customer.city = form["city"];
                 customer.email = form["email"];
 
-                db.customers.Add(customer);
-                db.SaveChanges();
-
                 order orders = new order();
-                orders.id_customer = customer.id_customer;
+                var findcus = db.customers.Where(x => x.phone == customer.phone && x.email == customer.email && x.addresss == customer.addresss && x.district == customer.district && x.city == customer.city && x.ward == customer.ward).FirstOrDefault();
+                if (findcus == null)
+                {
+                    orders.id_customer = customer.id_customer;
+                    db.customers.Add(customer);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    orders.id_customer = findcus.id_customer;
+                }
                 orders.created_at = DateTime.Now;
                 orders.payment_type = true;
                 orders.finished_at = null;
                 orders.shipping_fee = Convert.ToInt32(Session["Shipping"]);
-                orders.total_price = Convert.ToDecimal(Session["Total_order"]);
+                orders.total_price = Convert.ToDecimal(Session["Total_order_new"]);
                 orders.id_promo = null;
                 orders.pending = false;
-               
+                orders.completed = false;
                 orders.canceled = false;
-                orders.paid = false;
+
                 db.orders.Add(orders);
                 db.SaveChanges();
 

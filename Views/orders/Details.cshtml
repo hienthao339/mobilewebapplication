@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-      Layout = "../../Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Details</h2>
@@ -67,20 +67,14 @@
             @Html.DisplayFor(model => model.pending)
         </dd>
 
+    
+
         <dt>
-            @Html.DisplayNameFor(model => model.delivering)
+            @Html.DisplayNameFor(model => model.completed)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.delivering)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.successed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.successed)
+            @Html.DisplayFor(model => model.completed)
         </dd>
 
         <dt>
@@ -91,12 +85,14 @@
             @Html.DisplayFor(model => model.canceled)
         </dd>
 
+     
+
         <dt>
-            @Html.DisplayNameFor(model => model.paid)
+            @Html.DisplayNameFor(model => model.customer.email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.paid)
+            @Html.DisplayFor(model => model.customer.email)
         </dd>
 
         <dt>
@@ -113,14 +109,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.user.names)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.customer.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.customer.email)
         </dd>
 
     </dl>
