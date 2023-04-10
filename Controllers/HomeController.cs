@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,7 +33,7 @@ namespace WebApplication1.Controllers
                     }
                 }
             }
-           var products = db.products.ToList();
+            var products = db.products.ToList();
             return View(products);
         }
         public ActionResult SearchPage(string searching)
@@ -41,15 +42,15 @@ namespace WebApplication1.Controllers
         }
         public ActionResult SearchOrders(FormCollection form)
         {
-            if (form["searchOrders"] != null && form["searchOrders"]!= "")
+            if (form["searchOrders"] != null && form["searchOrders"] != "")
             {
                 var input = form["searchOrders"].ToString();
                 var cus = db.customers.Where(x => x.phone == input || x.email == input).First();
-                if(cus != null)
+                if (cus != null)
                 {
                     return RedirectToAction("YourOrders", "Home", new { id = cus.id_customer });
                 }
-                else 
+                else
                 {
                     this.AddNotification("We can not find your orders!", NotificationType.ERROR);
                     return RedirectToAction("SearchOrderPage", "Home");
@@ -64,7 +65,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult YourOrders(int id)
         {
-            var cus = db.customers.Where(x=>x.id_customer == id).FirstOrDefault();
+            var cus = db.customers.Where(x => x.id_customer == id).FirstOrDefault();
             Session["Customer"] = cus;
             var orders = db.orders.Where(x => x.id_customer == cus.id_customer).ToList();
             //var order_items = db.order_item.Where(x=>x.order.id_customer == id).ToList();
@@ -78,7 +79,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult Details_Pro(int id)
         {
-            var pro_seri = db.products.Where(x=>x.id_product == id).FirstOrDefault();
+            var pro_seri = db.products.Where(x => x.id_product == id).FirstOrDefault();
             return View(pro_seri);
         }
         public ActionResult Contact()
@@ -117,6 +118,14 @@ namespace WebApplication1.Controllers
             return View();
         }
         public ActionResult Search()
+        {
+            return View();
+        }
+        public ActionResult Chats()
+        {
+            return View();
+        }
+       public ActionResult Order()
         {
             return View();
         }
