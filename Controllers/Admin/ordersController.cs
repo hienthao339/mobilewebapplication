@@ -1,5 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Office2010.PowerPoint;
+using DocumentFormat.OpenXml.Presentation;
 using DocumentFormat.OpenXml.Vml.Office;
+using DocumentFormat.OpenXml.Wordprocessing;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -7,10 +9,12 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Extensions;
 using WebApplication1.Models;
+using WebApplication1.Models.Functions;
 
 namespace WebApplication1.Controllers.Admin
 {
@@ -34,7 +38,7 @@ namespace WebApplication1.Controllers.Admin
             //var sp = db.products.OrderBy(x => x.id_product);
             var sp = db.orders.Include(o => o.customer).Include(o => o.promocode).Include(o => o.user).ToList();
             // 4. Tạo kích thước trang (pageSize) hay là số sản phẩm hiển thị trên 1 trang
-            int pageSize = 10;
+            int pageSize = 20;
 
             // 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
             // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
@@ -58,35 +62,14 @@ namespace WebApplication1.Controllers.Admin
             }
             return View(order);
         }
-
-        // GET: orders/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.id_customer = new SelectList(db.customers, "id_customer", "email");
-        //    ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code");
-        //    ViewBag.id_user = new SelectList(db.users, "id_user", "names");
-        //    return View();
-        //}
-
-        //// POST: orders/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "id_order,id_customer,payment_type,created_at,started_at,finished_at,shipping_fee,total_price,id_promo,pending,onprocess,completed,canceled,paid,id_user")] order order)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.orders.Add(order);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.id_customer = new SelectList(db.customers, "id_customer", "email", order.id_customer);
-        //    ViewBag.id_promo = new SelectList(db.promocodes, "id_promo", "code", order.id_promo);
-        //    ViewBag.id_user = new SelectList(db.users, "id_user", "names", order.id_user);
-        //    return View(order);
-        //}
+        public ActionResult Waitting(int? page)
+        {
+            if (page == null) page = 1;
+            var sp = db.orders.Where(x => x.pending == false).ToList();
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(sp.ToPagedList(pageNumber, pageSize));
+        }
 
         // GET: orders/Edit/5
         public ActionResult Edit(int? id)
@@ -123,13 +106,13 @@ namespace WebApplication1.Controllers.Admin
             ord.id_promo = order.id_promo;
             ord.total_price = order.total_price;
             ord.created_at = order.created_at;
-            ord.finished_at = order.finished_at;
+          
 
-            if(order.pending == true)
+            if (order.pending == true)
             {
                 ord.pending = order.pending;
                 ord.started_at = DateTime.Now;
-                if(order.canceled == true)
+                if (order.canceled == true)
                 {
                     this.AddNotification("Your order has been solved !", NotificationType.WARNING);
                     return RedirectToAction("Edit", "orders");
@@ -148,7 +131,7 @@ namespace WebApplication1.Controllers.Admin
 
             ord.started_at = order.started_at;
             ord.shipping_fee = order.shipping_fee;
-            ord.completed = order.completed;
+          
             ord.payment_type = order.payment_type;
 
             db.SaveChanges();
@@ -171,7 +154,7 @@ namespace WebApplication1.Controllers.Admin
             {
                 return HttpNotFound();
             }
-            return RedirectToAction("Index");
+            return View(order);
         }
 
         // POST: orders/Delete/5
@@ -198,6 +181,23 @@ namespace WebApplication1.Controllers.Admin
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Approve(int id)
+        {
+            var ord = db.orders.Where(x=>x.id_order == id).FirstOrDefault();
+            ord.pending = true;
+            ord.started_at = DateTime.Now;
+            db.SaveChanges();
+            return RedirectToAction("Waitting");
+        }
+        public ActionResult Request_Cancel(int? page)
+        {
+            if (page == null) page = 1;
+            var sp = db.orders.Where(x => x.request_cancel == true).ToList();
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(sp.ToPagedList(pageNumber, pageSize));
         }
     }
 }

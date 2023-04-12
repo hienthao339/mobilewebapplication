@@ -62,12 +62,10 @@
           <Property Name="payment_type" Type="bit" />
           <Property Name="created_at" Type="datetime" />
           <Property Name="started_at" Type="datetime" />
-          <Property Name="finished_at" Type="datetime" />
           <Property Name="shipping_fee" Type="int" />
           <Property Name="total_price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="id_promo" Type="int" />
           <Property Name="pending" Type="bit" />
-          <Property Name="completed" Type="bit" />
           <Property Name="canceled" Type="bit" />
           <Property Name="id_user" Type="int" />
           <Property Name="request_cancel" Type="bit" />
@@ -92,6 +90,7 @@
           <Property Name="id_promo" Type="int" />
           <Property Name="color" Type="varchar" MaxLength="20" />
           <Property Name="brand" Type="varchar" MaxLength="20" />
+          <Property Name="discount_price" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="promocode">
           <Key>
@@ -375,12 +374,10 @@
           <Property Name="payment_type" Type="Boolean" />
           <Property Name="created_at" Type="DateTime" Precision="3" />
           <Property Name="started_at" Type="DateTime" Precision="3" />
-          <Property Name="finished_at" Type="DateTime" Precision="3" />
           <Property Name="shipping_fee" Type="Int32" />
           <Property Name="total_price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="id_promo" Type="Int32" />
           <Property Name="pending" Type="Boolean" />
-          <Property Name="completed" Type="Boolean" />
           <Property Name="canceled" Type="Boolean" />
           <Property Name="id_user" Type="Int32" />
           <NavigationProperty Name="customer" Relationship="Self.FK_id_customer_oders" FromRole="orders" ToRole="customer" />
@@ -412,6 +409,7 @@
           <NavigationProperty Name="carts" Relationship="Self.FK_id_product_cart" FromRole="product" ToRole="cart" />
           <NavigationProperty Name="order_item" Relationship="Self.FK_id_product_order_item" FromRole="product" ToRole="order_item" />
           <NavigationProperty Name="promocode" Relationship="Self.FK_id_promo_product" FromRole="product" ToRole="promocode" />
+          <Property Name="discount_price" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="promocode">
           <Key>
@@ -703,12 +701,10 @@
                 <ScalarProperty Name="payment_type" ColumnName="payment_type" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="started_at" ColumnName="started_at" />
-                <ScalarProperty Name="finished_at" ColumnName="finished_at" />
                 <ScalarProperty Name="shipping_fee" ColumnName="shipping_fee" />
                 <ScalarProperty Name="total_price" ColumnName="total_price" />
                 <ScalarProperty Name="id_promo" ColumnName="id_promo" />
                 <ScalarProperty Name="pending" ColumnName="pending" />
-                <ScalarProperty Name="completed" ColumnName="completed" />
                 <ScalarProperty Name="canceled" ColumnName="canceled" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
               </MappingFragment>
@@ -717,6 +713,7 @@
           <EntitySetMapping Name="products">
             <EntityTypeMapping TypeName="MobileShoppingModel.product">
               <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="discount_price" ColumnName="discount_price" />
                 <ScalarProperty Name="id_product" ColumnName="id_product" />
                 <ScalarProperty Name="names" ColumnName="names" />
                 <ScalarProperty Name="images" ColumnName="images" />

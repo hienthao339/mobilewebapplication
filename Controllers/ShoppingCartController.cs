@@ -139,14 +139,13 @@ namespace WebApplication1.Controllers
                 }
                 orders.created_at = DateTime.Now;
                 orders.payment_type = true;
-                orders.finished_at = null;
+              
                 orders.shipping_fee = Convert.ToInt32(Session["Shipping"]);
                 orders.total_price = Convert.ToDecimal(Session["Total_order_new"]);
                 orders.id_promo = null;
                 orders.pending = false;
-                orders.completed = false;
                 orders.canceled = false;
-
+                orders.request_cancel = false;
                 db.orders.Add(orders);
                 db.SaveChanges();
 

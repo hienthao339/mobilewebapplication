@@ -218,9 +218,8 @@ namespace WebApplication1.Controllers
             orders.id_user = user.id_user;
             orders.created_at = DateTime.Now;
             orders.payment_type = true;
-            orders.finished_at = null;
-            orders.completed = false;
-
+            orders.request_cancel = false;
+          
             var code = form["code"];
             var promo = db.promocodes.Where(x => x.code == code).FirstOrDefault();
             var count = db.promocodes.Count(x => x.code == code);

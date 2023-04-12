@@ -33,11 +33,11 @@ namespace WebApplication1.Models.Functions
             ord.id_order = order.id_order;
             ord.total_price = order.total_price;
          
-            ord.finished_at = order.finished_at;
+         
             ord.started_at = order.started_at;
             ord.created_at = order.created_at;
             ord.canceled = order.canceled;
-            ord.completed = order.completed;
+         
             ord.payment_type = order.payment_type;
           
             ord.shipping_fee = order.shipping_fee;
