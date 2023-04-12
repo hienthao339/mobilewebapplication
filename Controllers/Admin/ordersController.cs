@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2010.PowerPoint;
+using DocumentFormat.OpenXml.Presentation;
 using DocumentFormat.OpenXml.Vml.Office;
 using DocumentFormat.OpenXml.Wordprocessing;
 using PagedList;
@@ -189,6 +190,14 @@ namespace WebApplication1.Controllers.Admin
             ord.started_at = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("Waitting");
+        }
+        public ActionResult Request_Cancel(int? page)
+        {
+            if (page == null) page = 1;
+            var sp = db.orders.Where(x => x.request_cancel == true).ToList();
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(sp.ToPagedList(pageNumber, pageSize));
         }
     }
 }

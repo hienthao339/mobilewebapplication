@@ -107,23 +107,6 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
             }
         }
-        public ActionResult Cancel_Request_Cancel(int id)
-        {
-            var ord = db.orders.Where(x => x.id_order == id).FirstOrDefault();
-            if (ord.canceled == true)
-            {
-                this.AddNotification("You can not REPURCHASE this order !! ", NotificationType.WARNING);
-                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
-            }
-            else
-            {
-                this.AddNotification("Your  !! ", NotificationType.WARNING);
-                var orders = db.orders.Where(x => x.id_order == id).FirstOrDefault();
-                orders.request_cancel = true;
-                db.SaveChanges();
-                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
-            }
-        }
 
         public ActionResult Signin()
         {

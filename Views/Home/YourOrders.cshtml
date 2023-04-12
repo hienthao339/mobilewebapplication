@@ -3,7 +3,6 @@
     ViewBag.Title = "YourOrders";
 }
 
-<h2>YourOrders</h2>
 @Html.Partial("_Notifications")
 <div>Email: @(((WebApplication1.Models.customer)Session["Customer"]).email)</div>
 <div>Address: @(((WebApplication1.Models.customer)Session["Customer"]).addresss) @(((WebApplication1.Models.customer)Session["Customer"]).ward) @(((WebApplication1.Models.customer)Session["Customer"]).district) @(((WebApplication1.Models.customer)Session["Customer"]).city) </div>
