@@ -77,22 +77,7 @@ namespace WebApplication1.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                product pro = new product();
-                pro.id_product = product.id_product;
-                pro.price = product.price;
-                pro.quantity = product.quantity;
-                pro.rate = product.rate;
-                pro.water_resistance = product.water_resistance;
-                pro.operating_system = product.operating_system;
-                pro.weights = product.weights;
-                pro.battery = product.battery;
-                pro.brand = product.brand;
-                pro.color = product.color;
-                pro.ram = product.ram;
-                pro.display = product.display;
-                pro.id_promo = product.id_promo;
-                pro.processor = product.processor;
-                pro.names = product.names;
+             
                 if (images != null && images.ContentLength > 0)
                 {
                     int id = product.id_product;
@@ -104,10 +89,12 @@ namespace WebApplication1.Controllers.Admin
                     string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
                     images.SaveAs(path);
 
-                    pro.images = File_name;
+                    product.images = File_name;
                 }
+                var promo = db.promocodes.Where(x => x.code == product.promocode.code).FirstOrDefault();
+                product.id_promo = promo.id_promo;
                 var fpro = new Func_Product();
-                fpro.Insert(pro);
+                fpro.Insert(product);
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -137,22 +124,6 @@ namespace WebApplication1.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                product pro = new product();
-                pro.id_product = product.id_product;
-                pro.price = product.price;
-                pro.quantity = product.quantity;
-                pro.rate = product.rate;
-                pro.water_resistance = product.water_resistance;
-                pro.operating_system = product.operating_system;
-                pro.weights = product.weights;
-                pro.battery = product.battery;
-                pro.brand = product.brand;
-                pro.color = product.color;
-                pro.ram = product.ram;
-                pro.display = product.display;
-                pro.id_promo = product.id_promo;
-                pro.processor = product.processor;
-                pro.names = product.names;
                 if (images != null && images.ContentLength > 0)
                 {
                     int id = product.id_product;
@@ -163,10 +134,10 @@ namespace WebApplication1.Controllers.Admin
                     string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
                     images.SaveAs(path);
 
-                    pro.images = File_name;
+                    product.images = File_name;
                 }
                 var fpro = new Func_Product();
-                fpro.Update(pro);
+                fpro.Update(product);
                 return RedirectToAction("Index");
             }
             return View(product);

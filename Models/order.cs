@@ -25,12 +25,10 @@ namespace WebApplication1.Models
         public Nullable<bool> payment_type { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> started_at { get; set; }
-        public Nullable<System.DateTime> finished_at { get; set; }
         public Nullable<int> shipping_fee { get; set; }
         public Nullable<decimal> total_price { get; set; }
         public Nullable<int> id_promo { get; set; }
         public Nullable<bool> pending { get; set; }
-        public Nullable<bool> completed { get; set; }
         public Nullable<bool> canceled { get; set; }
         public Nullable<int> id_user { get; set; }
         public Nullable<bool> request_cancel { get; set; }

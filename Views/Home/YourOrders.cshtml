@@ -4,7 +4,7 @@
 }
 
 <h2>YourOrders</h2>
-
+@Html.Partial("_Notifications")
 <div>Email: @(((WebApplication1.Models.customer)Session["Customer"]).email)</div>
 <div>Address: @(((WebApplication1.Models.customer)Session["Customer"]).addresss) @(((WebApplication1.Models.customer)Session["Customer"]).ward) @(((WebApplication1.Models.customer)Session["Customer"]).district) @(((WebApplication1.Models.customer)Session["Customer"]).city) </div>
 <div>Phone: @(((WebApplication1.Models.customer)Session["Customer"]).phone)</div>
@@ -20,13 +20,10 @@
             Ngày vận chuyển
         </th>
         <th>
-            Ngày gửi đến
-        </th>
-        <th>
             Tình trạng xử lý
         </th>
         <th>
-            Tình trạng thành  công
+            Huỷ đơn hàng
         </th>
         <th>
             Huỷ đơn hàng
@@ -34,6 +31,7 @@
         <th>
             Tổng đơn hàng
         </th>
+
         <th></th>
     </tr>
 
@@ -51,23 +49,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.started_at)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.finished_at)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.pending)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.completed)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.canceled)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.request_cancel)
+            </td>
+            <td>
                 $@Html.DisplayFor(modelItem => item.total_price)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id_order }) |
+                <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
                 @Html.ActionLink("Delete", "Delete", new { id = item.id_order })
             </td>
         </tr>

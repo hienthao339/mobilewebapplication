@@ -14,12 +14,11 @@
             <th scope="col">Payment Type</th>
             <th scope="col">Create At</th>
             <th scope="col">Start At</th>
-            <th scope="col">Finished At</th>
             <th scope="col">Shipping Fee</th>
             <th scope="col">Total Price</th>
             <th scope="col">Pending</th>
-            <th scope="col">Completed</th>
             <th scope="col">Canceled</th>
+            <th scope="col">Request Canceled</th>
             <th scope="col">Email</th>
             <th scope="col">Promocode</th>
             <th scope="col">Name</th>
@@ -39,9 +38,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.started_at)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.finished_at)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.shipping_fee)
                 </td>
@@ -51,14 +48,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.pending)
                 </td>
-              
-                <td>
-                    @Html.DisplayFor(modelItem => item.completed)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.canceled)
                 </td>
-            
+                <td>
+                    @Html.DisplayFor(modelItem => item.request_cancel)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.customer.email)
                 </td>
@@ -66,10 +62,11 @@
                     @Html.DisplayFor(modelItem => item.promocode.code)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.user.names)
+                    @Html.DisplayFor(modelItem => item.id_user)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.id_order }) |
+                    <a href="/orders/Approve/@item.id_order">Approve</a>
                     @Html.ActionLink("Details", "Details", new { id = item.id_order }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.id_order })
                 </td>

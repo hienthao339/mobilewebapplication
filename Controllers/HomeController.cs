@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -87,6 +88,41 @@ namespace WebApplication1.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Request_Cancel(int id)
+        {
+            var ord = db.orders.Where(x=>x.id_order == id).FirstOrDefault();
+            if ( ord.pending == true)
+            {
+                this.AddNotification("You can not CANCEL this order !! ", NotificationType.WARNING);
+                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
+            }
+            else
+            {
+                this.AddNotification("Your request is being processed !! ", NotificationType.WARNING);
+                var orders = db.orders.Where(x=>x.id_order == id).FirstOrDefault();
+                orders.request_cancel = true;
+                db.SaveChanges();
+                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
+            }
+        }
+        public ActionResult Cancel_Request_Cancel(int id)
+        {
+            var ord = db.orders.Where(x => x.id_order == id).FirstOrDefault();
+            if (ord.canceled == true)
+            {
+                this.AddNotification("You can not REPURCHASE this order !! ", NotificationType.WARNING);
+                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
+            }
+            else
+            {
+                this.AddNotification("Your  !! ", NotificationType.WARNING);
+                var orders = db.orders.Where(x => x.id_order == id).FirstOrDefault();
+                orders.request_cancel = true;
+                db.SaveChanges();
+                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
+            }
         }
 
         public ActionResult Signin()
