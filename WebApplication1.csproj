@@ -463,11 +463,13 @@
     <Content Include="Views\Home\Details_Pro.cshtml" />
     <Content Include="Views\orders\Waitting.cshtml" />
     <Content Include="Views\orders\Request_Cancel.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
     <Folder Include="wwwroot\Images\Avatars\" />
+    <Folder Include="wwwroot\Images\New_Products\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

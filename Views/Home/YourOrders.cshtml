@@ -24,9 +24,7 @@
         <th>
             Huỷ đơn hàng
         </th>
-        <th>
-            Huỷ đơn hàng
-        </th>
+
         <th>
             Tổng đơn hàng
         </th>
@@ -50,20 +48,37 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.pending)
+                @Html.HiddenFor(modelItem => item.pending)
+                @if (item.pending == false && item.canceled == false)
+                {
+                    <div>Your order is Pending</div>
+                }
+                else if (item.pending == true && item.canceled == false)
+                {
+                    <div>Your order has been processed</div>
+                }
+                else
+                {
+                    <div>Your order has been Canceled</div>
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.canceled)
+                @Html.HiddenFor(modelItem => item.canceled)
+                @if (item.canceled == true)
+                {
+                    <div>Your order has been canceled</div>
+                }
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.request_cancel)
-            </td>
+
             <td>
                 $@Html.DisplayFor(modelItem => item.total_price)
             </td>
             <td>
-                <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
-                @Html.ActionLink("Delete", "Delete", new { id = item.id_order })
+                @if (item.canceled == false)
+                {
+                    <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.id_order })
             </td>
         </tr>
 

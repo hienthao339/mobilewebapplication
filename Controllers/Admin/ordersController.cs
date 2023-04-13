@@ -65,7 +65,7 @@ namespace WebApplication1.Controllers.Admin
         public ActionResult Waitting(int? page)
         {
             if (page == null) page = 1;
-            var sp = db.orders.Where(x => x.pending == false).ToList();
+            var sp = db.orders.Where(x => x.pending == false && x.request_cancel == false).ToList();
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             return View(sp.ToPagedList(pageNumber, pageSize));
@@ -194,10 +194,17 @@ namespace WebApplication1.Controllers.Admin
         public ActionResult Request_Cancel(int? page)
         {
             if (page == null) page = 1;
-            var sp = db.orders.Where(x => x.request_cancel == true).ToList();
+            var sp = db.orders.Where(x => x.request_cancel == true && x.pending == false && x.canceled == false).ToList();
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             return View(sp.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult Cancel(int id)
+        {
+            var ord = db.orders.Where(x => x.id_order == id).FirstOrDefault();
+            ord.canceled = true;
+            db.SaveChanges();
+            return RedirectToAction("Request_Cancel");
         }
     }
 }
