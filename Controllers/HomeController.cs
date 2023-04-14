@@ -39,29 +39,9 @@ namespace WebApplication1.Controllers
             var products = db.products.ToList();
             return View(products);
         }
-        public ActionResult SearchPage(string searching ,string brand, string color)
+        public ActionResult SearchPage()
         {
-            if(searching != null)
-            {
-                return View(db.products.Where(x => x.names.Contains(searching) || x.brand.Contains(searching) || searching == null).ToList());
-            }
-          
-            if (color == null && brand != null)
-            {
-                return View(db.products.Where(x => x.brand.Contains(brand)).ToList());
-            }
-            else if (brand == null && color != null)
-            {
-                return View(db.products.Where(x => x.color.Contains(color)).ToList());
-            }
-            else if (color != null && brand != null)
-            {
-                return View(db.products.Where(x => x.brand.Contains(brand) && x.color.Contains(color)).ToList());
-            }
-            else
-            {
                 return View(db.products.ToList());
-            }
         }
         public ActionResult Filter(string brand, string color)
         {

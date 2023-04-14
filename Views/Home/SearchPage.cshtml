@@ -14,205 +14,83 @@
 
         <div class="align-content-center align-self-center">
             <input type="text" class="font-light text-gray-400 bg-white border-b py-2" style="padding-right: 400px; padding-left:20px" value="" placeholder="Search" name="searching" />
-            <input class="p-3 mx-2 text-center font-medium text-xs fa-solid fa-search" type="submit" value="Search">
-            @*<i class="fa-solid fa-search"></i>
-                <input type="submit" value="Search" />*@
+            <input class="btn px-3 py-2 bg-gray-200 rounded-full mx-2 text-center font-semibold text-md ml-2" type="submit" value="Search" placeholder="Search">
         </div>
     </div>
-    @*@Html.TextBox("searching")
-        <input type="submit" value="Search" />*@
 }
 
 <main class="p-4">
     <div class="grid grid-cols-4">
         <div class="col-span-1">
             <div class="space-y-8 space-x-4">
-                @using (Html.BeginForm("SearchPage", "Home", FormMethod.Get))
-                {
-                    @*BRAND*@
-                    <div class="px-3">
-                        <div class="text-xl font-bold">BRANDS</div>
-                        <div class="mt-2 space-y-2">
-                            <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                                <input class="btn btn-outline-dark"
-                                       type="submit"
-                                  
-                                       value="Apple"
-                                       name="brand" />
-                                @*<label class="inline-block pl-[0.15rem] hover:cursor-pointer"
-                                           for="inlineCheckbox2">
-                                        Apple
-                                    </label>*@
-                            </div>
-                            <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                                <input class="btn btn-outline-dark"
-                                       type="submit"
-                                     
-                                       value="Samsung"
-                                       name="brand" />
-                                @*<label class="inline-block pl-[0.15rem] hover:cursor-pointer"
-                                           for="inlineCheckbox2">
-                                        Samsung
-                                    </label>*@
-                            </div>
-
-                            <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                                <input class="btn btn-outline-dark"
-                                       type="submit"
-                                     
-                                       value="Oppo"
-                                       name="brand" />
-                                @*<label class="inline-block pl-[0.15rem] hover:cursor-pointer"
-                                           for="inlineCheckbox2">
-                                        Oppo
-                                    </label>*@
-                            </div>
-                            <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                                <input class="btn btn-outline-dark"
-                                       type="submit"
-                                     
-                                       value="Huawei"
-                                       name="brand" />
-                                @*<label class="inline-block pl-[0.15rem] hover:cursor-pointer"
-                                           for="inlineCheckbox2">
-                                        Huawei
-                                    </label>*@
-                            </div>
-                            <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                                <input class="btn btn-outline-dark"
-                                       type="submit"
-                                     
-                                       value="Xiaomi"
-                                       name="brand" />
-                                @*<label class="inline-block pl-[0.15rem] hover:cursor-pointer"
-                                           for="inlineCheckbox2">
-                                        Xiaomi
-                                    </label>*@
-                            </div>
-                            <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                                <input class="btn btn-outline-dark"
-                                       type="submit"
-                                       
-                                       value="Google"
-                                       name="brand" />
-                                @*<label class="inline-block pl-[0.15rem] hover:cursor-pointer"
-                                           for="inlineCheckbox2">
-                                        Google
-                                    </label>*@
-                            </div>
-                        </div>
-                    </div>
-                @*COLOR*@
-                <div class="my-4">
-                    <div class="text-xl font-bold">COLORS</div>
-                    <div class="mt-2 space-y-2">
-                        <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                            <input class="btn btn-outline-dark"
-                                   type="submit"
-                                 
-                                   value="Black" />
-                        </div>
-                        <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                            <input class="btn btn-outline-dark"
-                                   type="submit"
-                                 
-                                   value="White" />
-                        </div>
-                        <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                            <input class="btn btn-outline-dark"
-                                   type="submit"
-                               
-                                   value="Golden" />
-                        </div>
-                        <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                            <input class="btn btn-outline-dark"
-                                   type="submit"
-                                 
-                                   value="Silver" />
-                        </div>
-                        <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                            <input class="btn btn-outline-dark"
-                                   type="submit"
-                                 
-                                   value="Purple" />
-                        </div>
-                        <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem]">
-                            <input class="btn btn-outline-dark"
-                                   type="submit"
-                                   value="Blue" />
-                        </div>
-                    </div>
-                </div>
-                }
             </div>
+
         </div>
 
 
         @*product-list*@
-    <div class="col-span-3">
-        <div class="w-full flex justify-between align-content-between px-4">
-            <p class="text-3xl font-bold">All Results</p>
-            <a href="/Home/SearchPage" class="bg-blue-600 text-light hover:bg-blue-700 py-2 px-3 rounded-md">View all products</a>
-        </div>
-
-        @*product-mini-list*@
-    <div class="grid grid-cols-3 gap-4 justify-content-between mx-auto mt-lg-5 px-4">
-
-        @if (Model.Count() == 0)
-        {
-            <div>
-                SORRY, WE CAN NOT FIND ANYTHING YOU NEED
+        <div class="col-span-3">
+            <div class="w-full flex justify-between align-content-between px-4">
+                <p class="text-3xl font-bold">All Results</p>
+                <a href="/Home/SearchPage" class="bg-blue-600 text-light hover:bg-blue-700 py-2 px-3 rounded-md">View all products</a>
             </div>
-        }
-        else
-        {
-            foreach (var item in Model)
-            {
-                if (item.id_product <= 8)
+
+            @*product-mini-list*@
+            <div class="grid grid-cols-3 gap-4 justify-content-between mx-auto mt-lg-5 px-4">
+
+                @if (Model.Count() == 0)
                 {
+                    <div>
+                        SORRY, WE CAN NOT FIND ANYTHING YOU NEED
+                    </div>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
 
 
-                    <div class="flex justify-center text-md w-full">
-                        <div class="block max-w-sm rounded-lg bg-white shadow-md w-full">
-                            @*<a href="#!">*@
-                            <img class="rounded-t-lg mx-auto object-center"
-                                 style="height: 250px"
-                                 src="~/wwwroot/Images/Products/@item.images"
-                                 alt="" />
-                            @*</a>*@
-                            <div class="p-3 font-medium">
-                                <div class="flex flex-row justify-between pb-3 border-bottom align-items-center">
-                                    <p class="text-2xl">$@Html.DisplayFor(modelItem => item.price)</p>
-                                    <div class="bg-danger py-2 px-3 rounded-md text-white">
-                                        0%
-                                    </div>
-                                </div>
-
-                                <h5 class="mt-4 mb-3 flex leading-tight text-neutral-800 dark:text-neutral-50 justify-between">
-                                    <div class="text-xl">@Html.DisplayFor(modelItem => item.names)</div>
-                                    <div class="flex flex-row">
-                                        <p class="px-2">@Html.DisplayFor(modelItem => item.rate)</p>
-                                        <i class="fa-solid fa-star text-warning"></i>
-                                    </div>
-                                </h5>
-                                <div class="my-3 flex text-xs items-center justify-between">
-                                    <div class="text-start">
-                                        <span class="p-2 rounded-full" style="border: 2px solid #0026ff; color: #0026ff">@Html.DisplayFor(modelItem => item.brand)</span>
-                                        <span class="p-2 rounded-full" style="border: 2px solid #ffd800; color: #ffd800 ">@Html.DisplayFor(modelItem => item.color)</span>
+                        <div class="flex justify-center text-md w-full">
+                            <div class="block max-w-sm rounded-lg bg-white shadow-md w-full">
+                                @*<a href="#!">*@
+                                <img class="rounded-t-lg mx-auto object-center"
+                                     style="height: 250px"
+                                     src="~/wwwroot/Images/Products/@item.images"
+                                     alt="" />
+                                @*</a>*@
+                                <div class="p-3 font-medium">
+                                    <div class="flex flex-row justify-between pb-3 border-bottom align-items-center">
+                                        <p class="text-2xl">$@Html.DisplayFor(modelItem => item.price)</p>
+                                        <div class="bg-danger py-2 px-3 rounded-md text-white">
+                                            0%
+                                        </div>
                                     </div>
 
-                                    <div class="">
-                                        <a href="/Home/Details_Pro/@item.id_product" class="p-2 text-md text-blue-600">View More 🡥</a>
+                                    <h5 class="mt-4 mb-3 flex leading-tight text-neutral-800 dark:text-neutral-50 justify-between">
+                                        <div class="text-xl">@Html.DisplayFor(modelItem => item.names)</div>
+                                        <div class="flex flex-row">
+                                            <p class="px-2">@Html.DisplayFor(modelItem => item.rate)</p>
+                                            <i class="fa-solid fa-star text-warning"></i>
+                                        </div>
+                                    </h5>
+                                    <div class="my-3 flex text-xs items-center justify-between">
+                                        <div class="text-start">
+                                            <span class="p-2 rounded-full" style="border: 2px solid #0026ff; color: #0026ff">@Html.DisplayFor(modelItem => item.brand)</span>
+                                            <span class="p-2 rounded-full" style="border: 2px solid #ffd800; color: #ffd800 ">@Html.DisplayFor(modelItem => item.color)</span>
+                                        </div>
+
+                                        <div class="">
+                                            <a href="/Home/Details_Pro/@item.id_product" class="p-2 text-lg text-blue-600">View More 🡥</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+                    }
                 }
-            }
-        }
+            </div>
         </div>
-    </div>
     </div>
 </main>
 
