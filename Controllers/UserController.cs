@@ -153,15 +153,26 @@ namespace WebApplication1.Controllers
             }
             return View(model);
         }
-        public ActionResult Details_Info(int id)
+        public ActionResult Details_Info()
         {
-            user user = db.users.Find(id);
-            return View(user);
+            user user = Session["email"] as user;
+            user users = db.users.Find(user.id_user);
+            return View(users);
         }
-        public ActionResult Orders(int id)
+        public ActionResult Orders()
         {
-            var orders = db.orders.Where(x => x.id_user == id).ToList();
+            user user = Session["email"] as user;
+            user users = db.users.Find(user.id_user);
+            var orders = db.orders.Where(x => x.id_user == user.id_user).ToList();
             return View(orders);
+        }
+        public ActionResult History()
+        {
+            user user = Session["email"] as user;
+            user users = db.users.Find(user.id_user);
+            var orders = db.orders.Where(x => x.id_user == user.id_user).ToList();
+            return View(orders);
+
         }
     }
 }

@@ -39,18 +39,46 @@ namespace WebApplication1.Controllers
             if (Session["Cart"] == null)
             {
                 Carts carts = Session["Cart"] as Carts;
-                return View(carts);
+                return View();
             }
             Carts cart = Session["Cart"] as Carts;
+
+            int a = 0;
+            int b = 0;
+            foreach (var item in cart.Items)
+            {
+                var pro = db.products.Where(x => x.id_product == item.Shopping_product.id_product).FirstOrDefault();
+                if (pro.quantity == 0)
+                {
+                    a = a + 1;
+                    this.AddNotification("Product " + pro.names + " out of stock", NotificationType.WARNING);
+                }
+                if (pro.quantity < item.Shopping_quantity)
+                {
+                    b = b + 1;
+                    this.AddNotification("Product " + pro.names + " not enough quantity", NotificationType.WARNING);
+                }
+            }
+            Session["CheckQuantity1"] = a;
+            Session["CheckQuantity2"] = b;
+
             if (cart != null)
             {
                 var pro = cart.Items.Sum(x => x.Shopping_quantity);
                 Session["Quantity_pro"] = pro;
                 var total_cost = cart.Items.Sum(x => x.Shopping_product.price * x.Shopping_quantity);
                 Session["TotalCost"] = total_cost;
-                var shippingfee = 10 + cart.Items.Sum(x => x.Shopping_quantity * 2);
-                Session["Shipping"] = shippingfee;
-                var total_order = shippingfee + total_cost;
+                var shippingfee = cart.Items.Sum(x => x.Shopping_quantity * 2);
+                if (shippingfee > 0)
+                {
+                    Session["Shipping"] = shippingfee + 10;
+                }
+                else
+                {
+                    Session["Shipping"] = shippingfee;
+                }
+              
+                var total_order = (int)Session["Shipping"] + total_cost;
                 Session["Total_order_new"] = total_order;
             }
             return View(cart);
@@ -115,23 +143,29 @@ namespace WebApplication1.Controllers
                     return RedirectToAction("ShowToCart", "ShoppingCart");
                 }
 
+                string phone = form["phone"];
+                string email = form["email"];
+                string address = form["address"];
+                string district = form["district"];
+                string ward = form["ward"];
+                string city = form["city"];
+
                 Carts cart = Session["Cart"] as Carts;
                 customer customer = new customer();
 
-                customer.phone = form["phone"];
-                customer.addresss = form["address"] + ",";
-                customer.ward = form["ward"] + ",";
-                customer.district = form["district"] + ",";
-                customer.city = form["city"];
-                customer.email = form["email"];
-
                 order orders = new order();
-                var findcus = db.customers.Where(x => x.phone == customer.phone && x.email == customer.email && x.addresss == customer.addresss && x.district == customer.district && x.city == customer.city && x.ward == customer.ward).FirstOrDefault();
+                var findcus = db.customers.Where(x => x.phone == phone && x.email == email && x.addresss == address && x.district == district && x.ward == ward && x.city == city).FirstOrDefault();
                 if (findcus == null)
                 {
-                    orders.id_customer = customer.id_customer;
+                    customer.phone = form["phone"];
+                    customer.addresss = form["address"] + ",";
+                    customer.ward = form["ward"] + ",";
+                    customer.district = form["district"] + ",";
+                    customer.city = form["city"];
+                    customer.email = form["email"];
+
                     db.customers.Add(customer);
-                    db.SaveChanges();
+                    orders.id_customer = customer.id_customer;
                 }
                 else
                 {

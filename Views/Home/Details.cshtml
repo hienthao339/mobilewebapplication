@@ -1,0 +1,107 @@
+﻿@model WebApplication1.Models.order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.started_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.started_at)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.shipping_fee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.shipping_fee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pending)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pending)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.canceled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.canceled)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.request_cancel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.request_cancel)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customer.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.promocode.code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.promocode.code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.names)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.names)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.Action("YourOrders", "Home",new {id = Model.id_order})
+</p>

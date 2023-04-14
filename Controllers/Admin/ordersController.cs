@@ -62,7 +62,7 @@ namespace WebApplication1.Controllers.Admin
             }
             return View(order);
         }
-        public ActionResult Waitting(int? page)
+        public ActionResult Waiting(int? page)
         {
             if (page == null) page = 1;
             var sp = db.orders.Where(x => x.pending == false && x.request_cancel == false).ToList();
@@ -189,7 +189,7 @@ namespace WebApplication1.Controllers.Admin
             ord.pending = true;
             ord.started_at = DateTime.Now;
             db.SaveChanges();
-            return RedirectToAction("Waitting");
+            return RedirectToAction("Waiting");
         }
         public ActionResult Request_Cancel(int? page)
         {

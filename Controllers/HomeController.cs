@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using WebApplication1.Extensions;
 using WebApplication1.Models;
 using WebApplication1.Models.Functions;
+using WebGrease.Css.Extensions;
 
 namespace WebApplication1.Controllers
 {
@@ -38,9 +39,45 @@ namespace WebApplication1.Controllers
             var products = db.products.ToList();
             return View(products);
         }
-        public ActionResult SearchPage(string searching)
+        public ActionResult SearchPage(string searching ,string brand, string color)
         {
-            return View(db.products.Where(x => x.names.Contains(searching) || x.brand.Contains(searching) || searching == null).ToList());
+            if(searching != null)
+            {
+                return View(db.products.Where(x => x.names.Contains(searching) || x.brand.Contains(searching) || searching == null).ToList());
+            }
+          
+            if (color == null && brand != null)
+            {
+                return View(db.products.Where(x => x.brand.Contains(brand)).ToList());
+            }
+            else if (brand == null && color != null)
+            {
+                return View(db.products.Where(x => x.color.Contains(color)).ToList());
+            }
+            else if (color != null && brand != null)
+            {
+                return View(db.products.Where(x => x.brand.Contains(brand) && x.color.Contains(color)).ToList());
+            }
+            else
+            {
+                return View(db.products.ToList());
+            }
+        }
+        public ActionResult Filter(string brand, string color)
+        {
+            if(color == null && brand != null)
+            {
+                return View(db.products.Where(x => x.brand.Contains(brand)).ToList());
+            }
+            else if(brand == null && color != null)
+            {
+                return View(db.products.Where(x => x.color.Contains(color)).ToList());
+            }
+            else if (color != null && brand != null)
+            {
+                return View(db.products.Where(x => x.brand.Contains(brand) && x.color.Contains(color)).ToList());
+            }
+            return RedirectToAction("SearchPage", "Home");
         }
         public ActionResult SearchOrders(FormCollection form)
         {
@@ -91,23 +128,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult Request_Cancel(int id)
-        {
-            var ord = db.orders.Where(x=>x.id_order == id).FirstOrDefault();
-            if ( ord.pending == true)
-            {
-                this.AddNotification("You can not CANCEL this order !! ", NotificationType.WARNING);
-                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
-            }
-            else
-            {
-                this.AddNotification("Your request is being processed !! ", NotificationType.WARNING);
-                var orders = db.orders.Where(x=>x.id_order == id).FirstOrDefault();
-                orders.request_cancel = true;
-                db.SaveChanges();
-                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
-            }
-        }
+       
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -140,9 +161,27 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-        public ActionResult ProductList()
+        public ActionResult Request_Cancel(int id)
         {
-            List<product> products = db.products.ToList();
+            var ord = db.orders.Where(x => x.id_order == id).FirstOrDefault();
+            if (ord.pending == true)
+            {
+                this.AddNotification("You can not CANCEL this order !! ", NotificationType.WARNING);
+                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
+            }
+            else
+            {
+                this.AddNotification("Your request is being processed !! ", NotificationType.WARNING);
+                var orders = db.orders.Where(x => x.id_order == id).FirstOrDefault();
+                orders.request_cancel = true;
+                db.SaveChanges();
+                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
+            }
+        }
+        public ActionResult ProductList(string brand)
+        {
+            ViewBag.Brands = (from c in db.products select c.brand).Distinct().ToList();
+            List<product> products = db.products.Where(x => x.brand == brand).ToList();
             return View(products);
         }
         public ActionResult Checkout()

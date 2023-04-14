@@ -34,9 +34,7 @@
 
     @foreach (var item in Model)
     {
-
         <tr>
-
             <td>
                 @Html.DisplayFor(modelItem => item.id_order)
             </td>
@@ -55,7 +53,7 @@
                 }
                 else if (item.pending == true && item.canceled == false)
                 {
-                    <div>Your order has been processed</div>
+                    <div>Your order has been Processed</div>
                 }
                 else
                 {
@@ -74,9 +72,13 @@
                 $@Html.DisplayFor(modelItem => item.total_price)
             </td>
             <td>
-                @if (item.canceled == false)
+                @if (item.request_cancel == false)
                 {
                     <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
+                }
+                else
+                {
+                    <div>Your request cancel is processing</div>
                 }
                 @Html.ActionLink("Details", "Details", new { id = item.id_order })
             </td>

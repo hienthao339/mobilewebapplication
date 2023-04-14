@@ -44,9 +44,16 @@ namespace WebApplication1.Controllers
                 Session["Quantity_pro"] = pro;
                 var total_cost = cart.Sum(x => x.product.price * x.quantity);
                 Session["TotalCost"] = total_cost;
-                var shippingfee = 10 + cart.Sum(x => x.quantity * 2);
-                Session["Shipping"] = shippingfee;
-                var total_order = shippingfee + total_cost;
+                var shippingfee = cart.Sum(x => x.quantity * 2);
+                if(shippingfee > 0)
+                {
+                    Session["Shipping"] = shippingfee + 10;
+                }
+                else
+                {
+                    Session["Shipping"] = shippingfee;
+                }
+                var total_order = (int)Session["Shipping"] + total_cost;
                 Session["Total_order"] = total_order;
             }
             return View(cart);
@@ -154,7 +161,7 @@ namespace WebApplication1.Controllers
             user user = Session["email"] as user;
             var cart = db.carts.Where(x => x.id_product == id && x.id_user == user.id_user).FirstOrDefault();
             var pro = db.products.Where(x => x.id_product == id).FirstOrDefault();
-            if (pro.quantity >= 1 && cart.quantity <= pro.quantity)
+            if (pro.quantity >= 1 && cart.quantity < pro.quantity)
             {
                 var quantity = new cart()
                 {
@@ -189,37 +196,44 @@ namespace WebApplication1.Controllers
         }
         public ActionResult CheckOut(FormCollection form)
         {
-            //try
-            //{
             user user = Session["email"] as user;
             customer customer = new customer();
 
-            customer.phone = form["phone"];
-            customer.addresss = form["address"] + ",";
-            customer.ward = form["ward"] + ",";
-            customer.district = form["district"] + ",";
-            customer.city = form["city"];
-            customer.email = form["email"];
+            string phone = form["phone"];
+            string email = form["email"];
+            string address = form["address"];
+            string district = form["district"];
+            string ward = form["ward"];
+            string city = form["city"];
 
             var cart = db.carts.Where(x => x.id_user == user.id_user).ToList();
             order orders = new order();
+            var findcus = db.customers.Where(x=>x.phone == phone && x.email == email && x.addresss == address && x.district == district && x.ward == ward && x.city == city).FirstOrDefault();
+            if(findcus == null)
+            {
+                customer.phone = form["phone"];
+                customer.addresss = form["address"] + ",";
+                customer.ward = form["ward"] + ",";
+                customer.district = form["district"] + ",";
+                customer.city = form["city"];
+                customer.email = form["email"];
 
-            var findcus = db.customers.Where(x => x.phone == customer.phone && x.email == customer.email && x.addresss == customer.addresss && x.district == customer.district && x.city == customer.city && x.ward == customer.ward).FirstOrDefault();
-            if (findcus == null)
-            {
-                orders.id_customer = customer.id_customer;
                 db.customers.Add(customer);
-                db.SaveChanges();
+
+                orders.id_customer = customer.id_customer;
             }
-            else
+            else if (findcus != null)
             {
-                orders.id_customer = findcus.id_customer;
+                orders.id_customer =findcus.id_customer;
             }
+
+
+
             orders.id_user = user.id_user;
             orders.created_at = DateTime.Now;
             orders.payment_type = true;
             orders.request_cancel = false;
-          
+
             var code = form["code"];
             var promo = db.promocodes.Where(x => x.code == code).FirstOrDefault();
             var count = db.promocodes.Count(x => x.code == code);
@@ -272,15 +286,11 @@ namespace WebApplication1.Controllers
                 orders.shipping_fee = Convert.ToInt32(Session["Shipping"]);
                 orders.total_price = Convert.ToDecimal(Session["Total_order"]);
             }
-
-
-
             orders.pending = false;
-
             orders.canceled = false;
 
             db.orders.Add(orders);
-            db.SaveChanges();
+        
 
             customer customers = Session["Customer"] as customer;
             Session["Customer"] = customer;
@@ -299,19 +309,15 @@ namespace WebApplication1.Controllers
                 db.order_item.Add(order_items);
                 db.SaveChanges();
             }
-            db.SaveChanges();
             foreach (var item in cart)
             {
                 cart model = db.carts.Where(x => x.id_cart == item.id_cart).FirstOrDefault();
                 db.carts.Remove(model);
                 db.SaveChanges();
             }
+            db.SaveChanges();
             return RedirectToAction("ShoppingSuccess", "Shopping", new { id = orders.id_order });
-            //}
-            //catch
-            //{
-            //    return Content("Error Check Out. Please infomation of Customer...");
-            //}
+
         }
     }
 }

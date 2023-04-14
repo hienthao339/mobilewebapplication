@@ -458,12 +458,13 @@
     <Content Include="Views\products\Details.cshtml" />
     <Content Include="Views\products\Edit.cshtml" />
     <Content Include="Views\products\Index.cshtml" />
-    <Content Include="Views\User\Orders.cshtml" />
     <Content Include="Views\orders\BagCartOrders.cshtml" />
     <Content Include="Views\Home\Details_Pro.cshtml" />
-    <Content Include="Views\orders\Waitting.cshtml" />
+    <Content Include="Views\orders\Waiting.cshtml" />
     <Content Include="Views\orders\Request_Cancel.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\User\Orders.cshtml" />
+    <Content Include="Views\User\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

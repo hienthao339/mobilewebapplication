@@ -29,7 +29,7 @@
                     {
                         @*Dashboard -- temp*@
                         <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
-                           href="@Url.Action("Details_Info", "User", new {id = ((WebApplication1.Models.user)Session["email"]).id_user})">
+                           href="@Url.Action("Details_Info", "User")">
                             <i class="fa-solid fa-user text-black"></i>
                             @(((WebApplication1.Models.user)Session["email"]).email)
                         </a>

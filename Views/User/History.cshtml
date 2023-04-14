@@ -1,0 +1,104 @@
+﻿@model List<WebApplication1.Models.order>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<main>
+    <div class="flex justify-start p-5">
+        <aside class="w-48" aria-label="Sidebar">
+            <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50">
+                <ul class="space-y-2">
+                    <li>
+                        <div href="#" class="items-center p-2 text-base font-normal text-gray-900 rounded-lg">
+                            <img class="relative h-75 w-75 ms-2 mb-3 rounded-lg" src="https://i.pinimg.com/564x/64/cf/6f/64cf6f2685b6939f1a9418289c3dd647.jpg" />
+                            <div class="ml-3">Name</div>
+                        </div>
+                    </li>
+                    <li class="mt-5">
+                        <a href="@Url.Action("Details_Info", "User")" class="flex items-center p-2 text-base font-medium text-blue-600 rounded-lg bg-blue-100 hover:bg-blue-200">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Orders", "User")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-blue-100 hover:text-blue-500">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("History", "User")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-blue-100 hover:text-blue-500">
+                            <span class="flex-1 ml-3 whitespace-nowrap">History</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Chats", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-blue-100 hover:text-blue-500">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Chats</span>
+                        </a>
+                    </li>
+                    <li class="mt-5">
+                        <a href="@Url.Action("Logout", "User")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 hover:text-blue-500">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Logout</span>
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div class="ms-5">
+            <p class="text-4xl font-bold my-4">History</p>
+            <div class="grid grid-cols-2 gap-4 p-3">
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="container border-solid border-black shadow-sm rounded d-flex align-items-end flex-column bd-highlight mb-3">
+                        <div class="p-2 w-100 bd-highlight">
+                            <div class="flex">
+                                <span class="text-neutral-500 text-md">@Html.DisplayFor(Item => item.created_at)</span>
+                                @*<span class="text-neutral-500 text-sm ml-4">Waiting</span>*@
+                            </div>
+                        </div>
+                        <div class="p-2 w-100 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight mb-3">
+                                @foreach (var items in item.order_item)
+                                {
+                                    double total = Convert.ToDouble(items.quantity * items.product.price);
+                                    <div class="d-flex flex-row bd-highlight mb-3">
+                                        <div class="p-2 bd-highlight"> <img src="~/wwwroot/Images/Products/@items.product.images" class="h-40" /></div>
+                                        <div class="d-flex flex-col bd-highlight mb-3">
+                                            <div class="p-2 bd-highlight text-xl font-bold">@Html.DisplayFor(Item => items.product.names)</div>
+                                            <div class="p-2 bd-highlight">
+                                                @Html.DisplayFor(Item => items.quantity)
+
+                                            </div>
+                                            <div class="p-2 bd-highlight">
+
+                                                @Html.DisplayFor(Item => items.product.color)
+                                                @Html.DisplayFor(Item => items.product.ram)
+                                            </div>
+
+                                            <div class="p-2 bd-highlight">
+                                                $@total.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                }
+                            </div>
+                        </div>
+                        <div class="mt-auto w-100 p-2 bd-highlight">
+                            <div class="d-flex justify-content-between">
+                                <span class="ms text-xl font-bold">$@Html.DisplayFor(Item => item.total_price).00</span>
+                                <a class="inline-flex text-neutral-500 text-md ms-4" href="/Shopping/ShoppingSuccess/@Html.DisplayFor(Item => item.id_order)">
+                                    View More 🡥
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</main>
