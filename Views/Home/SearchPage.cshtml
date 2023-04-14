@@ -23,6 +23,46 @@
     <div class="grid grid-cols-4">
         <div class="col-span-1">
             <div class="space-y-8 space-x-4">
+                @using (Html.BeginForm("SearchPage", "Home", FormMethod.Get))
+                {
+                    @*BRAND*@
+                    <div class="mb-lg-4">
+                        <div class="text-xl font-bold">BRANDS</div>
+                        <div class="mt-2 space-y-2">
+                            @foreach (var item in ViewBag.Brands)
+                            {
+
+                                <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem]">
+                                    <input class="btn btn-outline-dark rounded-full"
+                                           type="submit"
+                                           value="@item"
+                                           name="brand" />
+
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                    @*COLORS*@
+                    <div class="my-lg-4">
+                        <div class="text-xl font-bold">COLORS</div>
+                        <div class="mt-2 space-y-2">
+                            @foreach (var item in ViewBag.Colors)
+                            {
+
+                                <div class="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem]">
+                                    <input class="btn btn-outline-dark rounded-full"
+                                           type="submit"
+                                           value="@item"
+                                           name="brand" />
+
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                }
             </div>
 
         </div>
