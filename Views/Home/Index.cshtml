@@ -127,7 +127,7 @@
 
 
                 <div class="flex justify-center text-md w-full">
-                    <div class="block max-w-sm rounded-lg bg-white shadow-lg w-full">
+                    <div class="block max-w-sm rounded-lg bg-white shadow-md w-full">
                         @*<a href="#!">*@
                         <img class="rounded-t-lg mx-auto object-center"
                              style="height: 250px"
@@ -149,20 +149,16 @@
                                     <i class="fa-solid fa-star text-warning"></i>
                                 </div>
                             </h5>
-                            <p class="mb-4 space-y-2 font-light">
-                                <span>@Html.DisplayFor(modelItem => item.brand)</span><br />
-                                <span>@Html.DisplayFor(modelItem => item.color)</span>
-                            </p>
+                            <div class="my-3 flex text-xs items-center justify-between">
+                                <div class="text-start">
+                                    <span class="p-2 rounded-full" style="border: 2px solid #0026ff; color: #0026ff">@Html.DisplayFor(modelItem => item.brand)</span>
+                                    <span class="p-2 rounded-full" style="border: 2px solid #ffd800; color: #ffd800 ">@Html.DisplayFor(modelItem => item.color)</span>
+                                </div>
 
-                            <a href="/Home/Details_Pro/@item.id_product" class="text-white py-2 px-3 mb-3 rounded-full text-md text-white bg-blue-600 hover:bg-blue-800">View</a>
-
-                            <div class="flex flex-row justify-between align-items-center font-semibold">
-                                @*<a class="py-2 px-3 py-2 px-3 rounded-2xl bg-blue-600 hover:bg-blue-800 cursor-pointer text-white text-xs" href="/Home/Details_Pro_Seri/@item.id_product_seri">
-                                        Details
-                                    </a>*@
-                                @*<a href="#" class="text-blue-600 font-light">Learn More 🡥</a>*@
+                                <div class="">
+                                    <a href="/Home/Details_Pro/@item.id_product" class="p-2 text-md text-blue-600">View More 🡥</a>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
