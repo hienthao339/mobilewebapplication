@@ -5,5 +5,84 @@
 }
 
 <main>
-    Hello World
+    <div class="flex justify-start m-3">
+        <aside class="w-48" aria-label="Sidebar">
+            <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50">
+                <ul class="space-y-2">
+                    <li>
+                        <div href="#" class="items-center p-2 text-base font-normal text-gray-900 rounded-lg">
+                            <img class="relative h-75 w-75 ms-2 mb-3 rounded-lg" src="https://i.pinimg.com/564x/64/cf/6f/64cf6f2685b6939f1a9418289c3dd647.jpg" />
+                            <div class="ml-3">Name</div>
+                        </div>
+                    </li>
+                    <li class="mt-5">
+                        <a href="@Url.Action("Dashboard", "Home")" class="flex items-center p-2 text-base font-medium text-blue-600 rounded-lg bg-blue-100 hover:bg-blue-200">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Order", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-blue-100 hover:text-blue-500">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Chats", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-blue-100 hover:text-blue-500">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Chats</span>
+                        </a>
+                    </li>
+                    <li class="mt-5">
+                        <a href="@Url.Action("Index", "Home")" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 hover:text-blue-500">
+                            <span class="flex-1 ml-3 whitespace-nowrap">Logout</span>
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div class="ms-5">
+            <p class="text-4xl font-bold my-4">Dashboard</p>
+            <div class="flex grid grid-cols-3 gap-4 justify-between">
+                <div class="text-start me-5">
+                    <div class="flex text-lg font-bold my-2">
+                        Name
+                        <a href="#"><i class="fa-regular fa-pen-to-square ms-3"></i></a>
+                    </div>
+                    <p>Maria Clerk</p>
+                </div>
+                <div class="text-start me-5">
+                    <div class="text-lg font-bold my-2">
+                        Phone
+                        <a href="#"><i class="fa-regular fa-pen-to-square ms-3"></i></a>
+                    </div>
+                    <p>632-122-2854</p>
+                </div>
+                <div class="text-start">
+                    <div class="text-lg font-bold my-2">
+                        Email
+                        <a href="#"><i class="fa-regular fa-pen-to-square ms-3"></i></a>
+                    </div>
+                    <p>maria246@gmail.com</p>
+                </div>
+            </div>
+            <div class="flex w-full justify-between my-4">
+                <div class="text-start">
+                    <div class="text-lg font-bold my-2">Address</div>
+                    <p>44-46 Pasteur, Ben Nghe, District 1, Ho Chi Minh City</p>
+                </div>
+            </div>
+            <div class="flex w-full justify-between my-4">
+                <div class="text-start">
+                    <div class="text-lg font-bold my-2">Image</div>
+                    <p>Upload your image</p>
+                </div>
+            </div>
+            <div class="w-40">
+                <div class="rounded bg-amber-300 hover:bg-sky-600 hover:text-white text-center">
+                    <button class="m-2 font-bold">Save changes</button>
+                </div>
+            </div>
+        </div>
+        <script src="https://kit.fontawesome.com/6e08fcf7ad.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+
 </main>
