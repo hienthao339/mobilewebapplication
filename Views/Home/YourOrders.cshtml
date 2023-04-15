@@ -3,7 +3,8 @@
     ViewBag.Title = "YourOrders";
 }
 
-@Html.Partial("_Notifications")
+<h2>YourOrders</h2>
+
 <div>Email: @(((WebApplication1.Models.customer)Session["Customer"]).email)</div>
 <div>Address: @(((WebApplication1.Models.customer)Session["Customer"]).addresss) @(((WebApplication1.Models.customer)Session["Customer"]).ward) @(((WebApplication1.Models.customer)Session["Customer"]).district) @(((WebApplication1.Models.customer)Session["Customer"]).city) </div>
 <div>Phone: @(((WebApplication1.Models.customer)Session["Customer"]).phone)</div>
@@ -19,22 +20,28 @@
             Ngày vận chuyển
         </th>
         <th>
+            Ngày gửi đến
+        </th>
+        <th>
             Tình trạng xử lý
+        </th>
+        <th>
+            Tình trạng thành  công
         </th>
         <th>
             Huỷ đơn hàng
         </th>
-
         <th>
             Tổng đơn hàng
         </th>
-
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
+
         <tr>
+
             <td>
                 @Html.DisplayFor(modelItem => item.id_order)
             </td>
@@ -44,51 +51,24 @@
             <td>
                 @Html.DisplayFor(modelItem => item.started_at)
             </td>
-
             <td>
-                @Html.HiddenFor(modelItem => item.pending)
-                @if (item.pending == false && item.canceled == false)
-                {
-                    <div>Your order is Pending</div>
-                }
-                else if (item.pending == true && item.canceled == false)
-                {
-                    <div>Your order has been Processed</div>
-                }
-                else
-                {
-                    <div>Your order has been Canceled</div>
-                }
+                @Html.DisplayFor(modelItem => item.finished_at)
             </td>
             <td>
-                @Html.HiddenFor(modelItem => item.canceled)
-                @if (item.canceled == true)
-                {
-                    <div>Your order has been canceled</div>
-                }
+                @Html.DisplayFor(modelItem => item.pending)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.completed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.canceled)
+            </td>
             <td>
                 $@Html.DisplayFor(modelItem => item.total_price)
             </td>
             <td>
-                @if (item.canceled == false && item.pending == false)
-                {
-                    <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
-                }
-                else if (item.request_cancel == true && item.canceled == false)
-                {
-                    <div>Your request cancel is processing</div>
-                }
-                else if (item.request_cancel == true && item.canceled == true)
-                {
-                    <div>Your order has been canceled</div>
-                }
-                else if (item.pending == true)
-                {
-                    <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)" class="disabled">Cancel</a>
-                }
-                @Html.ActionLink("Details", "Details", new { id = item.id_order })
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_order }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_order })
             </td>
         </tr>
 
