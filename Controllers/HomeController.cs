@@ -65,11 +65,6 @@ namespace WebApplication1.Controllers
                 return View(db.products.ToList());
             }
         }
-
-        public ActionResult SearchPage()
-        {
-            return View(db.products.ToList());
-        }
         public ActionResult Filter(string brand, string color)
         {
             if(color == null && brand != null)

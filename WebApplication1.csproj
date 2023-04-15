@@ -189,12 +189,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\MoMoSecurity.cs" />
     <Compile Include="Models\order.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\order_item.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PaymentRequest.cs" />
     <Compile Include="Models\product.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -204,6 +206,7 @@
     <Compile Include="Models\rank.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -465,6 +468,7 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\User\Orders.cshtml" />
     <Content Include="Views\User\History.cshtml" />
+    <Content Include="Views\Shopping\Thanks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -505,6 +509,8 @@
           <DevelopmentServerPort>57370</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>https://localhost:44377/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44377/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

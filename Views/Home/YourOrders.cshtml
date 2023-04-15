@@ -72,13 +72,21 @@
                 $@Html.DisplayFor(modelItem => item.total_price)
             </td>
             <td>
-                @if (item.request_cancel == false)
+                @if (item.canceled == false && item.pending == false)
                 {
                     <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
                 }
-                else
+                else if (item.request_cancel == true && item.canceled == false)
                 {
                     <div>Your request cancel is processing</div>
+                }
+                else if (item.request_cancel == true && item.canceled == true)
+                {
+                    <div>Your order has been canceled</div>
+                }
+                else if (item.pending == true)
+                {
+                    <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)" class="disabled">Cancel</a>
                 }
                 @Html.ActionLink("Details", "Details", new { id = item.id_order })
             </td>
