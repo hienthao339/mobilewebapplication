@@ -35,9 +35,10 @@ namespace WebApplication1.Models
         public Nullable<int> quantity { get; set; }
         public Nullable<double> rate { get; set; }
         public Nullable<int> id_promo { get; set; }
-        public string color { get; set; }
-        public string brand { get; set; }
         public Nullable<decimal> discount_price { get; set; }
+        public string rom { get; set; }
+        public string brand { get; set; }
+        public string color { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cart> carts { get; set; }

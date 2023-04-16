@@ -4,17 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e047f18383754a6281c3f2fffba37460" Name="Diagram1" ZoomLevel="99">
-        <EntityTypeShape EntityType="MobileShoppingModel.cart" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.chat" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.customer" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.feedback" Width="1.5" PointX="8.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.order_item" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.order" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+      <Diagram DiagramId="f05a71f94c0e4ea99557aedcd8335bc3" Name="Diagram1">
+        <EntityTypeShape EntityType="MobileShoppingModel.cart" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.chat" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.customer" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.feedback" Width="1.5" PointX="8.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.order_item" Width="1.5" PointX="10.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.order" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.product" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.promocode" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.rank" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.user" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.promocode" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.rank" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.sysdiagram" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MobileShoppingModel.user" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_product_cart" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_user_cart" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_user_chat" ManuallyRouted="false" />
@@ -25,7 +26,6 @@
         <AssociationConnector Association="MobileShoppingModel.FK_id_user_orders" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_promo_product" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_users_rank" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MobileShoppingModel.sysdiagram" Width="1.5" PointX="0.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

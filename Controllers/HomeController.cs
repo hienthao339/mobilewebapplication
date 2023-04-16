@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using WebApplication1.Extensions;
 using WebApplication1.Models;
 using WebApplication1.Models.Functions;
+using WebGrease;
 using WebGrease.Css.Extensions;
 
 namespace WebApplication1.Controllers
@@ -67,11 +69,11 @@ namespace WebApplication1.Controllers
         }
         public ActionResult Filter(string brand, string color)
         {
-            if(color == null && brand != null)
+            if (color == null && brand != null)
             {
                 return View(db.products.Where(x => x.brand.Contains(brand)).ToList());
             }
-            else if(brand == null && color != null)
+            else if (brand == null && color != null)
             {
                 return View(db.products.Where(x => x.color.Contains(color)).ToList());
             }
@@ -121,6 +123,10 @@ namespace WebApplication1.Controllers
         public ActionResult Details_Pro(int id)
         {
             var pro_seri = db.products.Where(x => x.id_product == id).FirstOrDefault();
+            var pro = db.products.Where(x => x.names == pro_seri.names).ToList();
+            ViewBag.Ram = (from c in db.products select c.ram).Distinct().ToList();
+            ViewData["pro"] = pro;
+     
             return View(pro_seri);
         }
         public ActionResult Contact()
@@ -130,7 +136,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-       
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -198,7 +204,7 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-       public ActionResult Order()
+        public ActionResult Order()
         {
             return View();
         }

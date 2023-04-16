@@ -62,42 +62,49 @@
                             <fieldset class="mt-2">
                                 <legend class="sr-only">Choose a color</legend>
                                 <div class="flex items-center space-x-3">
-                                    <label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                                        <input type="radio" name="color-choice" value="White" class="sr-only" aria-labelledby="color-choice-0-label">
-                                        <span id="color-choice-0-label" class="sr-only"> White </span>
-                                        <span aria-hidden="true" class="h-8 w-8 bg-white rounded-full border border-black border-opacity-10"></span>
-                                    </label>
-                                    <label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                                        <input type="radio" name="color-choice" value="Gray" class="sr-only" aria-labelledby="color-choice-1-label">
-                                        <span id="color-choice-1-label" class="sr-only"> Gray </span>
-                                        <span aria-hidden="true" class="h-8 w-8 bg-gray-200 rounded-full border border-black border-opacity-10"></span>
-                                    </label>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        @foreach (var item in ViewData["pro"] as List<WebApplication1.Models.product>)
+                                        {
+                                            <a href="/Home/Details_Pro/@item.id_product" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">@item.color</a>
+                                        }
+                                    </div>
+                                    @*<label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
+                                            <input type="radio" name="color-choice" value="White" class="sr-only" aria-labelledby="color-choice-0-label">
+                                            <span id="color-choice-0-label" class="sr-only"> White </span>
+                                            <span aria-hidden="true" class="h-8 w-8 bg-white rounded-full border border-black border-opacity-10"></span>
+                                        </label>
+                                        <label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
+                                            <input type="radio" name="color-choice" value="Gray" class="sr-only" aria-labelledby="color-choice-1-label">
+                                            <span id="color-choice-1-label" class="sr-only"> Gray </span>
+                                            <span aria-hidden="true" class="h-8 w-8 bg-gray-200 rounded-full border border-black border-opacity-10"></span>
+                                        </label>
 
-                                    <label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-900">
-                                        <input type="radio" name="color-choice" value="Black" class="sr-only" aria-labelledby="color-choice-2-label">
-                                        <span id="color-choice-2-label" class="sr-only"> Black </span>
-                                        <span aria-hidden="true" class="h-8 w-8 bg-gray-900 rounded-full border border-black border-opacity-10"></span>
-                                    </label>
+                                        <label class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-900">
+                                            <input type="radio" name="color-choice" value="Black" class="sr-only" aria-labelledby="color-choice-2-label">
+                                            <span id="color-choice-2-label" class="sr-only"> Black </span>
+                                            <span aria-hidden="true" class="h-8 w-8 bg-gray-900 rounded-full border border-black border-opacity-10"></span>
+                                        </label>*@
                                 </div>
                             </fieldset>
                         </div>
 
                         <!-- Sizes -->
-                        <div class="my-3">
+                        <!--<div class="my-3">
                             <div class="flex items-center justify-between">
                                 <h3 class="font-medium text-gray-900">Internal Memory</h3>
                             </div>
 
                             <fieldset class="mt-2">
                                 <legend class="sr-only">Choose a size</legend>
-                                <div class="flex gap-2">
-                                    <a href="#" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">128GB</a>
-                                    <a href="#" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">152GB</a>
-                                    <a href="#" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">256GB</a>
-                                    <a href="#" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">1TB</a>
-                                </div>
+                                <div class="flex gap-2">-->
+                        @*<a href="#" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">128GB</a>
+                            <a href="#" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">152GB</a>
+                            <a href="#" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">256GB</a>
+                            <a href="#" class="p-2 text-center border rounded-md hover:bg-gray-100 text-black">1TB</a>*@
+
+                        <!--</div>
                             </fieldset>
-                        </div>
+                        </div>-->
                         @if (Session["email"] != null)
                         {
 
@@ -216,3 +223,4 @@
         </div>
     </div>
 </main>
+
