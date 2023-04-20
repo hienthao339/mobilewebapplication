@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Models.Functions;
+using WebApplication1.Models.ViewModels;
 
 namespace WebApplication1.Controllers.Admin
 {
@@ -77,22 +78,26 @@ namespace WebApplication1.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-             
                 if (images != null && images.ContentLength > 0)
                 {
                     int id = product.id_product;
-                  
+
 
                     string File_name = "";
                     int index = images.FileName.IndexOf('.');
-                    File_name = "pro" + "_" +id.ToString() + "." + images.FileName.Substring(index + 1);
+                    File_name = "pro" + "_" + id.ToString() + "." + images.FileName.Substring(index + 1);
                     string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
                     images.SaveAs(path);
 
                     product.images = File_name;
                 }
-                var promo = db.promocodes.Where(x => x.code == product.promocode.code).FirstOrDefault();
-                product.id_promo = promo.id_promo;
+                if (product.promocode.code != null)
+                {
+                    var promo = db.promocodes.Where(x => x.code == product.promocode.code).FirstOrDefault();
+                    product.id_promo = promo.id_promo;
+                    product.discount = product.price.Value * (100 - promo.discount_price) / 100;
+                }
+
                 var fpro = new Func_Product();
                 fpro.Insert(product);
                 return RedirectToAction("Index");
@@ -124,22 +129,37 @@ namespace WebApplication1.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                if (images != null && images.ContentLength > 0)
+                var pro = db.products.Where(x => x.id_product == product.id_product).FirstOrDefault();
+                if (images != null && images.ContentLength > 1)
                 {
                     int id = product.id_product;
 
                     string File_name = "";
                     int index = images.FileName.IndexOf('.');
-                    File_name = "pro" +"_"+ id.ToString()+"." + images.FileName.Substring(index + 1);
+                    File_name = "pro" + "_" + id.ToString() + "." + images.FileName.Substring(index + 1);
                     string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
                     images.SaveAs(path);
 
                     product.images = File_name;
                 }
+                else if (images == null)
+                {
+                    product.images = pro.images;
+                }
+                if(product.promocode.code != null)
+                {
+                    var promo = db.promocodes.Where(x => x.code == product.promocode.code).FirstOrDefault();
+                    product.id_promo= promo.id_promo;
+                    product.discount = pro.price.Value * (100 - promo.discount_price) / 100;
+                }
+
                 var fpro = new Func_Product();
                 fpro.Update(product);
+
+
                 return RedirectToAction("Index");
             }
+
             return View(product);
         }
 

@@ -16,7 +16,8 @@
         <tr>
             <th scope="col">Images</th>
             <th scope="col">Names</th>
-            <th scope="col">Prices</th>
+            <th scope="col">Price</th>
+            <th scope="col">Discount Price</th>
             <th scope="col">quantity</th>
             <th scope="col">rate</th>
             <th scope="col">color</th>
@@ -29,7 +30,6 @@
         @foreach (var item in Model)
         {
             <tr>
-
                 <td>
                     <img src="~/wwwroot/Images/Products/@Html.DisplayFor(modelItem=>item.images)" class="h-20" />
                 </td>
@@ -37,7 +37,10 @@
                     @Html.DisplayFor(modelItem => item.names)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.price)$
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.discount)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.quantity)
@@ -52,16 +55,29 @@
                     @Html.DisplayFor(modelItem => item.brand)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.promocode.code)
+                    @Html.DisplayFor(modelItem => item.id_promo)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_product }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_product }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_product })
+                <td> 
+
+                    <div class="flex space-x-2 font-medium">
+                        <div class="p-3 text-sm rounded-lg bg-yellow-300 cursor-pointer">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id_product }, new { @class = "ms-1 text-black" })
+                        </div>
+
+                        <div class="p-3 text-sm rounded-lg bg-red-600 text-white">
+                            <i class="fa-solid fa-xmark"></i>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id_product }, new { @class = "ms-1 text-white" })
+                        </div>
+                        <div class="p-3 text-sm rounded-lg bg-blue-600 text-white">
+                            <i class="fa-solid fa-info"></i>
+                            @Html.ActionLink("Details", "Details", new { id = item.id_product }, new { @class = "ms-1 text-white" })
+                        </div>
+                    </div>
                 </td>
             </tr>
         }
-         </tbody>
+    </tbody>
 </table>
 <br />
 <div id='Paging' style="text-align: center">

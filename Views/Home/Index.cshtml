@@ -124,6 +124,7 @@
         {
             if (item.id_product <= 67)
             {
+
                 <div class="flex justify-center text-md w-full">
                     <div class="block max-w-sm rounded-lg bg-white shadow-md w-full">
                         @*<a href="#!">*@
@@ -134,10 +135,20 @@
                         @*</a>*@
                         <div class="p-3 font-medium">
                             <div class="flex flex-row justify-between pb-3 border-bottom align-items-center">
-                                <p class="text-2xl">$@Html.DisplayFor(modelItem => item.price)</p>
-                                <div class="bg-danger py-2 px-3 rounded-md text-white">
-                                    0%
-                                </div>
+                                @if (item.id_promo != null)
+                                {
+                                    decimal a = Convert.ToDecimal(item.price.Value * (100 - item.promocode.discount_price.Value) / 100);
+
+                                    <p class="text-2xl text-red-600">$@a</p>
+                                    <del class="text-xl-start text-gray-500">$@Html.DisplayFor(modelItem => item.price)</del>
+                                    <div class="bg-danger py-2 px-3 rounded-md text-white">
+                                        <p>-@Html.DisplayFor(modelItem => item.promocode.discount_price)%</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <p class="text-2xl text-red-600">$@Html.DisplayFor(modelItem => item.price)</p>
+                                }
                             </div>
 
                             <h5 class="mt-4 mb-3 flex leading-tight text-neutral-800 dark:text-neutral-50 justify-between">

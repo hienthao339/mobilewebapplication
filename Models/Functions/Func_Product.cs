@@ -50,7 +50,7 @@ namespace WebApplication1.Models.Functions
             products.images = product.images;
             products.color = product.color;
             products.brand = product.brand;
-            products.battery = product.battery;
+            products.battery = product.battery; 
             products.display = product.display;
             products.water_resistance = product.water_resistance;
             products.weights = product.weights;
@@ -58,6 +58,8 @@ namespace WebApplication1.Models.Functions
             products.operating_system = product.operating_system;
             products.rate = product.rate;
             products.id_promo= product.id_promo;
+            products.discount = product.discount;
+            products.rom=product.rom;
             db.SaveChanges();
             return products.id_product;
         }
@@ -92,7 +94,7 @@ namespace WebApplication1.Models.Functions
                             weights = pro.weights,
                             processor = pro.processor,
                             id_promo = pro.id_promo,
-                            rate = (decimal)pro.rate,
+                            rate = pro.rate,
                             operating_system = pro.operating_system,
                         };
             listproductview = query.ToList();
@@ -118,7 +120,7 @@ namespace WebApplication1.Models.Functions
                             weights = pro.weights,
                             processor = pro.processor,
                             id_promo = pro.promocode.id_promo,
-                            rate = (decimal)pro.rate,
+                            rate = pro.rate,
                             operating_system = pro.operating_system,
                         };
             if (loaiTimKiem == "brand")

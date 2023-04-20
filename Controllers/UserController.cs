@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using System;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -126,15 +127,7 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 Session["email"] = model;
-                user edituser = new user();
-
-                edituser.id_user = model.id_user;
-                edituser.is_admin = model.is_admin;
-                edituser.names = model.names;
-                edituser.email = model.email;
-                edituser.passwords = model.passwords;
-                edituser.phone = model.phone;
-                edituser.id_rank = model.id_rank;
+                var users = db.users.Where(x => x.id_user == model.id_user).FirstOrDefault();
                 if (avatar != null && avatar.ContentLength > 0)
                 {
                     int id = model.id_user;
@@ -145,10 +138,14 @@ namespace WebApplication1.Controllers
                     string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Avatars"), File_name);
                     avatar.SaveAs(path);
 
-                    edituser.avatar = File_name;
+                    model.avatar = File_name;
+                }
+                else if (avatar == null)
+                {
+                    model.avatar = users.avatar;
                 }
                 var fuser = new Func_User();
-                fuser.Update(edituser);
+                fuser.Update(model);
                 return RedirectToAction("Details_Info", "User", new { id = model.id_user });
             }
             return View(model);
