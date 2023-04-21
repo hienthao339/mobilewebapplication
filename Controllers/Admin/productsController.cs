@@ -78,28 +78,28 @@ namespace WebApplication1.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                if (images != null && images.ContentLength > 0)
+                var pro = db.products.Where(x => x.id_product == product.id_product).FirstOrDefault();
+                if (images != null)
                 {
                     int id = product.id_product;
 
-
                     string File_name = "";
                     int index = images.FileName.IndexOf('.');
-                    File_name = "pro" + "_" + id.ToString() + "." + images.FileName.Substring(index + 1);
+                    File_name = id.ToString() + "." + images.FileName.Substring(index + 1);
                     string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
                     images.SaveAs(path);
 
                     product.images = File_name;
                 }
-                if (product.promocode.code != null)
+                else if (images == null)
                 {
-                    var promo = db.promocodes.Where(x => x.code == product.promocode.code).FirstOrDefault();
-                    product.id_promo = promo.id_promo;
-                    product.discount = product.price.Value * (100 - promo.discount_price) / 100;
+                    product.images = null;
                 }
-
+               
                 var fpro = new Func_Product();
                 fpro.Insert(product);
+
+
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -130,23 +130,23 @@ namespace WebApplication1.Controllers.Admin
             if (ModelState.IsValid)
             {
                 var pro = db.products.Where(x => x.id_product == product.id_product).FirstOrDefault();
-                if (images != null && images.ContentLength > 1)
+                if (images != null )
                 {
                     int id = product.id_product;
 
                     string File_name = "";
                     int index = images.FileName.IndexOf('.');
-                    File_name = "pro" + "_" + id.ToString() + "." + images.FileName.Substring(index + 1);
+                    File_name = id.ToString() + "." + images.FileName.Substring(index + 1);
                     string path = Path.Combine(Server.MapPath("~/wwwroot/Images/Products"), File_name);
                     images.SaveAs(path);
 
                     product.images = File_name;
                 }
-                else if (images == null)
+                if (product.images == null)
                 {
                     product.images = pro.images;
                 }
-                if(product.promocode.code != null)
+                if (product.promocode.code != null)
                 {
                     var promo = db.promocodes.Where(x => x.code == product.promocode.code).FirstOrDefault();
                     product.id_promo= promo.id_promo;

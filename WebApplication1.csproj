@@ -171,6 +171,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Functions\Func_Cart.cs" />
+    <Compile Include="Models\Functions\Func_Customer.cs" />
     <Compile Include="Models\Functions\Func_Order.cs" />
     <Compile Include="Models\Functions\Func_Product.cs" />
     <Compile Include="Models\Functions\Func_User.cs" />
@@ -469,6 +470,9 @@
     <Content Include="Views\User\Orders.cshtml" />
     <Content Include="Views\User\History.cshtml" />
     <Content Include="Views\Shopping\Thanks.cshtml" />
+    <Content Include="Views\Shopping\CheckOutInfo.cshtml" />
+    <Content Include="Views\Shopping\GetInfo.cshtml" />
+    <Content Include="Views\Shopping\Promocode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

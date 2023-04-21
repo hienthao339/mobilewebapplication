@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Vml;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -43,43 +44,43 @@ namespace WebApplication1.Controllers
             }
             Carts cart = Session["Cart"] as Carts;
 
-            int a = 0;
-            int b = 0;
+            if (cart != null)
+            {
+                int Quantity = (int)cart.Items.Sum(x => x.Shopping_quantity);
+                Session["Quantity"] = Quantity;
+                decimal Temp_Total = 0;
+                foreach (var item in cart.Items)
+                {
+                    if (item.Shopping_product.id_promo == null)
+                    {
+                        Temp_Total += (decimal)(item.Shopping_product.price * item.Shopping_quantity);
+                    }
+                    else
+                    {
+                        Temp_Total += (decimal)(item.Shopping_product.discount * item.Shopping_quantity);
+                    }
+                }
+                Session["Total"] = Temp_Total;
+                int Shipping = (int)Session["Quantity"] * 2;
+                Session["Shipping"] = Shipping + 10;
+
+            }
             foreach (var item in cart.Items)
             {
                 var pro = db.products.Where(x => x.id_product == item.Shopping_product.id_product).FirstOrDefault();
-                if (pro.quantity == 0)
+                if (pro.quantity < 1)
                 {
-                    a = a + 1;
-                    this.AddNotification("Product " + pro.names + " out of stock", NotificationType.WARNING);
+                    Session["CheckQuantity"] = 1;
+                    this.AddNotification(pro.names + " out of stock !", NotificationType.WARNING);
+                    return RedirectToAction("ShowToCart", "Shopping");
                 }
                 if (pro.quantity < item.Shopping_quantity)
                 {
-                    b = b + 1;
-                    this.AddNotification("Product " + pro.names + " not enough quantity", NotificationType.WARNING);
+                    item.Shopping_quantity = (int)pro.quantity;
+                    db.SaveChanges();
+                    this.AddNotification(pro.names + " quantity has been edited", NotificationType.WARNING);
+                    return RedirectToAction("ShowToCart", "Shopping");
                 }
-            }
-            Session["CheckQuantity1"] = a;
-            Session["CheckQuantity2"] = b;
-
-            if (cart != null)
-            {
-                var pro = cart.Items.Sum(x => x.Shopping_quantity);
-                Session["Quantity_pro"] = pro;
-                var total_cost = cart.Items.Sum(x => x.Shopping_product.price * x.Shopping_quantity);
-                Session["TotalCost"] = total_cost;
-                var shippingfee = cart.Items.Sum(x => x.Shopping_quantity * 2);
-                if (shippingfee > 0)
-                {
-                    Session["Shipping"] = shippingfee + 10;
-                }
-                else
-                {
-                    Session["Shipping"] = shippingfee;
-                }
-              
-                var total_order = (int)Session["Shipping"] + total_cost;
-                Session["Total_order_new"] = total_order;
             }
             return View(cart);
         }
@@ -134,81 +135,51 @@ namespace WebApplication1.Controllers
         }
         public ActionResult CheckOut(FormCollection form)
         {
-            try
+
+
+            Carts cart = Session["Cart"] as Carts;
+
+            order orders = new order();
+
+            customer customer = Session["Customer"] as customer;
+            var cus = db.customers.Find(customer.id_customer);
+            if (cus == null)
+                db.customers.Add(customer);
+
+            var total = (decimal)Session["Total"];
+            var shipping = (int)Session["Shipping"];
+
+            orders.id_customer = customer.id_customer;
+            orders.created_at = DateTime.Now;
+            orders.payment_type = true;
+            orders.shipping_fee = (int)Session["Shipping"];
+            orders.total_price = total + shipping;
+            Session["Total_Price"] = total + shipping;
+            orders.id_promo = null;
+            orders.pending = false;
+            orders.canceled = false;
+            orders.request_cancel = false;
+            db.orders.Add(orders);
+            db.SaveChanges();
+
+
+            foreach (var item in cart.Items)
             {
-                var code = form["code"];
-                if (code != null && code != "")
-                {
-                    this.AddNotification("You must SIGNIN to user promocode", NotificationType.WARNING);
-                    return RedirectToAction("ShowToCart", "ShoppingCart");
-                }
-
-                string phone = form["phone"];
-                string email = form["email"];
-                string address = form["address"];
-                string district = form["district"];
-                string ward = form["ward"];
-                string city = form["city"];
-
-                Carts cart = Session["Cart"] as Carts;
-                customer customer = new customer();
-
-                order orders = new order();
-                var findcus = db.customers.Where(x => x.phone == phone && x.email == email && x.addresss == address && x.district == district && x.ward == ward && x.city == city).FirstOrDefault();
-                if (findcus == null)
-                {
-                    customer.phone = form["phone"];
-                    customer.addresss = form["address"] + ",";
-                    customer.ward = form["ward"] + ",";
-                    customer.district = form["district"] + ",";
-                    customer.city = form["city"];
-                    customer.email = form["email"];
-
-                    db.customers.Add(customer);
-                    orders.id_customer = customer.id_customer;
-                }
-                else
-                {
-                    orders.id_customer = findcus.id_customer;
-                }
-                orders.created_at = DateTime.Now;
-                orders.payment_type = true;
-              
-                orders.shipping_fee = Convert.ToInt32(Session["Shipping"]);
-                orders.total_price = Convert.ToDecimal(Session["Total_order_new"]);
-                orders.id_promo = null;
-                orders.pending = false;
-                orders.canceled = false;
-                orders.request_cancel = false;
-                db.orders.Add(orders);
+                product products = db.products.Find(item.Shopping_product.id_product);
+                int quantity_pro = (int)products.quantity - item.Shopping_quantity;
+                products.quantity = quantity_pro;
                 db.SaveChanges();
-
-                customer customers = Session["Customer"] as customer;
-                Session["Customer"] = customer;
-
-                ViewBag.order_guest = orders.id_order;
-
-                foreach (var item in cart.Items)
-                {
-                    product products = db.products.Find(item.Shopping_product.id_product);
-                    int quantity_pro = (int)products.quantity - item.Shopping_quantity;
-                    products.quantity = quantity_pro;
-                    db.SaveChanges();
-                    order_item order_items = new order_item();
-                    order_items.id_order = orders.id_order;
-                    order_items.id_product = item.Shopping_product.id_product;
-                    order_items.quantity = item.Shopping_quantity;
-                    db.order_item.Add(order_items);
-                }
-                db.SaveChanges();
-                cart.ClearCart();
-                return RedirectToAction("ShoppingSuccess", "Shopping", new { id = orders.id_order });
-
+                order_item order_items = new order_item();
+                order_items.id_order = orders.id_order;
+                order_items.id_product = item.Shopping_product.id_product;
+                order_items.quantity = item.Shopping_quantity;
+                db.order_item.Add(order_items);
             }
-            catch
-            {
-                return Content("Error Check Out. Please infomation of Customer...");
-            }
+            db.SaveChanges();
+            cart.ClearCart();
+            return RedirectToAction("ShoppingSuccess", "Shopping", new { id = orders.id_order });
+
+
         }
     }
 }

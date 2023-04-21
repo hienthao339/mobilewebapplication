@@ -1,0 +1,57 @@
+﻿@model WebApplication1.Models.customer
+@{
+    ViewBag.Title = "ShowToCart";
+}
+
+@Html.Partial("_Notifications")
+<main>
+    <div class="w-50 border rounded-md p-5 mx-auto my-5">
+
+        <div>
+            <div class="flex space-x-6">
+                <div class="font-semibold space-y-3">
+                    <div>Email</div>
+                    <div>Address</div>
+                    <div>Phone</div>
+                </div>
+                <div class="font-light space-y-3">
+                    <div>@(((WebApplication1.Models.customer)Session["Customer"]).email)</div>
+                    <div>@(((WebApplication1.Models.customer)Session["Customer"]).addresss) @(((WebApplication1.Models.customer)Session["Customer"]).ward) @(((WebApplication1.Models.customer)Session["Customer"]).district) @(((WebApplication1.Models.customer)Session["Customer"]).city)</div>
+                    <div>@(((WebApplication1.Models.customer)Session["Customer"]).phone)</div>
+                </div>
+            </div>
+        </div>
+
+
+        @if (Session["email"] == null)
+        {
+            <div class="mt-2 text-black">
+                <div class="relative w-full" data-te-input-wrapper-init>
+                    <label for="code" class="text-sm">Promocode</label><br />
+                    <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="You must be logged to user promo code" readonly/>
+                </div>
+            </div>
+            <a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium py-3 mt-6" href="/ShoppingCart/CheckOut">Check Out</a>
+        }
+        else
+        {
+            using (Html.BeginForm("GetPromo", "Shopping"))
+            {
+                <div class="mt-2 text-black">
+                    <div class="relative w-full" data-te-input-wrapper-init>
+                        <label for="code" class="text-sm">Promocode</label><br />
+                        <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your promocode" name="code" />
+                    </div>
+                </div>
+                <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium py-3 mt-6" type="submit" value="Apply" />
+            }
+        }
+
+
+
+
+    </div>
+</main>
+
+
+

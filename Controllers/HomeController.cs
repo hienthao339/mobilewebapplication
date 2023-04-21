@@ -88,7 +88,7 @@ namespace WebApplication1.Controllers
             if (form["searchOrders"] != null && form["searchOrders"] != "")
             {
                 var input = form["searchOrders"].ToString();
-                var cus = db.customers.Where(x => x.phone == input || x.email == input).First();
+                var cus = db.customers.Where(x => x.phone == input || x.email == input).FirstOrDefault();
                 if (cus != null)
                 {
                     return RedirectToAction("YourOrders", "Home", new { id = cus.id_customer });
@@ -126,7 +126,7 @@ namespace WebApplication1.Controllers
             var pro = db.products.Where(x => x.names == pro_seri.names).ToList();
             ViewBag.Ram = (from c in db.products select c.ram).Distinct().ToList();
             ViewData["pro"] = pro;
-     
+
             return View(pro_seri);
         }
         public ActionResult Contact()
@@ -172,19 +172,10 @@ namespace WebApplication1.Controllers
         public ActionResult Request_Cancel(int id)
         {
             var ord = db.orders.Where(x => x.id_order == id).FirstOrDefault();
-            if (ord.pending == true)
-            {
-                this.AddNotification("You can not CANCEL this order !! ", NotificationType.WARNING);
-                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
-            }
-            else
-            {
-                this.AddNotification("Your request is being processed !! ", NotificationType.WARNING);
-                var orders = db.orders.Where(x => x.id_order == id).FirstOrDefault();
-                orders.request_cancel = true;
-                db.SaveChanges();
-                return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
-            }
+            ord.request_cancel = true;
+            db.SaveChanges();
+            return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
+
         }
         public ActionResult ProductList(string brand)
         {

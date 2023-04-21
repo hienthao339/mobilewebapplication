@@ -1,4 +1,7 @@
-﻿using Microsoft.Ajax.Utilities;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Vml;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.Ajax.Utilities;
 using Microsoft.SqlServer.Server;
 using Newtonsoft.Json.Linq;
 using System;
@@ -23,50 +26,45 @@ namespace WebApplication1.Controllers
         {
             user user = Session["email"] as user;
             List<cart> cart = db.carts.Where(x => x.id_user == user.id_user).ToList();
-            int a = 0;
-            int b = 0;
+            if (cart != null)
+            {
+                int Quantity = (int)cart.Sum(x => x.quantity);
+                Session["Quantity"] = Quantity;
+                decimal Temp_Total = 0;
+                foreach (var item in cart)
+                {
+                    if (item.product.id_promo == null)
+                    {
+                        Temp_Total += (decimal)(item.product.price * item.quantity);
+                    }
+                    else
+                    {
+                        Temp_Total += (decimal)(item.product.discount * item.quantity);
+                    }
+                }
+                Session["Temp_Total"] = Temp_Total;
+                int Shipping = (int)Session["Quantity"] * 2;
+                Session["Shipping"] = Shipping + 10;
+            }
             foreach (var item in cart)
             {
                 var pro = db.products.Where(x => x.id_product == item.id_product).FirstOrDefault();
-                if (pro.quantity == 0)
+                if (pro.quantity < 1)
                 {
-                    a = a + 1;
-                    this.AddNotification("Product " + pro.names + " out of stock", NotificationType.WARNING);
+                    Session["CheckQuantity"] = 1;
+                    this.AddNotification(pro.names + " out of stock !", NotificationType.WARNING);
+                    return RedirectToAction("ShowToCart", "Shopping");
                 }
                 if (pro.quantity < item.quantity)
                 {
-                    b = b + 1;
-                    this.AddNotification("Product " + pro.names + " not enough quantity", NotificationType.WARNING);
+                    item.quantity = pro.quantity;
+                    db.SaveChanges();
+                    this.AddNotification(pro.names + " quantity has been edited", NotificationType.WARNING);
+                    return RedirectToAction("ShowToCart", "Shopping");
                 }
-            }
-            Session["CheckQuantity1"] = a;
-            Session["CheckQuantity2"] = b;
-
-            if (cart != null)
-            {
-                var pro = cart.Sum(x => x.quantity);
-                Session["Quantity_pro"] = pro;
-                var total_cost = cart.Sum(x => x.product.price * x.quantity);
-                Session["TotalCost"] = total_cost;
-                var shippingfee = cart.Sum(x => x.quantity * 2);
-                if (shippingfee > 0)
-                {
-                    Session["Shipping"] = shippingfee + 10;
-                }
-                else
-                {
-                    Session["Shipping"] = shippingfee;
-                }
-                var total_order = (int)Session["Shipping"] + total_cost;
-                Session["Total_order"] = total_order;
             }
             return View(cart);
         }
-        //public ActionResult Details_Pro(int id)
-        //{
-        //    var pro = db.products.Where(x => x.id_product == id).First();
-        //    return View(pro);
-        //}
         public ActionResult AddToCart(int id)
         {
             this.AddNotification("Item has been added to your card !", NotificationType.SUCCESS);
@@ -198,108 +196,133 @@ namespace WebApplication1.Controllers
             }
             return RedirectToAction("ShowToCart", "Shopping");
         }
-        public ActionResult CheckOut(FormCollection form)
+        public ActionResult GetInfo()
         {
-            user user = Session["email"] as user;
-            customer customer = new customer();
+            return View();
+        }
+        public ActionResult CheckOutInfo(FormCollection form)
+        {
+            string email = form["email"].ToString();
+            string phone = form["phone"].ToString();
+            string addresss = form["address"].ToString() + ",";
+            string district = form["district"].ToString() + ",";
+            string ward = form["ward"].ToString() + ",";
+            string city = form["city"].ToString();
 
-            string phone = form["phone"];
-            string email = form["email"];
-            string address = form["address"];
-            string district = form["district"];
-            string ward = form["ward"];
-            string city = form["city"];
-
-            var cart = db.carts.Where(x => x.id_user == user.id_user).ToList();
-            order orders = new order();
-            var findcus = db.customers.Where(x => x.phone == phone && x.email == email && x.addresss == address && x.district == district && x.ward == ward && x.city == city).FirstOrDefault();
-            if (findcus == null)
+            var find_cus = db.customers.Where(x => x.email == email && x.phone == phone && x.addresss == addresss && x.district == district && x.ward == ward && x.city == city).FirstOrDefault();
+            if (find_cus == null)
             {
-                customer.phone = form["phone"];
-                customer.addresss = form["address"] + ",";
-                customer.ward = form["ward"] + ",";
-                customer.district = form["district"] + ",";
-                customer.city = form["city"];
-                customer.email = form["email"];
+                customer cus = new customer();
+                cus.email = form["email"].ToString();
+                cus.phone = form["phone"].ToString();
+                cus.addresss = form["address"].ToString() + ",";
+                cus.district = form["district"].ToString() + ",";
+                cus.ward = form["ward"].ToString() + ",";
+                cus.city = form["city"].ToString();
 
+                db.customers.Add(cus);
+
+                Session["Customer"] = cus;
+                return RedirectToAction("Promocode", "Shopping");
+            }
+            else
+            {
+                Session["Customer"] = find_cus;
+                return RedirectToAction("Promocode", "Shopping");
+            }
+        }
+        public ActionResult GetPromo(FormCollection form)
+        {
+            decimal Totals = (decimal)Session["Temp_Total"];
+            Session["Total"] = Totals;
+            string code = form["code"];
+            customer customer = Session["Customer"] as customer;
+            user user = Session["email"] as user;
+            var promo = db.promocodes.Where(x => x.code == code).FirstOrDefault();
+            if (promo != null)
+            {
+                if (promo.started_at <= DateTime.Now && promo.finished_at >= DateTime.Now)
+                {
+                    var orders = db.orders.Where(x => x.id_promo == promo.id_promo && x.id_user == user.id_user).FirstOrDefault();
+                    if (orders == null)
+                    {
+                        decimal Total = (decimal)(((decimal)Session["Temp_Total"]) * (100 - promo.discount_price) / 100);
+                        decimal Discount = (decimal)(((decimal)Session["Temp_Total"]) * promo.discount_price / 100);
+                        Session["Promo"] = promo;
+                        Session["Discount"] = Discount;
+                        Session["Total"] = Total;
+                        return RedirectToAction("Promocode", "Shopping");
+                    }
+                    else
+                    {
+                        this.AddNotification("You have used this promo code !", NotificationType.WARNING);
+                        return RedirectToAction("Promocode", "Shopping");
+                    }
+                }
+                else
+                {
+                    this.AddNotification("Promo code is incorrect !", NotificationType.WARNING);
+                    return RedirectToAction("Promocode", "Shopping");
+                }
+            }
+            else if (promo == null && code == "")
+            {
+                decimal Total = (decimal)Session["Temp_Total"];
+                Session["Total"] = Total;
+                Session["Discount"] = 0.00;
+                return RedirectToAction("CheckOut", "Shopping");
+            }
+            else
+            {
+                this.AddNotification("Promo code is incorrect !", NotificationType.WARNING);
+                return RedirectToAction("Promocode", "Shopping");
+            }
+
+        }
+        public ActionResult Promocode()
+        { 
+            return View();
+        }
+
+        public ActionResult CheckOut()
+        {
+            //lấy thông tin user từ Session khi khách hàng đã đắng nhập
+            user user = Session["email"] as user;
+
+            //lấy thông tin từ cart của khách hàng
+            var cart = db.carts.Where(x => x.id_user == user.id_user).ToList();
+
+            //tạo mới 1 order
+            order orders = new order();
+
+            //tạo mới customer
+            customer customer = Session["Customer"] as customer;
+            var cus = db.customers.Find(customer.id_customer);
+            if (cus == null)
                 db.customers.Add(customer);
 
-                orders.id_customer = customer.id_customer;
-            }
-            else if (findcus != null)
+            var total = (decimal)Session["Total"];
+            var shipping = (int)Session["Shipping"];
+
+            if (Session["Promo"] != null)
             {
-                orders.id_customer = findcus.id_customer;
+                orders.id_promo = ((promocode)Session["Promo"]).id_promo;
             }
 
-
-
+            //tạo mới thông tin cho order
+            orders.id_customer = customer.id_customer;
+            orders.shipping_fee = (int)Session["Shipping"];
+            orders.total_price = total + shipping;
+            Session["Total_Price"] = total + shipping;
             orders.id_user = user.id_user;
             orders.created_at = DateTime.Now;
             orders.payment_type = true;
             orders.request_cancel = false;
-
-            var code = form["code"];
-            var promo = db.promocodes.Where(x => x.code == code).FirstOrDefault();
-            var count = db.promocodes.Count(x => x.code == code);
-            if (count == 1)
-            {
-                if (promo.started_at <= DateTime.Now && promo.finished_at >= DateTime.Now)
-                {
-                    var checkpromo = db.orders.Where(x => x.id_user == user.id_user).ToList();
-                    var check = 0;
-                    foreach (var item in checkpromo)
-                    {
-                        if (item.id_promo == promo.id_promo)
-                        {
-                            check = 1;
-                        }
-                    }
-                    if (check == 0)
-                    {
-                        orders.id_promo = promo.id_promo;
-                        orders.shipping_fee = Convert.ToInt32(Session["Shipping"]);
-                        decimal totalcost = Convert.ToDecimal(Session["TotalCost"]);
-                        int shipping = Convert.ToInt32(Session["Shipping"]);
-                        Session["discount"] = totalcost * promo.discount_price / 100;
-                        orders.total_price = totalcost - Convert.ToDecimal(Session["discount"]) + shipping;
-                        Session["Total_order_new"] = totalcost - Convert.ToDecimal(Session["discount"]) + shipping;
-                    }
-                    else
-                    {
-                        this.AddNotification("Promocode '" + promo.code + "' has been used !", NotificationType.WARNING);
-                        return RedirectToAction("ShowToCart", "Shopping");
-                    }
-
-                }
-                else
-                {
-                    this.AddNotification("Promocode '" + promo.code + "' out of date !", NotificationType.WARNING);
-                    return RedirectToAction("ShowToCart", "Shopping");
-                }
-            }
-            else if (count == 0 && code != "")
-            {
-                this.AddNotification("Promocode '" + code + "' is not correct !", NotificationType.WARNING);
-                return RedirectToAction("ShowToCart", "Shopping");
-            }
-            else if (code.IsNullOrWhiteSpace())
-            {
-                Session["Total_order_new"] = Convert.ToDecimal(Session["Total_order"]);
-                Session["discount"] = 0;
-                orders.id_promo = null;
-                orders.shipping_fee = Convert.ToInt32(Session["Shipping"]);
-                orders.total_price = Convert.ToDecimal(Session["Total_order"]);
-            }
             orders.pending = false;
             orders.canceled = false;
-
             db.orders.Add(orders);
 
-
-            customer customers = Session["Customer"] as customer;
-            Session["Customer"] = customer;
-
-            ViewBag.order = orders.id_order;
+            //lấy thông tin từ list cart để cho vào order_item
             foreach (var item in cart)
             {
                 product products = db.products.Find(item.product.id_product);
@@ -313,6 +336,8 @@ namespace WebApplication1.Controllers
                 db.order_item.Add(order_items);
                 db.SaveChanges();
             }
+
+            //xoá thông tin trong list cart sau khi đặt hàng thành công
             foreach (var item in cart)
             {
                 cart model = db.carts.Where(x => x.id_cart == item.id_cart).FirstOrDefault();
@@ -323,97 +348,97 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ShoppingSuccess", "Shopping", new { id = orders.id_order });
 
         }
-        public ActionResult Thanks()
-        {
-            return View();
-        }
-        public ActionResult Payment()
-        {
-            //request params need to request to MoMo system
+        //public ActionResult Thanks()
+        //{
+        //    return View();
+        //}
+        //public ActionResult Payment()
+        //{
+        //    //request params need to request to MoMo system
 
-            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
-            string partnerCode = "MOMOOJOI20210710";
-            string accessKey = "iPXneGmrJH0G8FOP";
-            string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
-            string orderInfo = "test";
-            string returnUrl = "https://localhost:44377/Shopping/Thanks";
-            string notifyurl = "https://localhost:44377/Shopping/Thanks"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+        //    string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+        //    string partnerCode = "MOMOOJOI20210710";
+        //    string accessKey = "iPXneGmrJH0G8FOP";
+        //    string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
+        //    string orderInfo = "test";
+        //    string returnUrl = "https://localhost:44377/Shopping/Thanks";
+        //    string notifyurl = "https://localhost:44377/Shopping/Thanks"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
-            string amount = "1000";
-            string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
-            string requestId = DateTime.Now.Ticks.ToString();
-            string extraData = "";
+        //    string amount = "1000";
+        //    string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
+        //    string requestId = DateTime.Now.Ticks.ToString();
+        //    string extraData = "";
 
-            //string endpoint = ConfigurationManager.AppSettings["endpoint"].ToString();
-            //string partnerCode = ConfigurationManager.AppSettings["partnerCode"].ToString();
-            //string accessKey = ConfigurationManager.AppSettings["accessKey"].ToString();
-            //string serectkey = ConfigurationManager.AppSettings["serectkey"].ToString();
-            //string orderInfo = ConfigurationManager.AppSettings["orderInfo"].ToString();
-            //string returnUrl = ConfigurationManager.AppSettings["returnUrl"].ToString();
-            //string notifyurl = ConfigurationManager.AppSettings["notifyurl"].ToString(); //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+        //    //string endpoint = ConfigurationManager.AppSettings["endpoint"].ToString();
+        //    //string partnerCode = ConfigurationManager.AppSettings["partnerCode"].ToString();
+        //    //string accessKey = ConfigurationManager.AppSettings["accessKey"].ToString();
+        //    //string serectkey = ConfigurationManager.AppSettings["serectkey"].ToString();
+        //    //string orderInfo = ConfigurationManager.AppSettings["orderInfo"].ToString();
+        //    //string returnUrl = ConfigurationManager.AppSettings["returnUrl"].ToString();
+        //    //string notifyurl = ConfigurationManager.AppSettings["notifyurl"].ToString(); //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
-            //string amount = Session["Total_order"].ToString();
-            //string orderid = Guid.NewGuid().ToString(); //mã đơn hàng
-            //string requestId = Guid.NewGuid().ToString();
-            //string extraData = "";
+        //    //string amount = Session["Total_order"].ToString();
+        //    //string orderid = Guid.NewGuid().ToString(); //mã đơn hàng
+        //    //string requestId = Guid.NewGuid().ToString();
+        //    //string extraData = "";
 
-            //Before sign HMAC SHA256 signature
-            string rawHash = "partnerCode=" +
-                partnerCode + "&accessKey=" +
-                accessKey + "&requestId=" +
-                requestId + "&amount=" +
-                amount + "&orderId=" +
-                orderid + "&orderInfo=" +
-                orderInfo + "&returnUrl=" +
-                returnUrl + "&notifyUrl=" +
-                notifyurl + "&extraData=" +
-                extraData;
+        //    //Before sign HMAC SHA256 signature
+        //    string rawHash = "partnerCode=" +
+        //        partnerCode + "&accessKey=" +
+        //        accessKey + "&requestId=" +
+        //        requestId + "&amount=" +
+        //        amount + "&orderId=" +
+        //        orderid + "&orderInfo=" +
+        //        orderInfo + "&returnUrl=" +
+        //        returnUrl + "&notifyUrl=" +
+        //        notifyurl + "&extraData=" +
+        //        extraData;
 
-            MoMoSecurity crypto = new MoMoSecurity();
-            //sign signature SHA256
-            string signature = crypto.signSHA256(rawHash, serectkey);
+        //    MoMoSecurity crypto = new MoMoSecurity();
+        //    //sign signature SHA256
+        //    string signature = crypto.signSHA256(rawHash, serectkey);
 
-            //build body json request
-            JObject message = new JObject
-            {
-                { "partnerCode", partnerCode },
-                { "accessKey", accessKey },
-                { "requestId", requestId },
-                { "amount", amount },
-                { "orderId", orderid },
-                { "orderInfo", orderInfo },
-                { "returnUrl", returnUrl },
-                { "notifyUrl", notifyurl },
-                { "extraData", extraData },
-                { "requestType", "captureMoMoWallet" },
-                { "signature", signature }
+        //    //build body json request
+        //    JObject message = new JObject
+        //    {
+        //        { "partnerCode", partnerCode },
+        //        { "accessKey", accessKey },
+        //        { "requestId", requestId },
+        //        { "amount", amount },
+        //        { "orderId", orderid },
+        //        { "orderInfo", orderInfo },
+        //        { "returnUrl", returnUrl },
+        //        { "notifyUrl", notifyurl },
+        //        { "extraData", extraData },
+        //        { "requestType", "captureMoMoWallet" },
+        //        { "signature", signature }
 
-            };
+        //    };
 
-            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+        //    string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
 
-            JObject jmessage = JObject.Parse(responseFromMomo);
+        //    JObject jmessage = JObject.Parse(responseFromMomo);
 
-            return Redirect(jmessage.GetValue("payUrl").ToString());
-        }
+        //    return Redirect(jmessage.GetValue("payUrl").ToString());
+        //}
 
-        //Khi thanh toán xong ở cổng thanh toán Momo, Momo sẽ trả về một số thông tin, trong đó có errorCode để check thông tin thanh toán
-        //errorCode = 0 : thanh toán thành công (Request.QueryString["errorCode"])
-        //Tham khảo bảng mã lỗi tại: https://developers.momo.vn/#/docs/aio/?id=b%e1%ba%a3ng-m%c3%a3-l%e1%bb%97i
-        public ActionResult ConfirmPaymentClient(Result result)
-        {
-            //lấy kết quả Momo trả về và hiển thị thông báo cho người dùng (có thể lấy dữ liệu ở đây cập nhật xuống db)
-            string rMessage = result.message;
-            string rOrderId = result.orderId;
-            string rErrorCode = result.errorCode; // = 0: thanh toán thành công
-            return View();
-        }
+        ////Khi thanh toán xong ở cổng thanh toán Momo, Momo sẽ trả về một số thông tin, trong đó có errorCode để check thông tin thanh toán
+        ////errorCode = 0 : thanh toán thành công (Request.QueryString["errorCode"])
+        ////Tham khảo bảng mã lỗi tại: https://developers.momo.vn/#/docs/aio/?id=b%e1%ba%a3ng-m%c3%a3-l%e1%bb%97i
+        //public ActionResult ConfirmPaymentClient(Result result)
+        //{
+        //    //lấy kết quả Momo trả về và hiển thị thông báo cho người dùng (có thể lấy dữ liệu ở đây cập nhật xuống db)
+        //    string rMessage = result.message;
+        //    string rOrderId = result.orderId;
+        //    string rErrorCode = result.errorCode; // = 0: thanh toán thành công
+        //    return View();
+        //}
 
-        [HttpPost]
-        public void SavePayment()
-        {
-            //cập nhật dữ liệu vào db
-            String a = "";
-        }
+        //[HttpPost]
+        //public void SavePayment()
+        //{
+        //    //cập nhật dữ liệu vào db
+        //    String a = "";
+        //}
     }
 }

@@ -17,7 +17,7 @@
             <div>Phone</div>
         </div>
         <div class="font-light space-y-3">
-            <div>@(((WebApplication1.Models.customer)Session["Customer"]).email)</div>
+            <div>@(((WebApplication1.Models.customer)Session["Customer"]).email) </div>
             <div>@(((WebApplication1.Models.customer)Session["Customer"]).addresss) @(((WebApplication1.Models.customer)Session["Customer"]).ward) @(((WebApplication1.Models.customer)Session["Customer"]).district) @(((WebApplication1.Models.customer)Session["Customer"]).city)</div>
             <div>@(((WebApplication1.Models.customer)Session["Customer"]).phone)</div>
         </div>
@@ -35,7 +35,7 @@
                     <span class="font-light text-md">
                         @Html.DisplayFor(modelItem => item.product.color)<br />
                         @Html.DisplayFor(modelItem => item.quantity)<br />
-                       $@Html.DisplayFor(modelItem => item.product.price)<br />
+                        $@Html.DisplayFor(modelItem => item.product.price)<br />
                         <hr />
                         $@total.00
                     </span>
@@ -48,26 +48,41 @@
         <div class="mb-3 text-lg font-medium pb-2 my-2 border-b">Order Summary</div>
         <div class="d-flex justify-content-between my-2">
             <p>Total</p>
-            <p>$@Session["TotalCost"].00</p>
+            @if (Session["Temp_Total"] != null)
+            {
+                <p>$@Session["Temp_Total"]</p>
+            }
+            else
+            {
+                <p>$@Session["Total"]</p>
+            }
+
         </div>
 
         <div class="d-flex justify-content-between mb-2">
             <p>Shipping</p>
-            <p>$@Session["Shipping"].00</p>
+            <p>$@Session["Shipping"]</p>
         </div>
 
         <div class="d-flex justify-content-between pb-2 mb-2 border-b">
             <p>Discount</p>
-            <p>$@Session["discount"].00</p>
+            @if (Session["Discount"] != null)
+            {
+                <p>$@Session["Discount"]</p>
+            }
+            else
+            {
+                <p>$00.0</p>
+            }
         </div>
         <div class="d-flex justify-content-between my-2">
             <p>Subtotal</p>
-            <p>$@Session["Total_order_new"].00</p>
+            <p>$@Session["Total_Price"]</p>
         </div>
         <a href="/Home/Index">
             <div class="cursor-pointer w-full rounded-md text-center py-3 bg-yellow-300 text-md font-semibold my-3">Continuous Shopping</div><br />
         </a>
-       
+
     </div>
 </div>
 

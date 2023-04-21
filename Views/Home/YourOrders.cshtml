@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "YourOrders";
 }
+@Html.Partial("_Notifications")
 @*<div>Email: @(((WebApplication1.Models.customer)Session["Customer"]).email)</div>
     <div>Address: @(((WebApplication1.Models.customer)Session["Customer"]).addresss) @(((WebApplication1.Models.customer)Session["Customer"]).ward) @(((WebApplication1.Models.customer)Session["Customer"]).district) @(((WebApplication1.Models.customer)Session["Customer"]).city) </div>
     <div>Phone: @(((WebApplication1.Models.customer)Session["Customer"]).phone)</div>*@
@@ -16,7 +17,7 @@
         </div>
     </div>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Reverse())
     {
         <div class="mb-5 w-full grid grid-cols-3 rounded-md" style="border: 0.5px solid #dcdcdc">
             <div class="col-span-1 p-4" style="border-right: 0.5px solid #dcdcdc">
@@ -58,6 +59,20 @@
                             @item.pending
                         </div>
                     </div>
+                    <div class="grid">
+                        <div class="text-gray-500">Request Cancel</div>
+                        <div class="font-semibold text-black">
+                            <div class="w-5 h-5 rounded-circle" style="color: #00ca1a"></div>
+                            @item.request_cancel
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="text-gray-500">Canceled</div>
+                        <div class="font-semibold text-black">
+                            <div class="w-5 h-5 rounded-circle" style="color: #00ca1a"></div>
+                            @item.canceled
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-span-2 p-4">
@@ -70,19 +85,50 @@
                                 <div class="font-medium text-lg">
                                     <div>@items.product.names</div>
                                 </div>
-                                <div class="text-gray-500">@items.product.color</div><br>
+                                <div class="text-gray-500">@items.product.color</div>
+                                <div class="text-gray-500">@items.product.quantity</div>
                                 <a href="@Url.Action("Details_Pro", "Home", new {id = @items.product.id_product})" class="text-gray-300">View More</a>
                             </div>
-                            <div class="col-span-1 text-end font-medium text-lg">
-                                <div>$@items.product.price.00</div>
-                            </div>
+                            @if (items.product.id_promo != null)
+                            {
+                                <div class="col-span-1 text-end font-medium text-lg">
+                                    <div>$@items.product.discount</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-span-1 text-end font-medium text-lg">
+                                    <div>$@items.product.price</div>
+                                </div>
+                            }
+
                         </div>
                     }
                 </div>
                 <div class="flex justify-between">
-                    <div class="flex space-x-3">
-                        <input type="submit" class="btn btn-outline-danger px-3 py-2 rounded-md text-sm" value="Cancel Order">
-                    </div>
+                    @if (item.request_cancel == false && item.pending == false)
+                    {
+                        <div class="flex space-x-3">
+                            <a class="btn btn-outline-danger px-3 py-2 rounded-md text-sm" href="/Home/Request_Cancel/@item.id_order">Cancel Order</a>
+                        </div>
+                    }
+                    else
+                    {
+                        if (item.canceled == false)
+                        {
+                            <div class="flex space-x-3">
+                                <input class="btn btn-outline-danger px-3 py-2 rounded-md text-sm" disabled="disabled" value="Cancel Order" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="flex space-x-3">
+                                <input class="btn btn-outline-secondary px-3 py-2 rounded-md text-sm" disabled="disabled" value="Order is Canceled" />
+                            </div>
+                        }
+
+                    }
+
                     <div class="font-medium text-lg items-center">
                         $@item.total_price.00
                     </div>

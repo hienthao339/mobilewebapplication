@@ -8,191 +8,148 @@
     <div class="flex space-x-2 mb-2">
         <div class="text-4xl font-bold">Shopping</div>
         <div class="text-neutral-500 text-xs px-4">
-            (@Session["Quantity_pro"] items)
+            (@Session["Quantity"] items)
         </div>
     </div>
     <div class="flex mb-lg-5">
         <a class="text-lg font-medium hover:text-gray-200" href="/Home/Index">Continue Shopping</a>
     </div>
+    <div class="row">
+        <div class="w-75 mx-auto">
+
+            @if (Model != null)
+            {
+                <div class="row flex">
+                    @*header*@
+                    <div class="row mb-4 pb-3 border-b font-medium">
+                        <div class="col">Product</div>
+                        <div class="col"></div>
+                        <div class="col">Price</div>
+                        <div class="col">Quantity</div>
+                        <div class="col">Total Price</div>
+                        <div class="col">Remove</div>
 
 
-    @if (Model != null)
-    {
-        <div class="row flex">
-            <div class="col-lg-9">
-                @*header*@
-                <div class="row mb-4 pb-3 border-b font-medium">
-                    <div class="col">Product</div>
-                    <div class="col"></div>
-                    <div class="col">Price</div>
-                    <div class="col">Quantity</div>
-                    <div class="col">Total Price</div>
-                    <div class="col">Remove</div>
+                    </div>
+                    @foreach (var item in Model)
+                    {
+                        decimal total = 0;
+
+                        @*body*@
+                        <div class="row flex my-3 py-4 pr-4 shadow-sm">
+                            @*Product*@
+                            <div class="col flex flex-wrap w-50">
+                                <img src="~/wwwroot/Images/Products/@item.product.images"
+                                     class="h-15" />
+                            </div>
+                            <div class="col flex flex-wrap w-50">
+                                <div class="col grid-rows-4">
+                                    <div class="font-medium">@Html.DisplayFor(model => item.product.names)</div>
+                                    <div class="font-light text-xs">@Html.DisplayFor(model => item.product.brand)</div>
+                                    <div class="font-light text-xs">@Html.DisplayFor(model => item.product.color)</div>
+                                    <div class="font-light text-xs">@Html.DisplayFor(model => item.product.quantity)</div>
+                                    <a href="/Shopping/Details_Pro/@item.id_product" class="text-blue-600 font-semibold text-xs mt-4">Learn More 🡥</a>
+                                </div>
+                            </div>
+
+                            @*Price*@
+                            @if (item.product.id_promo != null)
+                            {
+                                total = Convert.ToDecimal(item.product.discount.Value * item.quantity);
+                                <div class="col">
+                                    <div class="flex">
+                                        <del> $@Html.DisplayFor(model => item.product.price)</del>
+                                    </div>
+                                    <div class="flex">
+                                        <div> $@Html.DisplayFor(model => item.product.discount)</div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                total = Convert.ToDecimal(item.product.price.Value * item.quantity);
+                                <div class="col">
+                                    <div class="flex">
+                                        <div> $@Html.DisplayFor(model => item.product.price)</div>
+                                    </div>
+                                </div>
+                            }
+
+                            @*Quantity*@
+                            <div class="col">
+                                <div class="flex">
+                                    <a href="/Shopping/btn_Decrease/@item.product.id_product" class="text-center text-black py-1 px-2.5 bg-gray-100 hover:bg-gray-200 rounded-md">
+                                        <i class="fa-solid fa-minus text-xs"></i>
+                                    </a>
+                                    <input type="text" value="@item.quantity" readonly="readonly" style="width: 30px;" class="text-center" />
+                                    <a href="/Shopping/btn_Increase/@item.product.id_product" class="text-center text-black py-1 px-2.5 bg-gray-100 hover:bg-gray-200 rounded-md">
+                                        <i class="fa-solid fa-plus text-xs"></i>
+                                    </a>
+
+                                </div>
+                            </div>
 
 
+
+                            <div class="col" style="text-align:center">
+                                <div class="flex">
+                                    $@total.00
+                                </div>
+                            </div>
+
+
+                            @*Remove/Check*@
+                            <div class="col">
+                                <div class="flex">
+                                    <a href="/Shopping/RemoveCart/@item.product.id_product" class="bg-red-100 text-center py-1 px-2.5 hover:bg-red-200 rounded-md">
+                                        <i class="fa-solid fa-xmark text-red-600 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
-                @foreach (var item in Model)
-                {
-                    double total = Convert.ToDouble(item.product.price.Value * item.quantity);
+            }
+        </div>
+        <div class="w-25 p-4 border rounded-md shadow-sm" style="height: fit-content">
 
-                    @*body*@
-                    <div class="row flex my-3 py-4 pr-4 shadow-sm">
-                        @*Product*@
-                        <div class="col flex flex-wrap w-50">
-                            <img src="~/wwwroot/Images/Products/@item.product.images"
-                                 class="h-15" />
-                        </div>
-                        <div class="col flex flex-wrap w-50">
-                            <div class="col grid-rows-4">
-                                <div class="font-medium">@Html.DisplayFor(model => item.product.names)</div>
-                                <div class="font-light text-xs">@Html.DisplayFor(model => item.product.brand)</div>
-                                <div class="font-light text-xs">@Html.DisplayFor(model => item.product.color)</div>
-                                <a href="/Shopping/Details_Pro/@item.id_product" class="text-blue-600 font-semibold text-xs mt-4">Learn More 🡥</a>
-                            </div>
-                        </div>
-
-                        @*Price*@
-                        <div class="col">
-                            <div class="flex">
-                                $@Html.DisplayFor(model => item.product.price)
-                            </div>
-                        </div>
-
-                        @*Quantity*@
-                        <div class="col">
-                            <div class="flex">
-                                <a href="/Shopping/btn_Decrease/@item.product.id_product" class="text-center text-black py-1 px-2.5 bg-gray-100 hover:bg-gray-200 rounded-md">
-                                    <i class="fa-solid fa-minus text-xs"></i>
-                                </a>
-                                <input type="text" value="@item.quantity" readonly="readonly" style="width: 30px;" class="text-center" />
-                                <a href="/Shopping/btn_Increase/@item.product.id_product" class="text-center text-black py-1 px-2.5 bg-gray-100 hover:bg-gray-200 rounded-md">
-                                    <i class="fa-solid fa-plus text-xs"></i>
-                                </a>
-
-                            </div>
-                        </div>
-
-
-
-                        <div class="col" style="text-align:center">
-                            <div class="flex">
-                                $@total.00
-                            </div>
-                        </div>
-
-
-                        @*Remove/Check*@
-                        <div class="col">
-                            <div class="flex">
-                                <a href="/Shopping/RemoveCart/@item.product.id_product" class="bg-red-100 text-center py-1 px-2.5 hover:bg-red-200 rounded-md">
-                                    <i class="fa-solid fa-xmark text-red-600 text-xs"></i>
-                                </a>
-                            </div>
+            @*Order Sumamry*@
+            <div class="font-medium">
+            @foreach(var item in Model) { 
+                <div class="row">
+                    <img src="~/wwwroot/Images/Products/@item.product.images" class="col h-10" />
+                    <div class="col flex flex-wrap">
+                        <div class="col grid-rows-4">
+                            <div class="font-medium">@Html.DisplayFor(model => item.product.names)</div>
+                            <div class="font-light text-xs">@Html.DisplayFor(model => item.product.brand)</div>
+                            <div class="font-light text-xs">@Html.DisplayFor(model => item.product.color)</div>
                         </div>
                     </div>
+
+                    <div class="font-light text-xs col">@Html.DisplayFor(model => item.product.quantity)</div>
+                </div>
+            }
+                @*<div class="flex justify-between mb-2 pb-2 border-b">
+                    <div>Shipping fee</div>
+                    <div>$12.00</div>
+                </div>*@
+                <div class="flex justify-between">
+                    <div>Subtotal</div><br />
+                    <div>$@Session["Temp_Total"]</div>
+                </div>
+            </div><br />
+            <div>
+                @if (Convert.ToInt32(Session["CheckQuantity"]) != 0)
+                {
+                    <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2" type="submit" value="Next" disabled="disabled" />
                 }
-            </div>
-
-            @*Place Order*@
-            <div class="col-lg-3">
-                <div class="font-medium mb-2">Shipping Info</div>
-                <div class="text-gray-400 font-light text-xs">Fill your order</div>
-                @using (Html.BeginForm("CheckOut", "Shopping"))
+                else
                 {
-
-                    @*Email*@
-                    <div class="mt-2 text-black">
-                        <div class="relative w-full" data-te-input-wrapper-init>
-                            <label for="email" class="text-sm">Email</label><br />
-                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your email" name="email" required />
-                        </div>
-                    </div>
-                    <div class="mt-2 text-black">
-                        <div class="relative w-full" data-te-input-wrapper-init>
-                            <label for="phone" class="text-sm">Phone</label><br />
-                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your phone number" name="phone" required />
-                        </div>
-                    </div>
-                    <div class="mt-2 text-black">
-                        <div class="relative w-full" data-te-input-wrapper-init>
-                            <label for="street" class="text-sm">Street</label><br />
-                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your street" name="address" required />
-                        </div>
-                    </div>
-                    <div class="mt-2 text-black">
-                        <div class="relative w-full" data-te-input-wrapper-init>
-                            <label for="district" class="text-sm">District</label><br />
-                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your district" name="district" required />
-                        </div>
-                    </div>
-                    <div class="mt-2 text-black">
-                        <div class="relative w-full" data-te-input-wrapper-init>
-                            <label for="ward" class="text-sm">Ward</label><br />
-                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your ward" name="ward" required />
-                        </div>
-                    </div>
-                    <div class="mt-2 text-black">
-                        <div class="relative w-full" data-te-input-wrapper-init>
-                            <label for="city" class="text-sm">City</label><br />
-                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your city" name="city" required />
-                        </div>
-                    </div>
-                    <div class="mt-2 text-black">
-                        <div class="relative w-full" data-te-input-wrapper-init>
-                            <label for="card-number" class="text-sm">Card</label><br />
-                            <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your card number" name="card-number" />
-                        </div>
-                    </div>
-
-                    @*Promo Code*@
-                    <div class="my-4">
-                        <div class="font-medium mb-2">Apply Coupon</div>
-                        <div class="text-gray-400 font-light text-xs">Using A Promo Code?</div>
-
-
-                        @*Enter promo-code*@
-                        <div class="mt-2 text-black">
-                            <div class="relative w-full" data-te-input-wrapper-init>
-                                <label for="code" class="text-sm">Promocode</label><br />
-                                <input type="text" class="font-light text-black border-b py-2 pl-3 w-full mt-2" placeholder="Enter your promocode" name="code" />
-                            </div>
-                        </div>
-                    </div>
-                    @*Order Sumamry*@
-                    <div>
-                        <div class="mb-2 font-medium pb-2 my-2 border-b">Order Summary</div>
-                        <div class="d-flex justify-content-between my-2">
-                            <p>Total</p>
-                            <p>$@Session["TotalCost"].00</p>
-                        </div>
-
-                        <div class="d-flex justify-content-between mb-2">
-                            <p>Shipping</p>
-                            <p>$@Session["Shipping"].00</p>
-                        </div>
-
-                        @*<div class="d-flex justify-content-between pb-2 mb-2 border-b">
-                                <p>Discount</p>
-                                <p>$0.00</p>
-                            </div>*@
-                        <div class="d-flex justify-content-between my-2">
-                            <p>Subtotal</p>
-                            <p>$@Session["Total_order"].00</p>
-                        </div>
-                        @if (Convert.ToInt32(Session["CheckQuantity1"]) != 0 || Convert.ToInt32(Session["CheckQuantity2"]) != 0)
-                        {
-                            <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-3" type="submit" value="Checkout" disabled="disabled" />
-                        }
-                        else
-                        {
-                            <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-3" type="submit" value="Checkout" />
-                        }
-                        <a href="/Shopping/Payment">Payment</a>
-                    </div>
+            <a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Shopping/GetInfo">Checkout	•	$@Session["Temp_Total"]</a>
                 }
             </div>
         </div>
-    }
+    </div>
 </main>
 
 
