@@ -133,35 +133,6 @@ namespace WebApplication1.Controllers
             return View(pro_seri);
         }
 
-        //public ActionResult Feedbacks(string comment, int rating, int id_pro)
-        //{
-        //    var content = comment;
-        //    feedback new_fb = new feedback();
-        //    new_fb.content = content;
-        //    new_fb.created_at = DateTime.Now;
-        //    int id = id_pro;
-        //    if (Session["email"] == null)
-        //    {
-        //        this.AddNotification("You must be logged in to rate", NotificationType.ERROR);
-        //        return RedirectToAction("Details_Pro", "Home", new { id = id_pro });
-        //    }
-        //    user user = Session["email"] as user;
-        //    new_fb.id_user = user.id_user;
-        //    new_fb.id_product = id;
-        //    new_fb.rate = rating;
-        //    db.feedbacks.Add(new_fb);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Details_Pro", "Home", new { id = id_pro });
-        //}
-
-        //public ActionResult Message_Feedback(string comment, int rating, int id_user, int id_feedback)
-        //{
-        //    var content = comment;
-        //    db_message_feedback mf = new db_message_feedback();
-        //    mf.content = content;
-        //    mf.id_feedbacks = id_feedback;
-
-        //}
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
