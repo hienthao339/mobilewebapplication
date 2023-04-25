@@ -12,6 +12,7 @@ namespace WebApplication1.Models.ViewModels
         public int id_product { get; set; }
         public string names { get; set; }
         public string images { get; set; }
+        [DataType(DataType.Currency)]
         public Nullable<decimal> price { get; set; }
         public string display { get; set; }
         public string weights { get; set; }

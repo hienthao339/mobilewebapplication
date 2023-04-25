@@ -1,27 +1,50 @@
 ﻿@model WebApplication1.Models.rank
 
 @{
-    ViewBag.Title = "Details";
-      Layout = "../../Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
 
-<div>
-    <h4>rank</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.discount)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_rank }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>rank</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.discount)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.discount)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.name_rank)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.name_rank)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.spend)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.spend)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id_rank }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

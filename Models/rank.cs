@@ -22,6 +22,8 @@ namespace WebApplication1.Models
     
         public int id_rank { get; set; }
         public Nullable<int> discount { get; set; }
+        public string name_rank { get; set; }
+        public Nullable<decimal> spend { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> users { get; set; }

@@ -48,7 +48,7 @@
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.product.brand)</div>
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.product.color)</div>
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.product.quantity)</div>
-                                    <a href="/Shopping/Details_Pro/@item.id_product" class="text-blue-600 font-semibold text-xs mt-4">Learn More 🡥</a>
+                                    <a href="/Home/Details_Pro/@item.id_product" class="text-blue-600 font-semibold text-xs mt-4">Learn More 🡥</a>
                                 </div>
                             </div>
 
@@ -115,38 +115,42 @@
 
             @*Order Sumamry*@
             <div class="font-medium">
-            @foreach(var item in Model) { 
-                <div class="row">
-                    <img src="~/wwwroot/Images/Products/@item.product.images" class="col h-10" />
-                    <div class="col flex flex-wrap">
-                        <div class="col grid-rows-4">
-                            <div class="font-medium">@Html.DisplayFor(model => item.product.names)</div>
-                            <div class="font-light text-xs">@Html.DisplayFor(model => item.product.brand)</div>
-                            <div class="font-light text-xs">@Html.DisplayFor(model => item.product.color)</div>
+                @foreach (var item in Model)
+                {
+                    <div class="row py-2">
+                        <img src="~/wwwroot/Images/Products/@item.product.images" class="col h-20" />
+                        <div class="col flex flex-wrap">
+                            <div class="col grid-rows-4">
+                                <div class="font-medium">@Html.DisplayFor(model => item.product.names)</div>
+                                <div class="font-light text-xs">@Html.DisplayFor(model => item.product.brand)</div>
+                                <div class="font-light text-xs">@Html.DisplayFor(model => item.product.color)</div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="font-light text-xs col">@Html.DisplayFor(model => item.product.quantity)</div>
-                </div>
-            }
+                        <div class="font-light text-xs col">@Html.DisplayFor(model => item.quantity)</div>
+                    </div>
+                }
                 @*<div class="flex justify-between mb-2 pb-2 border-b">
-                    <div>Shipping fee</div>
-                    <div>$12.00</div>
-                </div>*@
-                <div class="flex justify-between">
+                        <div>Shipping fee</div>
+                        <div>$12.00</div>
+                    </div>*@
+                <div class="flex justify-between mt-3">
                     <div>Subtotal</div><br />
                     <div>$@Session["Temp_Total"]</div>
                 </div>
             </div><br />
             <div>
-                @if (Convert.ToInt32(Session["CheckQuantity"]) != 0)
+                @if ((int)Session["CheckPro"] != 0)
                 {
-                    <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2" type="submit" value="Next" disabled="disabled" />
+                    <button disabled class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Shopping/GetInfo">Checkout	•	$@Session["Temp_Total"]</button>
                 }
                 else
                 {
-            <a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Shopping/GetInfo">Checkout	•	$@Session["Temp_Total"]</a>
+                    <a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Shopping/GetInfo">Checkout	•	$@Session["Temp_Total"]</a>
+                    @*<a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Payment/CreatePayment">Paypal</a>*@
                 }
+
+
             </div>
         </div>
     </div>

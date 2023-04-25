@@ -5,142 +5,106 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.names)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.names)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.images)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.images)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.display)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.display)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.weights)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.weights)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.water_resistance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.water_resistance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.operating_system)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.operating_system)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.processor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.processor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.battery)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.battery)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ram)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ram)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.color)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.color)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.brand)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.brand)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.promocode.code)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.promocode.code)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="w-75 rounded-md grid grid-cols-3 border mx-auto my-5 p-5 h-screen">
+    <h1 class="col-span-3 ml-4">Delete</h1>
+    <img class="object-center col-span-1"
+         src="~/wwwroot/Images/Products/@Html.DisplayFor(x=>x.images)"
+         alt="" />
+    <div class="grid grid-cols-2 col-span-2 gap-y-3">
+        <div class="form-group">
+            <div class="font-bold">Name</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.names)
+            </div>
         </div>
-    }
+        <div class="form-group">
+            <div class="font-bold">Price</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.price)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Display</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.display)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Weights</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.weights)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Water Resistant</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.water_resistance)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Operating System</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.operating_system)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Processor</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.processor)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Battery</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.battery)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Ram</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.ram)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Quantity</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.quantity)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Rate</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.rate)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Color</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.color)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Brand</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.brand)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Promo Code</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.promocode.code)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-span-1">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.id_product)
+            </div>
+        </div>
+    </div>
+    <div class="col-span-3 flex space-x-2 justify-content-end justify-between">
+        <input type="submit" value="Delete" class="btn bg-red-600 text-white font-medium py-2 px-4 rounded-md" style="height: fit-content" />
+        <a href="@Url.Action("Index", "products")" class="btn text-black cursor-pointer bg-yellow-300 font-medium py-2 px-4 rounded-md" style="height: fit-content">Back</a>
+    </div>
 </div>

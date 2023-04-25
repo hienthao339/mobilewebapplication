@@ -104,8 +104,8 @@
 
     @*topfeatures*@
     <div class="text-center mt-5">
-        <div class="text-uppercase font-bold text-5xl my-2">top features of this year</div>
-        <div class="font-light w-75 mx-auto text-sm">
+        <div class="text-uppercase font-bold my-2" style="font-size: 96px">top features of this year</div>
+        <div class="font-light w-50 mx-auto text-lg">
             Crafted in part with recycled glass and ocean-bound plastic,
             each phone comes in a recycled paper box.
             Crafted in part with recycled glass and ocean-bound plastic,
@@ -129,7 +129,7 @@
                     <div class="block max-w-sm rounded-lg bg-white shadow-md w-full">
                         @*<a href="#!">*@
                         <img class="rounded-t-lg mx-auto object-center"
-                             style="height: 250px"
+                             style="height: 260px"
                              src="~/wwwroot/Images/Products/@item.images"
                              alt="" />
                         @*</a>*@
@@ -151,13 +151,13 @@
                                 }
                             </div>
 
-                            <h5 class="mt-4 mb-3 flex leading-tight text-neutral-800 dark:text-neutral-50 justify-between">
+                            <h5 class="mt-4 mb-3 flex leading-tight text-neutral-800 dark:text-neutral-50 justify-between"></h5>
                                 <div class="text-xl">@Html.DisplayFor(modelItem => item.names)</div>
                                 <div class="flex flex-row">
                                     <p class="px-2">@Html.DisplayFor(modelItem => item.rate)</p>
                                     <i class="fa-solid fa-star text-warning"></i>
                                 </div>
-                            </h5>
+                         
                             <div class="my-3 flex text-xs items-center justify-between">
                                 <div class="text-start">
                                     <span class="p-2 rounded-full" style="border: 2px solid #0026ff; color: #0026ff">@Html.DisplayFor(modelItem => item.brand)</span>

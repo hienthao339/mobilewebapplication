@@ -49,7 +49,7 @@
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.Shopping_product.brand)</div>
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.Shopping_product.color)</div>
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.Shopping_product.quantity)</div>
-                                    <a href="/Shopping/Details_Pro/@item.Shopping_product.id_product" class="text-blue-600 font-semibold text-xs mt-4">Learn More 🡥</a>
+                                    <a href="/Home/Details_Pro/@item.Shopping_product.id_product" class="text-blue-600 font-semibold text-xs mt-4">Learn More 🡥</a>
                                 </div>
                             </div>
 
@@ -132,22 +132,23 @@
                     </div>
                 }
                 @*<div class="flex justify-between mb-2 pb-2 border-b">
-                    <div>Shipping fee</div>
-                    <div>$12.00</div>
-                </div>*@
+                        <div>Shipping fee</div>
+                        <div>$12.00</div>
+                    </div>*@
                 <div class="flex justify-between">
                     <div>Subtotal</div><br />
                     <div>$@Session["Total"]</div>
                 </div>
             </div><br />
             <div>
-                @if (Convert.ToInt32(Session["CheckQuantity"]) != 0)
+                @if (Convert.ToInt32(Session["CheckPro"]) != 0)
                 {
-                    <input class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2" type="submit" value="Next" disabled="disabled" />
+                    <button disabled class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Shopping/GetInfo">Checkout	•	$@Session["Temp_Total"]</button>
                 }
                 else
                 {
                     <a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Shopping/GetInfo">Checkout	•	$@Session["Total"]</a>
+                    @*<a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Payment/CreatePayment">Paypal</a>*@
                 }
             </div>
         </div>

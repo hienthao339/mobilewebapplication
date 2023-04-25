@@ -43,7 +43,22 @@ namespace WebApplication1.Controllers
                 return View();
             }
             Carts cart = Session["Cart"] as Carts;
+            foreach (var item in cart.Items)
+            {
+                var pro = db.products.Where(x => x.id_product == item.Shopping_product.id_product).FirstOrDefault();
+                if (pro.quantity < 1)
+                {
+                    Session["CheckPro"] = 1;
+                    this.AddNotification(pro.names + " out of stock !", NotificationType.WARNING);
 
+                }
+                if (pro.quantity < item.Shopping_quantity)
+                {
+                    Session["CheckPro"] = 1;
+                    this.AddNotification(pro.names + " not enough quantity !", NotificationType.WARNING);
+
+                }
+            }
             if (cart != null)
             {
                 int Quantity = (int)cart.Items.Sum(x => x.Shopping_quantity);
@@ -70,7 +85,7 @@ namespace WebApplication1.Controllers
                 var pro = db.products.Where(x => x.id_product == item.Shopping_product.id_product).FirstOrDefault();
                 if (pro.quantity < 1)
                 {
-                    Session["CheckQuantity"] = 1;
+                    Session["CheckPro"] = 1;
                     this.AddNotification(pro.names + " out of stock !", NotificationType.WARNING);
                     return RedirectToAction("ShowToCart", "Shopping");
                 }

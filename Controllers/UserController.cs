@@ -93,7 +93,8 @@ namespace WebApplication1.Controllers
                     return View(tk);
                 }
                 taiKhoan = new user()
-                {
+                {   
+                    totalspend = 0,
                     id_user = tk.id_user,
                     email = tk.Email,
                     passwords = tk.Password,

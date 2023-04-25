@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-      Layout = "../../Views/Shared/_AdminLayout.cshtml";
+    Layout = "../../Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Details</h2>
@@ -34,15 +34,17 @@
         <dd>
             @Html.DisplayFor(model => model.email)
         </dd>
+        @if (Model.is_admin == true)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.passwords)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.passwords)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.passwords)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.passwords)
-        </dd>
-
+        }
         <dt>
             @Html.DisplayNameFor(model => model.avatar)
         </dt>

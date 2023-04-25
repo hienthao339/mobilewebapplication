@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_rank,discount")] rank rank)
+        public ActionResult Create([Bind(Include = "id_rank,discount,name_rank,spend")] rank rank)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace WebApplication1.Controllers.Admin
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_rank,discount")] rank rank)
+        public ActionResult Edit([Bind(Include = "id_rank,discount,name_rank,spend")] rank rank)
         {
             if (ModelState.IsValid)
             {

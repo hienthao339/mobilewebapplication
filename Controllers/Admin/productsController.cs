@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Extensions;
 using WebApplication1.Models;
 using WebApplication1.Models.Functions;
 using WebApplication1.Models.ViewModels;
@@ -95,7 +96,12 @@ namespace WebApplication1.Controllers.Admin
                 {
                     product.images = null;
                 }
-               
+                if (product.price <= 0 || product.quantity < 0)
+                {
+                    this.AddNotification("Value must be greater than 0", NotificationType.WARNING);
+                    return RedirectToAction("Edit", "products", new { id = product.id_product });
+                }
+
                 var fpro = new Func_Product();
                 fpro.Insert(product);
 
@@ -152,7 +158,11 @@ namespace WebApplication1.Controllers.Admin
                     product.id_promo= promo.id_promo;
                     product.discount = pro.price.Value * (100 - promo.discount_price) / 100;
                 }
-
+                if(product.price <= 0 || product.quantity < 0 )
+                {
+                    this.AddNotification("Value must be greater than 0", NotificationType.WARNING);
+                    return RedirectToAction("Edit", "products", new {id = product.id_product});
+                }
                 var fpro = new Func_Product();
                 fpro.Update(product);
 

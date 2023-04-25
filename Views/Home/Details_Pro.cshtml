@@ -6,6 +6,42 @@
 
 @Html.Partial("_Notifications")
 
+<script type="text/javascript">
+    function CRateOut(rating) {
+        for (var i = 1; i <= rating; i++) {
+            $("span" + i).attr('class', 'fa-regular fa-star');
+        }
+    }
+    function CReateOver(rating) {
+        for (var i = 1; i <= rating; i++) {
+            $("span" + i).attr('class', 'fa-solid fa-star');
+        }
+    }
+    function CReateClick(rating) {
+        $("#lblRating").val(rating);
+        for (var i = 1; i <= rating; i++) {
+            $("#span" + i).attr('class', 'fa-solid fa-star');
+        }
+        for (var i = rating + 1; i <= 5; i++) {
+            $("#span" + i).attr('class', 'fa-regular fa-star');
+        }
+    }
+    function CReateSelected(rating) {
+        var rating = $("#lblRating").val();
+        for (var i = 1; i <= rating; i++) {
+            $("#span" + i).attr('class', 'fa-solid fa-star');
+        }
+    }
+    function VerifyRating() {
+        var rating = $("$lblRating").val();
+        if (rating == "0") {
+            alter("Please Select Rating.");
+            return false;
+        }
+    }
+
+</script>
+
 <main>
     <div>
         <div class="text-xs">
@@ -14,7 +50,6 @@
                 <a href="@Url.Action("SearchPage", "Home")">List</a> \
                 <a href="#">@Html.DisplayFor(model => model.names)</a> \
             </div>
-
             <div class="w-75 grid grid-cols-4 grid-rows-2 mx-auto">
                 <div class="col-span-2 m-4">
                     <img src="~/wwwroot/Images/Products/@Html.DisplayFor(model => model.images)"
@@ -89,66 +124,88 @@
                             </fieldset>
                         </div>
                         <div class="flex space-x-3 mb-2 mt-6 ">
-
-                            @if (Session["email"] != null)
+                            @if (Model.quantity == 0)
                             {
 
-                                <a href="/Shopping/BuyNow/@Html.DisplayFor(model => model.id_product)">
-                                    <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium" )">Buy</div>
+
+                                <a href="#">
+                                    <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium" )">Out of Stock</div>
                                 </a>
-                                <a href="/Shopping/AddToCart/@Html.DisplayFor(model => model.id_product)">
-                                    <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-gray-100 hover:bg-gray-200 font-medium" )">Add To Cart</div>
+
+
+                                <a href="#">
+                                    <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-gray-100 hover:bg-gray-200 font-medium" )">OUt of Stock</div>
                                 </a>
                             }
                             else
                             {
-                                <a href="/ShoppingCart/BuyNow/@Html.DisplayFor(model => model.id_product)">
-                                    <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium" )">Buy</div>
-                                </a>
-                                <a href="/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.id_product)">
-                                    <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-gray-100 hover:bg-gray-200 font-medium" )">Add To Cart</div>
-                                </a>
+                                if (Session["email"] != null)
+                                {
+
+                                    <a href="/Shopping/BuyNow/@Html.DisplayFor(model => model.id_product)">
+                                        <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium" )">Buy</div>
+                                    </a>
+                                    <a href="/Shopping/AddToCart/@Html.DisplayFor(model => model.id_product)">
+                                        <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-gray-100 hover:bg-gray-200 font-medium" )">Add To Cart</div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/ShoppingCart/BuyNow/@Html.DisplayFor(model => model.id_product)">
+                                        <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-blue-600 hover:bg-blue-700 text-light text-center font-medium" )">Buy</div>
+                                    </a>
+                                    <a href="/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.id_product)">
+                                        <div style="text-decoration:none; color:black;text-align:center" class="p-3 rounded-md bg-gray-100 hover:bg-gray-200 font-medium" )">Add To Cart</div>
+                                    </a>
+                                }
                             }
+
+
                         </div>
                     </form>
                 </div>
-                <div class="col-span-2 m-4">
-                    <div class="flex items-center mb-4 space-x-4">
-                        @*<img class="w-10 h-10 rounded-full" src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg" alt="">*@
-                        <div class="space-y-1 font-medium dark:text-white">
-                            <p>
-                                Jese Leos <time datetime="2014-08-16 19:00"
-                                                class="block text-gray-500 dark:text-gray-400">Joined on Auguest 2014</time>
-                            </p>
+                @*<div class="col-span-2 m-4">
+                        <p class="text-3xl font-bold mb-4">Feedbacks</p>
+
+                        <div class="rounded-md p-4 border">
+
+                            @foreach (var item in ViewData["feedback"] as List<WebApplication1.Models.feedback>)
+                            {
+
+
+                                <div class="border-b">
+                                    <div class="flex items-center mb-1">
+                                        @if (item.user.names == null)
+                                        {
+                                            <div class="mr-4 font-medium text-lg">Anonymous</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="mr-4 font-medium text-lg">@item.user.names</div>
+                                        }
+
+
+                                        @for (int i = 0; i < item.rate; i++)
+                                        {
+                                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                        }
+                                    </div>
+                                    <div class="mb-3 text-gray-500 dark:text-gray-400">
+                                        <p>
+                                            <time>@item.created_at</time>
+                                        </p>
+                                    </div>
+                                    <p class="mb-2 font-medium text-dark text-base">
+                                        @item.content
+                                    </p>
+                                </div>
+                            }
                         </div>
-                    </div>
-                    <div class="flex items-center mb-1">
+                    </div>*@
 
-                        <div class="mr-4 font-medium text-lg">John. Clerk</div>
+                @*<div class="col-span-2 m-4">*@
 
-                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-
-                    </div>
-                    <div class="mb-3 text-gray-500 dark:text-gray-400"><p>Reviewed in the United Kingdom on <time datetime="2017-03-03 19:00">March 3, 2017</time></p></div>
-                    <p class="mb-2 font-light text-gray-500 dark:text-gray-400">This is my third Invicta Pro Diver. They are just fantastic value for money. This one arrived yesterday and the first thing I did was set the time, popped on an identical strap from another Invicta and went in the shower with it to test the waterproofing.... No problems.</p>
-                    <p class="mb-2 font-light text-gray-500 dark:text-gray-400">It is obviously not the same build quality as those very expensive watches. But that is like comparing a Citroën to a Ferrari. This watch was well under £100! An absolute bargain.</p>
-                    <a href="#" class="block mb-5 font-medium text-blue-600 hover:underline dark:text-blue-500">Read more</a>
-                    <aside>
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">19 people found this helpful</p>
-                        <div class="flex items-center mt-3 space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
-                            <a href="#" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Helpful</a>
-                            <a href="#" class="pl-4 font-medium text-blue-600 hover:underline dark:text-blue-500">Report abuse</a>
-                        </div>
-                    </aside>
-                </div>
-
-
-                <div class="col-span-2 m-4">
-                    <div class="row">
+                @*<div class="row">
                         <div class="flex items-center mb-3">
                             <i class="fa-solid fa-star text-yellow-500"></i>
                             <i class="fa-solid fa-star text-yellow-500"></i>
@@ -193,23 +250,44 @@
                             </div>
                             <span class="font-medium text-blue-600 dark:text-blue-500">1%</span>
                         </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="w-full shadow-md">
-                            <form action="" class="w-full p-4">
-                                <div class="mb-2">
-                                    <label for="comment" class="text-lg font-bold text-gray-600">Write your review</label>
-                                    <input type="text" class="w-full p-2 my-3 border-b rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
-                                           name="comment" placeholder="Enter your review">
-                                </div>
-                                <button class="w-full py-3 font-semibold text-white bg-blue-600 rounded-md">Review</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </div>*@
 
+                <!--<p class="text-3xl font-bold mb-4">Write a review</p>
+                <div class="rounded-md m-2 p-4 border">
+                    using (Html.BeginForm("Feedbacks", "Home", FormMethod.Post, new { onsubmit = "retun VerifyRating()" }))
+                    {-->
+                @*<textarea rows="6" cols="50" name="articleComment" id="txtArticleComment"></textarea>*@
+                <!--<div onmouseout="CReateSelected()">
+                            <span id="span1" onmouseout="CRateOut(1)" onmouseover="CRateOut(1)" onclick="CReateClick(1)" class="fa-regular fa-star"></span>
+                            <span id="span2" onmouseout="CRateOut(2)" onmouseover="CRateOut(2)" onclick="CReateClick(2)" class="fa-regular fa-star"></span>
+                            <span id="span3" onmouseout="CRateOut(3)" onmouseover="CRateOut(3)" onclick="CReateClick(3)" class="fa-regular fa-star"></span>
+                            <span id="span4" onmouseout="CRateOut(4)" onmouseover="CRateOut(4)" onclick="CReateClick(4)" class="fa-regular fa-star"></span>
+                            <span id="span5" onmouseout="CRateOut(5)" onmouseover="CRateOut(5)" onclick="CReateClick(5)" class="fa-regular fa-star"></span>
+                        </div><div>
+                            <input type="hidden" name="rating" id="lblRating" value="0" />
+                        </div>
+                        <div class="row mt-4">
+                            <div class="w-full">
+                                <form action="" class="w-full p-4">
+                                    <div class="mb-2">
+                                        <input type="hidden" value="Html.DisplayFor(model => model.id_product)" name="id_pro" />
+                                        <label for="comment" class="text-lg font-bold text-gray-600">Write your review</label>
+                                        <input type="text" class="w-full p-2 my-3 border-b rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+                                               name="comment" placeholder="Enter your review">
+                                    </div>
+                                    <button class="w-full py-3 font-semibold text-white bg-blue-600 rounded-md">Review</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>-->
+            </div>
         </div>
+
     </div>
+
 </main>
+
+
+
 

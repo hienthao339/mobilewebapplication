@@ -18,6 +18,7 @@ namespace WebApplication1.Models
         public product()
         {
             this.carts = new HashSet<cart>();
+            this.feedbacks = new HashSet<feedback>();
             this.order_item = new HashSet<order_item>();
         }
     
@@ -42,6 +43,8 @@ namespace WebApplication1.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cart> carts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<feedback> feedbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_item> order_item { get; set; }
         public virtual promocode promocode { get; set; }

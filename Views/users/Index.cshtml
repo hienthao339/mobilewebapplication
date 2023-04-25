@@ -2,69 +2,87 @@
 
 @{
     ViewBag.Title = "Index";
-      Layout = "../../Views/Shared/_AdminLayout.cshtml";
+    Layout = "../../Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h1 class="my-4 ml-4">Index</h1>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.is_admin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.names)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.passwords)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.avatar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rank.id_rank)
-        </th>
-        <th></th>
-    </tr>
+<div class="w-full ml-4 my-2">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn bg-blue-600 text-white font-medium rounded-lg px-3 py-2" })
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.is_admin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.names)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.passwords)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.avatar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rank.id_rank)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_user }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_user }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_user })
-        </td>
-    </tr>
-}
+<div class="w-full p-4 grid grid-cols-2">
+    @foreach (var item in Model)
+    {
+        <div class="col-span-1 flex m-3 border rounded-md p-4 justify-between">
+            <div style="width: 100px">
+                @if (item.avatar == null)
+                {
+                    <img src="https://freesvg.org/img/abstract-user-flat-4.png" class="object-center object-cover">
+                }
+                else
+                {
+                    <img src="~/wwwroot/Images/Avatars/@item.avatar" class="object-center object-cover"/>
+                }
+            </div>
+            <div class="grid grid-cols-3 font-bold">
+                <div class="col-span-1">
+                    <div>Role</div>
+                    @if (item.is_admin == true)
+                    {
+                        <div class="font-light">Admin</div>
+                    }
+                    else
+                    {
+                        <div class="font-light">User</div>
+                    }
+                </div>
+                <div class="col-span-1">
+                    <div>Name</div>
+                    <div class="font-light">@item.names</div>
+                </div>
+                <div class="col-span-1">
+                    <div>Email</div>
+                    <div class="font-light">@item.email</div>
+                </div>
+                <div class="col-span-1">
+                    <div>Phone</div>
+                    <div class="font-light">@item.phone</div>
+                </div>
+                <div class="col-span-1">
+                    <div>Rank</div>
+                    @if (item.id_rank == null)
+                    {
+                        <div class="font-light">Thường</div>
+                    }
+                    else
+                    {
 
-</table>
+                        <div class="font-light">@item.rank.name_rank</div>
+                    }
+                </div>
+            </div>
+            <div>
+                <div class="p-3 text-sm rounded-lg bg-yellow-300 cursor-pointer">
+                    <a href="/users/Edit/@item.id_user" class="ms-1 text-black rounded">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                </div>
+
+                <div class="p-3 text-sm rounded-lg bg-red-600 text-white">
+                    <a href="/users/Delete/@item.id_user" class="ms-1 text-white rounded">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
+                </div>
+                <div class="p-3 text-sm rounded-lg bg-blue-600 text-white">
+                    <a href="/users/Delete/@item.id_user" class="ms-1 text-white rounded">
+                        <i class="fa-solid fa-info"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+

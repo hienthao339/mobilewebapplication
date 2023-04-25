@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using WebApplication1.Models;
 
@@ -17,6 +18,19 @@ namespace WebApplication1.Controllers.Admin
         // GET: users
         public ActionResult Index()
         {
+            var user_ranks = db.users.ToList();
+            var ranks = db.ranks.ToList();
+            foreach(var item1 in user_ranks)
+            {
+                foreach(var item2 in ranks.OrderBy(x=>x.spend))
+                {
+                    if(item1.totalspend > (double)item2.spend)
+                    { 
+                        item1.id_rank = item2.id_rank;
+                    }
+                }
+            }
+            db.SaveChanges();
             var users = db.users.Include(u => u.rank);
             return View(users.ToList());
         }
