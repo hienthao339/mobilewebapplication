@@ -42,14 +42,14 @@
                     {
                         <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                            href="@Url.Action("SignIn", "User")">
-                            <i class="fa-solid fa-user text-black"></i>
-                            SignIn
+                            <i class="fa-solid fa-user text-black pr-8"></i>
                         </a>
 
                         @*Cart*@
                         <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"
                            href="@Url.Action("ShowToCart", "ShoppingCart")"><i class="fa-solid fa-cart-shopping text-black"></i> </a>
-                        @Html.Action("BagCart", "ShoppingCart")
+                       
+                            @Html.Action("BagCart", "ShoppingCart")
                     }
                     @*Search*@
                     <a class="lg:inline-block py-[10px] rounded-xl transition duration-200"

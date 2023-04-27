@@ -70,6 +70,7 @@
           <Property Name="completed" Type="bit" />
           <Property Name="canceled" Type="bit" />
           <Property Name="id_user" Type="int" />
+          <Property Name="request_cancel" Type="bit" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -375,6 +376,7 @@
           <NavigationProperty Name="order_item" Relationship="Self.FK_id_order_order_item" FromRole="orders" ToRole="order_item" />
           <NavigationProperty Name="promocode" Relationship="Self.FK_id_promo_order" FromRole="orders" ToRole="promocode" />
           <NavigationProperty Name="user" Relationship="Self.FK_id_user_orders" FromRole="orders" ToRole="users" />
+          <Property Name="request_cancel" Type="Boolean" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -673,6 +675,7 @@
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="MobileShoppingModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="request_cancel" ColumnName="request_cancel" />
                 <ScalarProperty Name="id_order" ColumnName="id_order" />
                 <ScalarProperty Name="id_customer" ColumnName="id_customer" />
                 <ScalarProperty Name="payment_type" ColumnName="payment_type" />

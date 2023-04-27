@@ -72,11 +72,12 @@
                 </div>*@
             <div class="flex w-full justify-between my-4">
                 <div class="text-start">
-                    <div class="text-lg font-bold my-2">Image</div>
-                    <p>Upload your image</p>
+                    @*<div class="text-lg font-bold my-2">Image</div>
+                    <p>Upload your image</p>*@
+                    <a href="/User/Edit_Info/@Html.DisplayFor(model => model.id_user)" class="m-2 font-bold py-2 px-3 bg-yellow-300">Changes Info</a>
                 </div>
             </div>
-                    <a href="/User/Edit_Info/@Html.DisplayFor(model => model.id_user)" class="m-2 font-bold py-2 px-3 bg-yellow-300">Changes Info</a>
+                  
 
         </div>
         <script src="https://kit.fontawesome.com/6e08fcf7ad.js" crossorigin="anonymous"></script>
