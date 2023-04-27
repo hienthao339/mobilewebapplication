@@ -170,7 +170,6 @@ namespace WebApplication1.Controllers
             user users = db.users.Find(user.id_user);
             var orders = db.orders.Where(x => x.id_user == user.id_user).ToList();
             return View(orders);
-
         }
     }
 }

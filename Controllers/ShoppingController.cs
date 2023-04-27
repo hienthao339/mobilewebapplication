@@ -321,6 +321,9 @@ namespace WebApplication1.Controllers
                 var ranks_discount = db.ranks.Where(x => x.id_rank == user_spend.id_rank).FirstOrDefault();
                 orders.total_price = total * (100 - ranks_discount.discount) / 100 + shipping;
                 Session["Total_Price"] = orders.total_price;
+
+                var discount_price = total * ranks_discount.discount / 100;
+                Session["UserDiscount"] = discount_price;
             }
             else
             {

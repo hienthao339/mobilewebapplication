@@ -164,127 +164,127 @@
                         </div>
                     </form>
                 </div>
-                @*<div class="col-span-2 m-4">
-                        <p class="text-3xl font-bold mb-4">Feedbacks</p>
+                <div class="col-span-2 m-4">
+                    <p class="text-3xl font-bold mb-4">Feedbacks</p>
 
-                        <div class="rounded-md p-4 border">
+                    <div class="rounded-md p-4 border">
 
-                            @foreach (var item in ViewData["feedback"] as List<WebApplication1.Models.feedback>)
-                            {
-
-
-                                <div class="border-b">
-                                    <div class="flex items-center mb-1">
-                                        @if (item.user.names == null)
-                                        {
-                                            <div class="mr-4 font-medium text-lg">Anonymous</div>
-                                        }
-                                        else
-                                        {
-                                            <div class="mr-4 font-medium text-lg">@item.user.names</div>
-                                        }
+                        @foreach (var item in ViewData["feedback"] as List<WebApplication1.Models.feedback>)
+                        {
 
 
-                                        @for (int i = 0; i < item.rate; i++)
-                                        {
-                                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                        }
-                                    </div>
-                                    <div class="mb-3 text-gray-500 dark:text-gray-400">
-                                        <p>
-                                            <time>@item.created_at</time>
-                                        </p>
-                                    </div>
-                                    <p class="mb-2 font-medium text-dark text-base">
-                                        @item.content
+                            <div class="border-b">
+                                <div class="flex items-center mb-1">
+                                    @if (item.user.names == null)
+                                    {
+                                        <div class="mr-4 font-medium text-lg">Anonymous</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="mr-4 font-medium text-lg">@item.user.names</div>
+                                    }
+
+
+                                    @for (int i = 0; i < item.rate; i++)
+                                    {
+                                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    }
+                                </div>
+                                <div class="mb-3 text-gray-500 dark:text-gray-400">
+                                    <p>
+                                        <time>@item.created_at</time>
                                     </p>
                                 </div>
-                            }
-                        </div>
-                    </div>*@
+                                <p class="mb-2 font-medium text-dark text-base">
+                                    @item.content
+                                </p>
+                            </div>
+                        }
+                    </div>
+                </div>
 
-                @*<div class="col-span-2 m-4">*@
+                <div class="col-span-2 m-4">
 
-                @*<div class="row">
-                        <div class="flex items-center mb-3">
-                            <i class="fa-solid fa-star text-yellow-500"></i>
-                            <i class="fa-solid fa-star text-yellow-500"></i>
-                            <i class="fa-solid fa-star text-yellow-500"></i>
-                            <i class="fa-solid fa-star text-yellow-500"></i>
-                            <i class="fa-solid fa-star text-yellow-500"></i>
-                            <p class="ml-2 font-medium text-gray-900 dark:text-white">5 out of 5</p>
-                        </div>
-                        <p class="font-medium text-gray-500">1,745 global ratings</p>
-                        <div class="flex items-center mt-4">
-                            <span class="font-medium text-blue-600 dark:text-blue-500">5 star</span>
-                            <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                <div class="h-5 bg-yellow-300 rounded" style="width: 70%"></div>
+                    @*<div class="row">
+                            <div class="flex items-center mb-3">
+                                <i class="fa-solid fa-star text-yellow-500"></i>
+                                <i class="fa-solid fa-star text-yellow-500"></i>
+                                <i class="fa-solid fa-star text-yellow-500"></i>
+                                <i class="fa-solid fa-star text-yellow-500"></i>
+                                <i class="fa-solid fa-star text-yellow-500"></i>
+                                <p class="ml-2 font-medium text-gray-900 dark:text-white">5 out of 5</p>
                             </div>
-                            <span class="font-medium text-blue-600 dark:text-blue-500">70%</span>
-                        </div>
-                        <div class="flex items-center mt-4">
-                            <span class="font-medium text-blue-600 dark:text-blue-500">4 star</span>
-                            <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                <div class="h-5 bg-yellow-300 rounded" style="width: 17%"></div>
+                            <p class="font-medium text-gray-500">1,745 global ratings</p>
+                            <div class="flex items-center mt-4">
+                                <span class="font-medium text-blue-600 dark:text-blue-500">5 star</span>
+                                <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
+                                    <div class="h-5 bg-yellow-300 rounded" style="width: 70%"></div>
+                                </div>
+                                <span class="font-medium text-blue-600 dark:text-blue-500">70%</span>
                             </div>
-                            <span class="font-medium text-blue-600 dark:text-blue-500">17%</span>
-                        </div>
-                        <div class="flex items-center mt-4">
-                            <span class="font-medium text-blue-600 dark:text-blue-500">3 star</span>
-                            <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                <div class="h-5 bg-yellow-300 rounded" style="width: 8%"></div>
+                            <div class="flex items-center mt-4">
+                                <span class="font-medium text-blue-600 dark:text-blue-500">4 star</span>
+                                <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
+                                    <div class="h-5 bg-yellow-300 rounded" style="width: 17%"></div>
+                                </div>
+                                <span class="font-medium text-blue-600 dark:text-blue-500">17%</span>
                             </div>
-                            <span class="font-medium text-blue-600 dark:text-blue-500">8%</span>
-                        </div>
-                        <div class="flex items-center mt-4">
-                            <span class="font-medium text-blue-600 dark:text-blue-500">2 star</span>
-                            <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                <div class="h-5 bg-yellow-300 rounded" style="width: 4%"></div>
+                            <div class="flex items-center mt-4">
+                                <span class="font-medium text-blue-600 dark:text-blue-500">3 star</span>
+                                <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
+                                    <div class="h-5 bg-yellow-300 rounded" style="width: 8%"></div>
+                                </div>
+                                <span class="font-medium text-blue-600 dark:text-blue-500">8%</span>
                             </div>
-                            <span class="font-medium text-blue-600 dark:text-blue-500">4%</span>
-                        </div>
-                        <div class="flex items-center mt-4">
-                            <span class="font-medium text-blue-600 dark:text-blue-500">1 star</span>
-                            <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                <div class="h-5 bg-yellow-300 rounded" style="width: 1%"></div>
+                            <div class="flex items-center mt-4">
+                                <span class="font-medium text-blue-600 dark:text-blue-500">2 star</span>
+                                <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
+                                    <div class="h-5 bg-yellow-300 rounded" style="width: 4%"></div>
+                                </div>
+                                <span class="font-medium text-blue-600 dark:text-blue-500">4%</span>
                             </div>
-                            <span class="font-medium text-blue-600 dark:text-blue-500">1%</span>
-                        </div>
-                    </div>*@
+                            <div class="flex items-center mt-4">
+                                <span class="font-medium text-blue-600 dark:text-blue-500">1 star</span>
+                                <div class="w-2/3 h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
+                                    <div class="h-5 bg-yellow-300 rounded" style="width: 1%"></div>
+                                </div>
+                                <span class="font-medium text-blue-600 dark:text-blue-500">1%</span>
+                            </div>
+                        </div>*@
 
-                <!--<p class="text-3xl font-bold mb-4">Write a review</p>
-                <div class="rounded-md m-2 p-4 border">
-                    using (Html.BeginForm("Feedbacks", "Home", FormMethod.Post, new { onsubmit = "retun VerifyRating()" }))
-                    {-->
-                @*<textarea rows="6" cols="50" name="articleComment" id="txtArticleComment"></textarea>*@
-                <!--<div onmouseout="CReateSelected()">
-                            <span id="span1" onmouseout="CRateOut(1)" onmouseover="CRateOut(1)" onclick="CReateClick(1)" class="fa-regular fa-star"></span>
-                            <span id="span2" onmouseout="CRateOut(2)" onmouseover="CRateOut(2)" onclick="CReateClick(2)" class="fa-regular fa-star"></span>
-                            <span id="span3" onmouseout="CRateOut(3)" onmouseover="CRateOut(3)" onclick="CReateClick(3)" class="fa-regular fa-star"></span>
-                            <span id="span4" onmouseout="CRateOut(4)" onmouseover="CRateOut(4)" onclick="CReateClick(4)" class="fa-regular fa-star"></span>
-                            <span id="span5" onmouseout="CRateOut(5)" onmouseover="CRateOut(5)" onclick="CReateClick(5)" class="fa-regular fa-star"></span>
-                        </div><div>
-                            <input type="hidden" name="rating" id="lblRating" value="0" />
-                        </div>
-                        <div class="row mt-4">
-                            <div class="w-full">
-                                <form action="" class="w-full p-4">
-                                    <div class="mb-2">
-                                        <input type="hidden" value="Html.DisplayFor(model => model.id_product)" name="id_pro" />
-                                        <label for="comment" class="text-lg font-bold text-gray-600">Write your review</label>
-                                        <input type="text" class="w-full p-2 my-3 border-b rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
-                                               name="comment" placeholder="Enter your review">
-                                    </div>
-                                    <button class="w-full py-3 font-semibold text-white bg-blue-600 rounded-md">Review</button>
-                                </form>
+                    <p class="text-3xl font-bold mb-4">Write a review</p>
+                    <div class="rounded-md m-2 p-4 border">
+                        @using (Html.BeginForm("Feedbacks", "Home", FormMethod.Post, new { onsubmit = "retun VerifyRating()" }))
+                        {
+
+                            <div onmouseout="CReateSelected()">
+                                <span id="span1" onmouseout="CRateOut(1)" onmouseover="CRateOut(1)" onclick="CReateClick(1)" class="fa-regular fa-star"></span>
+                                <span id="span2" onmouseout="CRateOut(2)" onmouseover="CRateOut(2)" onclick="CReateClick(2)" class="fa-regular fa-star"></span>
+                                <span id="span3" onmouseout="CRateOut(3)" onmouseover="CRateOut(3)" onclick="CReateClick(3)" class="fa-regular fa-star"></span>
+                                <span id="span4" onmouseout="CRateOut(4)" onmouseover="CRateOut(4)" onclick="CReateClick(4)" class="fa-regular fa-star"></span>
+                                <span id="span5" onmouseout="CRateOut(5)" onmouseover="CRateOut(5)" onclick="CReateClick(5)" class="fa-regular fa-star"></span>
+                            </div><div>
+                                <input type="hidden" name="rating" id="lblRating" value="0" />
                             </div>
-                        </div>
-                    }
-                </div>-->
+                            <div class="row mt-4">
+                                <div class="w-full">
+                                    <form action="" class="w-full p-4">
+                                        <div class="mb-2">
+                                            <input type="hidden" value="@Html.DisplayFor(model => model.id_product)" name="id_pro" />
+                                            <label for="comment" class="text-lg font-bold text-gray-600">Write your review</label>
+                                            <input type="text" class="w-full p-2 my-3 border-b rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+                                                   name="comment" placeholder="Enter your review">
+                                        </div>
+                                        <button class="w-full py-3 font-semibold text-white bg-blue-600 rounded-md">Review</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 
 </main>
 
