@@ -109,7 +109,7 @@
 
                                             @if (item.request_cancel == false)
                                             {
-                                                <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
+                                                <a href="/User/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
                                             }
                                             else
                                             {
@@ -306,10 +306,10 @@
                                             <span class="w-60 text-xl font-bold">$@Html.DisplayFor(Item => item.total_price).00</span>
 
 
-
+                                            
                                             @if (item.canceled == false)
                                             {
-                                                <a href="/Home/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
+                                                <a href="/User/Request_Cancel/@Html.DisplayFor(modelItem => item.id_order)">Cancel</a>
                                             }
                                             <a class="inline-flex text-neutral-500 text-md ms-4" href="/Shopping/ShoppingSuccess/@Html.DisplayFor(Item => item.id_order)">
                                                 View More 🡥

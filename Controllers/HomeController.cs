@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using WebApplication1.Controllers.Admin;
 using WebApplication1.Extensions;
 using WebApplication1.Models;
 using WebApplication1.Models.Functions;
@@ -109,10 +111,24 @@ namespace WebApplication1.Controllers
         public ActionResult YourOrders(int id)
         {
             var cus = db.customers.Where(x => x.id_customer == id).FirstOrDefault();
-            Session["Customer"] = cus;
-            var orders = db.orders.Where(x => x.id_customer == cus.id_customer).ToList();
+
+            var find_cus = db.customers.Where(x => x.email == cus.email).ToList();
+
+            List<order> ord = new List<order>();
+
+            foreach (var item in find_cus)
+            {
+                var find_ord = db.orders.Where(x => x.id_customer == item.id_customer).ToList();
+                foreach (var item2 in find_ord)
+                {
+                    ord.Add(item2);
+                }
+            }
+
+            //Session["Customer"] = cus;
+            //var orders = db.orders.Where(x => x.id_customer == cus.id_customer).ToList();
             //var order_items = db.order_item.Where(x=>x.order.id_customer == id).ToList();
-            return View(orders);
+            return View(ord);
         }
         public ActionResult About()
         {
@@ -127,7 +143,60 @@ namespace WebApplication1.Controllers
             ViewBag.Ram = (from c in db.products select c.ram).Distinct().ToList();
             ViewData["pro"] = pro;
 
+            var count = db.feedbacks.Count(x => x.id_product == id);
             var feedbacks = db.feedbacks.Where(x => x.id_product == id).ToList();
+         
+            int star = 0;
+            int one = 0;
+            int two = 0;
+            int three = 0;
+            int four = 0;
+            int five = 0;
+            foreach (var item in feedbacks)
+            {
+                if (item.rate == 1)
+                    one += 1;
+                if (item.rate == 2)
+                    two += 1;
+                if (item.rate == 3)
+                    three += 1;
+                if (item.rate == 4)
+                    four += 1;
+                if (item.rate == 5)
+                    five += 1;
+
+                star += (int)item.rate;
+            }
+
+            Session["rate1"] = one;
+            Session["rate2"] = two;
+            Session["rate3"] = three;
+            Session["rate4"] = four;
+            Session["rate5"] = five;
+
+
+            double allstar = one + two + three + four + five;
+            double avg_1 = one / allstar * 100;
+            double avg_2 = two / allstar * 100;
+            double avg_3 = three / allstar * 100;
+            double avg_4 = four / allstar * 100;
+            double avg_5 = five / allstar * 100;
+
+            Session["1"] = Math.Round(avg_1, 2) + "%";
+            Session["2"] = Math.Round(avg_2, 2) + "%";
+            Session["3"] = Math.Round(avg_3, 2) + "%";
+            Session["4"] = Math.Round(avg_4, 2) + "%";
+            Session["5"] = Math.Round(avg_5, 2) + "%";
+
+            double avg = (double)star / (double)count;
+            int avg2 = star / count;
+            Session["avg2"] = avg2;
+            avg = Math.Round(avg, 1);
+            Session["count"] = count;
+            Session["star"] = star;
+            Session["avg"] = avg;
+
+
             ViewData["feedback"] = feedbacks;
 
             return View(pro_seri);
@@ -148,6 +217,11 @@ namespace WebApplication1.Controllers
             user user = Session["email"] as user;
             new_fb.id_user = user.id_user;
             new_fb.id_product = id;
+            if(rating == 0)
+            {
+                this.AddNotification("You must be rating before review", NotificationType.ERROR);
+                return RedirectToAction("Details_Pro", "Home", new { id = id_pro });
+            }
             new_fb.rate = rating;
             db.feedbacks.Add(new_fb);
             db.SaveChanges();
@@ -201,7 +275,6 @@ namespace WebApplication1.Controllers
             ord.request_cancel = true;
             db.SaveChanges();
             return RedirectToAction("YourOrders", "Home", new { id = ord.id_customer });
-
         }
         public ActionResult ProductList(string brand)
         {

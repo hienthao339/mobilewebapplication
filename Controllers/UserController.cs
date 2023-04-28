@@ -171,5 +171,13 @@ namespace WebApplication1.Controllers
             var orders = db.orders.Where(x => x.id_user == user.id_user).ToList();
             return View(orders);
         }
+        public ActionResult Request_Cancel(int id)
+        {
+            var ord = db.orders.Where(x => x.id_order == id).FirstOrDefault();
+            ord.request_cancel = true;
+            db.SaveChanges();
+            return RedirectToAction("Orders", "User");
+
+        }
     }
 }

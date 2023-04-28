@@ -25,20 +25,34 @@
     <div class="my-lg-5">
         @foreach (var item in Model)
         {
-            double total = Convert.ToDouble(item.product.price.Value * item.quantity);
+            
             <div class="flex space-x-6 mb-4 pb-4 border-b">
                 <img src="~/wwwroot/Images/Products/@Html.DisplayFor(modelItem => item.product.images)" class="object-cover w-25" />
                 <div>
                     <span class="font-semibold text-2xl">
                         @Html.DisplayFor(modelItem => item.product.names)
                     </span><br />
-                    <span class="font-light text-md">
-                        @Html.DisplayFor(modelItem => item.product.color)<br />
-                        @Html.DisplayFor(modelItem => item.quantity)<br />
-                        $@Html.DisplayFor(modelItem => item.product.price)<br />
-                        <hr />
-                        $@total.00
-                    </span>
+                           <span class="font-light text-md">
+                               @Html.DisplayFor(modelItem => item.product.color)<br />
+                               @Html.DisplayFor(modelItem => item.quantity)<br />
+                               @if (item.product.id_promo == null)
+                               {
+                                   double total = Convert.ToDouble(item.product.price.Value * item.quantity);
+                                   <span>$@Html.DisplayFor(modelItem => item.product.price)</span>
+                                   <br />
+                                   <hr />
+                                   <span>$@total.00</span>
+                               }
+                               @if(item.product.id_promo != null)
+                               {
+                                   double total = Convert.ToDouble(item.product.discount.Value *  item.quantity);
+                                   <span>$@Html.DisplayFor(modelItem => item.product.discount)</span>
+                                   <br />
+                                   <hr />
+                                   <span>$@total.00</span>
+                               }
+
+                           </span>
                 </div>
             </div>
         }
