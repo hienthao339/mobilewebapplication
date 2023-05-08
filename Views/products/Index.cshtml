@@ -31,7 +31,7 @@
         {
             <tr>
                 <td>
-                    <img src="~/wwwroot/Images/Products/@Html.DisplayFor(modelItem=>item.images)" class="h-20" />
+                    <img src="~/wwwroot/Images/Products/@Html.DisplayFor(modelItem=>item.images)" class="h-10" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.names)
@@ -65,7 +65,7 @@
                             @Html.ActionLink("Edit", "Edit", new { id = item.id_product }, new { @class = "ms-1 text-black" })
                         </div>
 
-                        <div class="p-3 text-sm rounded-lg bg-red-600 text-white">
+                        <div class="p-3 text-sm rounded-lg bg-danger text-white">
                             <i class="fa-solid fa-xmark"></i>
                             @Html.ActionLink("Delete", "Delete", new { id = item.id_product }, new { @class = "ms-1 text-white" })
                         </div>
