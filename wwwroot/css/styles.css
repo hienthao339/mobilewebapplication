@@ -1925,7 +1925,7 @@ img, video {
         color: rgb(229 229 229/var(--tw-text-opacity))
     }
 
-    .dark:text-neutral-50 {
+    .{
         --tw-text-opacity: 1;
         color: rgb(250 250 250/var(--tw-text-opacity))
     }

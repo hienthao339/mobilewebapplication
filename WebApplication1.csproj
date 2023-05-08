@@ -446,7 +446,6 @@
     <Content Include="Views\Shopping\BagCart.cshtml" />
     <Content Include="Views\Shopping\Buy_now.cshtml" />
     <Content Include="Views\Home\SearchPage.cshtml" />
-    <Content Include="Views\Home\SearchOrders.cshtml" />
     <Content Include="Views\Home\YourOrders.cshtml" />
     <Content Include="Views\Home\SearchOrderPage.cshtml" />
     <Content Include="Views\products\Create.cshtml" />
