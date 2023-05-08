@@ -145,7 +145,7 @@ namespace WebApplication1.Controllers
 
             var count = db.feedbacks.Count(x => x.id_product == id);
             var feedbacks = db.feedbacks.Where(x => x.id_product == id).ToList();
-         
+
             int star = 0;
             int one = 0;
             int two = 0;
@@ -188,14 +188,29 @@ namespace WebApplication1.Controllers
             Session["4"] = Math.Round(avg_4, 2) + "%";
             Session["5"] = Math.Round(avg_5, 2) + "%";
 
-            double avg = (double)star / (double)count;
-            int avg2 = star / count;
+            double avg;
+            int avg2;
+
+            if (count != 0)
+            {
+                avg = (double)star / (double)count;
+                avg2 = star / count;
+            }
+            else
+            {
+                avg = 0;
+                avg2 = 0;
+            }
+
             Session["avg2"] = avg2;
             avg = Math.Round(avg, 1);
             Session["count"] = count;
             Session["star"] = star;
             Session["avg"] = avg;
 
+            var rate = db.products.Where(x => x.id_product == id).FirstOrDefault();
+            rate.rate = avg;
+            db.SaveChanges();
 
             ViewData["feedback"] = feedbacks;
 
@@ -217,7 +232,7 @@ namespace WebApplication1.Controllers
             user user = Session["email"] as user;
             new_fb.id_user = user.id_user;
             new_fb.id_product = id;
-            if(rating == 0)
+            if (rating == 0)
             {
                 this.AddNotification("You must be rating before review", NotificationType.ERROR);
                 return RedirectToAction("Details_Pro", "Home", new { id = id_pro });

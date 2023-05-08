@@ -14,12 +14,6 @@ namespace WebApplication1.Models
     
     public partial class feedback
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public feedback()
-        {
-            this.db_message_feedback = new HashSet<db_message_feedback>();
-        }
-    
         public int id_feedback { get; set; }
         public string content { get; set; }
         public Nullable<int> rate { get; set; }
@@ -27,8 +21,6 @@ namespace WebApplication1.Models
         public Nullable<int> id_product { get; set; }
         public Nullable<int> id_user { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<db_message_feedback> db_message_feedback { get; set; }
         public virtual product product { get; set; }
         public virtual user user { get; set; }
     }

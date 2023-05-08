@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="MobileShoppingModel.cart" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.chat" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.customer" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MobileShoppingModel.db_message_feedback" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.feedback" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.order_item" Width="1.5" PointX="10.5" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MobileShoppingModel.order" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
@@ -21,8 +20,6 @@
         <AssociationConnector Association="MobileShoppingModel.FK_id_user_cart" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_user_chat" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_customer_oders" ManuallyRouted="false" />
-        <AssociationConnector Association="MobileShoppingModel.FK_id_feedbacks_message" ManuallyRouted="false" />
-        <AssociationConnector Association="MobileShoppingModel.FK_id_user_message" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_product_feedbacks" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_user_feedbacks" ManuallyRouted="false" />
         <AssociationConnector Association="MobileShoppingModel.FK_id_order_order_item" ManuallyRouted="false" />

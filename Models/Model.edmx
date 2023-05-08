@@ -35,16 +35,6 @@
           <Property Name="district" Type="nvarchar" MaxLength="100" />
           <Property Name="ward" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="db_message_feedback">
-          <Key>
-            <PropertyRef Name="id_message" />
-          </Key>
-          <Property Name="id_message" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_feedbacks" Type="int" />
-          <Property Name="content" Type="nvarchar" MaxLength="500" />
-          <Property Name="id_user" Type="int" />
-          <Property Name="create_at" Type="datetime" />
-        </EntityType>
         <EntityType Name="feedbacks">
           <Key>
             <PropertyRef Name="id_feedback" />
@@ -161,18 +151,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_id_feedbacks_message">
-          <End Role="feedbacks" Type="Self.feedbacks" Multiplicity="0..1" />
-          <End Role="db_message_feedback" Type="Self.db_message_feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="feedbacks">
-              <PropertyRef Name="id_feedback" />
-            </Principal>
-            <Dependent Role="db_message_feedback">
-              <PropertyRef Name="id_feedbacks" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_id_order_order_item">
           <End Role="orders" Type="Self.orders" Multiplicity="0..1" />
           <End Role="order_item" Type="Self.order_item" Multiplicity="*" />
@@ -281,18 +259,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_id_user_message">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="db_message_feedback" Type="Self.db_message_feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="users">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="db_message_feedback">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_id_user_orders">
           <End Role="users" Type="Self.users" Multiplicity="0..1" />
           <End Role="orders" Type="Self.orders" Multiplicity="*" />
@@ -321,7 +287,6 @@
           <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="chat" EntityType="Self.chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_message_feedback" EntityType="Self.db_message_feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="feedbacks" EntityType="Self.feedbacks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_item" EntityType="Self.order_item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
@@ -333,10 +298,6 @@
           <AssociationSet Name="FK_id_customer_oders" Association="Self.FK_id_customer_oders">
             <End Role="customer" EntitySet="customer" />
             <End Role="orders" EntitySet="orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_id_feedbacks_message" Association="Self.FK_id_feedbacks_message">
-            <End Role="feedbacks" EntitySet="feedbacks" />
-            <End Role="db_message_feedback" EntitySet="db_message_feedback" />
           </AssociationSet>
           <AssociationSet Name="FK_id_order_order_item" Association="Self.FK_id_order_order_item">
             <End Role="orders" EntitySet="orders" />
@@ -373,10 +334,6 @@
           <AssociationSet Name="FK_id_user_feedbacks" Association="Self.FK_id_user_feedbacks">
             <End Role="users" EntitySet="users" />
             <End Role="feedbacks" EntitySet="feedbacks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_id_user_message" Association="Self.FK_id_user_message">
-            <End Role="users" EntitySet="users" />
-            <End Role="db_message_feedback" EntitySet="db_message_feedback" />
           </AssociationSet>
           <AssociationSet Name="FK_id_user_orders" Association="Self.FK_id_user_orders">
             <End Role="users" EntitySet="users" />
@@ -425,18 +382,6 @@
           <Property Name="ward" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="orders" Relationship="Self.FK_id_customer_oders" FromRole="customer" ToRole="orders" />
         </EntityType>
-        <EntityType Name="db_message_feedback">
-          <Key>
-            <PropertyRef Name="id_message" />
-          </Key>
-          <Property Name="id_message" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_feedbacks" Type="Int32" />
-          <Property Name="content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="id_user" Type="Int32" />
-          <Property Name="create_at" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="feedback" Relationship="Self.FK_id_feedbacks_message" FromRole="db_message_feedback" ToRole="feedbacks" />
-          <NavigationProperty Name="user" Relationship="Self.FK_id_user_message" FromRole="db_message_feedback" ToRole="users" />
-        </EntityType>
         <EntityType Name="feedback">
           <Key>
             <PropertyRef Name="id_feedback" />
@@ -447,7 +392,6 @@
           <Property Name="created_at" Type="DateTime" Precision="3" />
           <Property Name="id_product" Type="Int32" />
           <Property Name="id_user" Type="Int32" />
-          <NavigationProperty Name="db_message_feedback" Relationship="Self.FK_id_feedbacks_message" FromRole="feedbacks" ToRole="db_message_feedback" />
           <NavigationProperty Name="product" Relationship="Self.FK_id_product_feedbacks" FromRole="feedbacks" ToRole="product" />
           <NavigationProperty Name="user" Relationship="Self.FK_id_user_feedbacks" FromRole="feedbacks" ToRole="users" />
         </EntityType>
@@ -558,7 +502,6 @@
           <Property Name="totalspend" Type="Double" />
           <NavigationProperty Name="carts" Relationship="Self.FK_id_user_cart" FromRole="users" ToRole="cart" />
           <NavigationProperty Name="chats" Relationship="Self.FK_id_user_chat" FromRole="users" ToRole="chat" />
-          <NavigationProperty Name="db_message_feedback" Relationship="Self.FK_id_user_message" FromRole="users" ToRole="db_message_feedback" />
           <NavigationProperty Name="feedbacks" Relationship="Self.FK_id_user_feedbacks" FromRole="users" ToRole="feedbacks" />
           <NavigationProperty Name="orders" Relationship="Self.FK_id_user_orders" FromRole="users" ToRole="orders" />
           <NavigationProperty Name="rank" Relationship="Self.FK_id_users_rank" FromRole="users" ToRole="ranks" />
@@ -608,30 +551,6 @@
             </Principal>
             <Dependent Role="orders">
               <PropertyRef Name="id_customer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_id_feedbacks_message">
-          <End Role="feedbacks" Type="Self.feedback" Multiplicity="0..1" />
-          <End Role="db_message_feedback" Type="Self.db_message_feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="feedbacks">
-              <PropertyRef Name="id_feedback" />
-            </Principal>
-            <Dependent Role="db_message_feedback">
-              <PropertyRef Name="id_feedbacks" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_id_user_message">
-          <End Role="users" Type="Self.user" Multiplicity="0..1" />
-          <End Role="db_message_feedback" Type="Self.db_message_feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="users">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="db_message_feedback">
-              <PropertyRef Name="id_user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -735,7 +654,6 @@
           <EntitySet Name="carts" EntityType="Self.cart" />
           <EntitySet Name="chats" EntityType="Self.chat" />
           <EntitySet Name="customers" EntityType="Self.customer" />
-          <EntitySet Name="db_message_feedback" EntityType="Self.db_message_feedback" />
           <EntitySet Name="feedbacks" EntityType="Self.feedback" />
           <EntitySet Name="order_item" EntityType="Self.order_item" />
           <EntitySet Name="orders" EntityType="Self.order" />
@@ -759,14 +677,6 @@
           <AssociationSet Name="FK_id_customer_oders" Association="Self.FK_id_customer_oders">
             <End Role="customer" EntitySet="customers" />
             <End Role="orders" EntitySet="orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_id_feedbacks_message" Association="Self.FK_id_feedbacks_message">
-            <End Role="feedbacks" EntitySet="feedbacks" />
-            <End Role="db_message_feedback" EntitySet="db_message_feedback" />
-          </AssociationSet>
-          <AssociationSet Name="FK_id_user_message" Association="Self.FK_id_user_message">
-            <End Role="users" EntitySet="users" />
-            <End Role="db_message_feedback" EntitySet="db_message_feedback" />
           </AssociationSet>
           <AssociationSet Name="FK_id_product_feedbacks" Association="Self.FK_id_product_feedbacks">
             <End Role="product" EntitySet="products" />
@@ -837,17 +747,6 @@
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="district" ColumnName="district" />
                 <ScalarProperty Name="ward" ColumnName="ward" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_message_feedback">
-            <EntityTypeMapping TypeName="MobileShoppingModel.db_message_feedback">
-              <MappingFragment StoreEntitySet="db_message_feedback">
-                <ScalarProperty Name="id_message" ColumnName="id_message" />
-                <ScalarProperty Name="id_feedbacks" ColumnName="id_feedbacks" />
-                <ScalarProperty Name="content" ColumnName="content" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="create_at" ColumnName="create_at" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

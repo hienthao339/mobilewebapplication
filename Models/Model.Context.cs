@@ -28,7 +28,6 @@ namespace WebApplication1.Models
         public virtual DbSet<cart> carts { get; set; }
         public virtual DbSet<chat> chats { get; set; }
         public virtual DbSet<customer> customers { get; set; }
-        public virtual DbSet<db_message_feedback> db_message_feedback { get; set; }
         public virtual DbSet<feedback> feedbacks { get; set; }
         public virtual DbSet<order_item> order_item { get; set; }
         public virtual DbSet<order> orders { get; set; }

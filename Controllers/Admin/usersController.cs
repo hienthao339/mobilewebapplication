@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using WebApplication1.Extensions;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers.Admin
@@ -20,12 +21,12 @@ namespace WebApplication1.Controllers.Admin
         {
             var user_ranks = db.users.ToList();
             var ranks = db.ranks.ToList();
-            foreach(var item1 in user_ranks)
+            foreach (var item1 in user_ranks)
             {
-                foreach(var item2 in ranks.OrderBy(x=>x.spend))
+                foreach (var item2 in ranks.OrderBy(x => x.spend))
                 {
-                    if(item1.totalspend > (double)item2.spend)
-                    { 
+                    if (item1.totalspend > (double)item2.spend)
+                    {
                         item1.id_rank = item2.id_rank;
                     }
                 }
@@ -129,6 +130,28 @@ namespace WebApplication1.Controllers.Admin
         public ActionResult DeleteConfirmed(int id)
         {
             user user = db.users.Find(id);
+
+            var ord = db.orders.Where(x => x.id_user == user.id_user).ToList();
+
+            foreach (var item in ord)
+            {
+                if (item.pending == false)
+                {
+                    this.AddNotification("This user can not delete !", NotificationType.ERROR);
+                    return RedirectToAction("Delete", "users",new {id = id});
+                }
+            }
+            
+            foreach(var item in ord)
+            {
+                var ord_item = db.order_item.Where(x => x.id_order == item.id_order).ToList();
+                foreach(var item2 in ord_item)
+                {
+                    db.order_item.Remove(item2);
+                }
+                db.orders.Remove(item);
+            }
+
             db.users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");

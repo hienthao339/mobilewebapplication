@@ -5,73 +5,59 @@
     Layout = "../../Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>user</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.is_admin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.is_admin)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.names)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.names)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
-        @if (Model.is_admin == true)
+<div class="w-75 rounded-md grid grid-cols-3 border mx-auto my-5 p-5 h-screen">
+    <h1 class="col-span-3 ml-4">Details</h1>
+    <div style="width: 200px">
+        @if (Html.DisplayFor(x=>x.avatar).ToString() == "")
         {
-            <dt>
-                @Html.DisplayNameFor(model => model.passwords)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.passwords)
-            </dd>
-
+            <img src="https://freesvg.org/img/abstract-user-flat-4.png" class="object-center object-cover">
         }
-        <dt>
-            @Html.DisplayNameFor(model => model.avatar)
-        </dt>
+        else
+        {
+            <img src="~/wwwroot/Images/Avatars/@Html.DisplayFor(x=>x.avatar)" class="object-center object-cover" />
+        }
+    </div>
+    <div class="grid grid-cols-2 col-span-2 gap-y-3">
+        <div class="form-group">
+            <div class="font-bold">Name</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.names)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Email</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.email)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Rank</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.rank.name_rank)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Phone</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.phone)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="font-bold">Role</div>
+            <div class="col-span-1">
+                @Html.DisplayFor(x => x.is_admin)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.avatar)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rank.id_rank)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rank.id_rank)
-        </dd>
-
-    </dl>
+        <div class="form-group">
+            <div class="col-span-1">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.id_user)
+            </div>
+        </div>
+    </div>
+    <div class="col-span-3 flex space-x-2 justify-content-end justify-between">
+        <a href="@Url.Action("Index", "users")" class="btn text-black cursor-pointer bg-yellow-300 font-medium py-2 px-4 rounded-md" style="height: fit-content">Back</a>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id_user }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
