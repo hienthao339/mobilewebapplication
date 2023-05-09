@@ -4,13 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
+
 namespace WebApplication1.Models.ViewModels
 {
     public class SignUpVM
     {
         public int id_user { get; set; }
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]

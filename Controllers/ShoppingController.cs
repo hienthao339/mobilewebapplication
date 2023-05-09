@@ -36,13 +36,13 @@ namespace WebApplication1.Controllers
                 {
                     Session["CheckPro"] = 1;
                     this.AddNotification(pro.names + " out of stock !", NotificationType.WARNING);
-                 
+
                 }
                 if (pro.quantity < item.quantity)
                 {
                     Session["CheckPro"] = 1;
                     this.AddNotification(pro.names + " not enough quantity !", NotificationType.WARNING);
-                 
+
                 }
             }
 
@@ -254,7 +254,7 @@ namespace WebApplication1.Controllers
                         Session["Promo"] = promo;
                         Session["Discount"] = Discount;
                         Session["Total"] = Total;
-                        return RedirectToAction("Promocode", "Shopping");
+                        return RedirectToAction("CheckOut", "Shopping");
                     }
                     else
                     {
@@ -304,6 +304,17 @@ namespace WebApplication1.Controllers
             if (cus == null)
                 db.customers.Add(customer);
 
+            var ranks = db.ranks.ToList();
+            foreach (var item2 in ranks.OrderBy(x => x.spend))
+            {
+                if (user.totalspend > (double)item2.spend)
+                {
+                    user.id_rank = item2.id_rank;
+                }
+            }
+
+            db.SaveChanges();
+
 
 
             if (Session["Promo"] != null)
@@ -332,7 +343,11 @@ namespace WebApplication1.Controllers
             }
 
 
-            user_spend.totalspend = (double)total;
+
+          
+
+
+            user_spend.totalspend += (double)total;
             orders.id_customer = customer.id_customer;
             orders.shipping_fee = (int)Session["Shipping"];
 

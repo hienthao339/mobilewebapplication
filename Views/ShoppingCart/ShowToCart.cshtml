@@ -80,11 +80,11 @@
                             <div class="col">
                                 <div class="flex">
                                     <a href="/ShoppingCart/btn_Decrease/@item.Shopping_product.id_product" class="text-center text-black py-1 px-2.5 bg-gray-100 hover:bg-gray-200 rounded-md">
-                                        <i class="fa-solid fa-minus text-xs"></i>
+                                        <i class="fa-solid fa-minus text-xs p-2"></i>
                                     </a>
                                     <input type="text" value="@item.Shopping_quantity" readonly="readonly" style="width: 30px;" class="text-center" />
                                     <a href="/ShoppingCart/btn_Increase/@item.Shopping_product.id_product" class="text-center text-black py-1 px-2.5 bg-gray-100 hover:bg-gray-200 rounded-md">
-                                        <i class="fa-solid fa-plus text-xs"></i>
+                                        <i class="fa-solid fa-plus text-xs p-2"></i>
                                     </a>
 
                                 </div>
@@ -103,7 +103,7 @@
                             <div class="col">
                                 <div class="flex">
                                     <a href="/ShoppingCart/RemoveCart/@item.Shopping_product.id_product" class="bg-red-100 text-center py-1 px-2.5 hover:bg-red-200 rounded-md">
-                                        <i class="fa-solid fa-xmark text-red-600 text-xs"></i>
+                                        <i class="fa-solid fa-xmark text-red-600 text-xs p-2"></i>
                                     </a>
                                 </div>
                             </div>
@@ -118,8 +118,11 @@
             <div class="font-medium">
                 @foreach (var item in Model.Items)
                 {
-                    <div class="row">
-                        <img src="~/wwwroot/Images/Products/@item.Shopping_product.images" class="col h-20" />
+                    <div class="row mb-2">
+                        <div class="col">
+
+                            <img src="~/wwwroot/Images/Products/@item.Shopping_product.images" class="object-cover object-center" />
+                        </div>
                         <div class="col flex flex-wrap">
                             <div class="col grid-rows-4">
                                 <div class="font-medium">@Html.DisplayFor(model => item.Shopping_product.names)</div>
