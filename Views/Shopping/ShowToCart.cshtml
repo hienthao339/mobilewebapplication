@@ -48,7 +48,7 @@
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.product.brand)</div>
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.product.color)</div>
                                     <div class="font-light text-xs">@Html.DisplayFor(model => item.product.quantity)</div>
-                                    <a href="/Home/Details_Pro/@item.id_product" class="text-blue-600 font-semibold text-xs mt-4">Learn More 🡥</a> 
+                                    <a href="/Home/Details_Pro/@item.id_product" class="text-blue-600 font-semibold text-xs mt-4">Learn More 🡥</a>
                                 </div>
                             </div>
 
@@ -75,15 +75,18 @@
                                 </div>
                             }
 
+
+
+
                             @*Quantity*@
                             <div class="col">
                                 <div class="flex">
                                     <a href="/Shopping/btn_Decrease/@item.product.id_product" class="text-center text-black py-1 px-2.5 bg-gray-100 hover:bg-gray-200 rounded-md">
-                                        <i class="fa-solid fa-minus text-xs"></i>
+                                        <i class="fa-solid fa-minus text-xs p-2"></i>
                                     </a>
                                     <input type="text" value="@item.quantity" readonly="readonly" style="width: 30px;" class="text-center" />
                                     <a href="/Shopping/btn_Increase/@item.product.id_product" class="text-center text-black py-1 px-2.5 bg-gray-100 hover:bg-gray-200 rounded-md">
-                                        <i class="fa-solid fa-plus text-xs"></i>
+                                        <i class="fa-solid fa-plus text-xs p-2"></i>
                                     </a>
 
                                 </div>
@@ -102,7 +105,7 @@
                             <div class="col">
                                 <div class="flex">
                                     <a href="/Shopping/RemoveCart/@item.product.id_product" class="bg-red-100 text-center py-1 px-2.5 hover:bg-red-200 rounded-md">
-                                        <i class="fa-solid fa-xmark text-red-600 text-xs"></i>
+                                        <i class="fa-solid fa-xmark text-red-600 text-xs p-2"></i>
                                     </a>
                                 </div>
                             </div>
@@ -147,7 +150,6 @@
                 else
                 {
                     <a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Shopping/GetInfo">Checkout	•	$@Session["Temp_Total"]</a>
-                    <a class="btn bg-blue-600 hover:bg-blue-800 w-full rounded-md text-white text-center text-md font-medium text-md py-3 mt-2 " href="/Payment/CreatePayment">Paypal</a>
                 }
 
 

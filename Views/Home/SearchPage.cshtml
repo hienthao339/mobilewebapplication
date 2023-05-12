@@ -76,66 +76,105 @@
             </div>
 
             @*product-mini-list*@
-            <div class="grid grid-cols-3 gap-4 justify-content-between mx-auto mt-lg-5 px-4">
+        <div class="grid grid-cols-3 gap-4 justify-content-between mx-auto mt-lg-5 px-4">
 
-                @if (Model.Count() == 0)
+            @if (Model.Count() == 0)
+            {
+                <div>
+                    SORRY, WE CAN NOT FIND ANYTHING YOU NEED
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model)
                 {
+
+
                     <div>
-                        SORRY, WE CAN NOT FIND ANYTHING YOU NEED
-                    </div>
-                }
-                else
-                {
-                    foreach (var item in Model)
-                    {
-
-
-                        <div class="flex justify-center text-md w-full">
-                            <div class="block max-w-sm rounded-lg bg-white shadow-md w-full">
-                                @*<a href="#!">*@
-                                <img class="rounded-t-lg mx-auto object-center"
-                                     style="height: 250px"
-                                     src="~/wwwroot/Images/Products/@item.images"
-                                     alt="" />
-                                @*</a>*@
-                                <div class="p-3 font-medium">
-                                    <div class="flex flex-row justify-between pb-3 border-bottom align-items-center">
-                                        <p class="text-2xl">$@Html.DisplayFor(modelItem => item.price)</p>
-                                        <div class="bg-danger py-2 px-3 rounded-md text-white">
-                                            0%
-                                        </div>
-                                    </div>
-
-                                    <h5 class="mt-4 mb-3 flex leading-tight text-neutral-800 justify-between">
-                                        <div class="text-xl">@Html.DisplayFor(modelItem => item.names)</div>
-                                        <div class="flex flex-row">
-                                            @for (int i = 0; i < (int)item.rate; i++)
-                                            {
-                                                <i class="fa-solid fa-star text-yellow-500"></i>
-                                            }
-                                            @if ((double)item.rate > (int)item.rate)
-                                            {
-                                                <i class="fa-solid fa-star-half text-yellow-500"></i>
-                                            }
-                                        </div>
-                                    </h5>
-                                    <div class="my-3 flex text-xs items-center justify-between">
-                                        <div class="text-start">
-                                            <span class="p-2 rounded-full" style="border: 2px solid #0026ff; color: #0026ff">@Html.DisplayFor(modelItem => item.brand)</span>
-                                            <span class="p-2 rounded-full" style="border: 2px solid #ffd800; color: #ffd800 ">@Html.DisplayFor(modelItem => item.color)</span>
-                                        </div>
-
-                                        <div>
-                                            <a href="/Home/Details_Pro/@item.id_product" class="py-2 px-3 text-sm bg-blue-600 text-white rounded-full">View</a>
-                                        </div>
-                                    </div>
+                        <div class="bg-gray-100 py-4 relative">
+                            <img src="~/wwwroot/Images/Products/@item.images" class="mx-auto object-center relative" style="height: 300px" />
+                            @if (item.promocode != null)
+                            {
+                                <div class="absolute end-0 top-4 bg-danger font-medium text-white px-4 py-2"
+                                     style="border-radius: 50% 0 50% 0">
+                                    SALE
                                 </div>
+                            }
+                        </div>
+
+                        @*Name + Status*@
+                        <div class="flex mt-4 mb-2 justify-between justify-center font-medium">
+                            <div class="flex mr-4 align-items-center space-x-2">
+                                <div class="h-3 w-3 rounded-full" style="background-color: @item.color"></div>
+                                <span class="text-truncate text-xl">@item.names</span>
+                                <div class="text-sm text-gray-400">12 sold</div> @*số lượt bán*@
+                            </div>
+                            @if (item.quantity == 0)
+                            {
+                                <span class="ml-4 text-gray-400">Sold</span> @*Sold hoặc Avail*@
+                            }
+                            else
+                            {
+                                <span class="ml-4 text-gray-400">Avail</span> @*Sold hoặc Avail*@
+                            }
+
+                        </div>
+
+                        @*Price + Rating*@
+                        <div class="flex justify-between align-items-center mb-2">
+                            <div class="flex align-items-center">
+                                @if (item.promocode == null)
+                                {
+                                    <div class="text-gray-800 text-2xl mr-4">$ @item.price</div>
+
+                                }
+                                else
+                                {
+                                    <div class="text-gray-800 text-2xl mr-4">$ @item.discount</div>
+                                    <div class="text-gray-800 text-md text-decoration-line-through">$ @item.price</div>
+                                }
+
+                            </div>
+                            <div class="flex align-items-center">
+                                @if (item.rate != 0)
+                                {
+
+
+                                    for (int i = 0; i < (int)item.rate; i++)
+                                    {
+                                        <i class="fa-solid fa-star text-yellow-500"></i>
+                                    }
+                                    if ((double)item.rate > (int)item.rate)
+                                    {
+                                        <i class="fa-solid fa-star-half text-yellow-500"></i>
+                                    }
+
+                                    <span class="ml-4 font-medium">@item.rate</span>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-star text-gray-200"></i>
+                                    <i class="fa-solid fa-star text-gray-200"></i>
+                                    <i class="fa-solid fa-star text-gray-200"></i>
+                                    <i class="fa-solid fa-star text-gray-200"></i>
+                                    <i class="fa-solid fa-star text-gray-200"></i>
+                                    <span class="ml-4 font-medium">0</span>
+                                }
                             </div>
                         </div>
 
-                    }
+                        <div class="flex justify-between">
+                            <div class="flex">
+                                <div class="bg-gray-100 py-2 px-4 text-sm rounded-full mr-2">@item.brand</div>
+                                <div class="bg-gray-100 py-2 px-4 text-sm rounded-full">@item.color</div>
+                            </div>
+                            <a href="/Home/Details_Pro/@item.id_product" class="bg-blue-600 py-2 px-4 text-white rounded-full">View</a>
+                        </div>
+                    </div>
+
                 }
-            </div>
+            }
+        </div>
         </div>
     </div>
 </main>

@@ -70,80 +70,114 @@
             </span>
             <span class="w-50 text-end">
                 <a href="@Url.Action("SearchPage", "Home")" class="btn btn-outline-dark rounded-full text-xl px-5 py-2 font-light" style="width: fit-content;">
-                    VIEW
+                    VIEW ALL
                 </a>
             </span>
         </div>
     </div>
 
     @*new-product-list*@
-    <div class="grid grid-cols-3 justify-between justify-center px-4 space-x-2 my-4">
-        <div>
-            <div class="bg-gray-100 py-4 relative">
-                <img src="~/wwwroot/Images/Products/1.png" class="object-center relative" />
-                <div class="absolute end-0 top-4 bg-danger font-medium text-white px-4 py-2"
-                     style="border-radius: 50% 0 50% 0">
-                    SALE
+    <div class="grid grid-cols-3 justify-between justify-center px-4 gap-3 my-4">
+        @foreach (var item in Model)
+        {
+            if (item.id_product <= 72)
+            {
+                <div>
+                    <div class="bg-gray-100 py-4 relative">
+                        <img src="~/wwwroot/Images/Products/@item.images" class="mx-auto object-center relative" style="height: 400px" />
+                        @if (item.promocode != null)
+                        {
+                            <div class="absolute end-0 top-4 bg-danger font-medium text-white px-4 py-2"
+                                 style="border-radius: 50% 0 50% 0">
+                                SALE
+                            </div>
+                        }
+                    </div>
+
+                    @*Name + Status*@
+                    <div class="flex mt-4 mb-2 justify-between justify-center font-medium">
+                        <div class="flex mr-4 align-items-center space-x-2">
+                            <div class="h-3 w-3 rounded-full" style="background-color: @item.color"></div>
+                            <span class="text-truncate text-xl">@item.names</span>
+                            <div class="text-sm text-gray-400">12 sold</div> @*số lượt bán*@
+                        </div>
+                        @if (item.quantity == 0)
+                        {
+                            <span class="ml-4 text-gray-400">Sold</span> @*Sold hoặc Avail*@
+                        }
+                        else
+                        {
+                            <span class="ml-4 text-gray-400">Avail</span> @*Sold hoặc Avail*@
+                        }
+
+                    </div>
+
+                    @*Price + Rating*@
+                    <div class="flex justify-between align-items-center mb-2">
+                        <div class="flex align-items-center">
+                            @if (item.promocode == null)
+                            {
+                                <div class="text-gray-800 text-2xl mr-4">$ @item.price</div>
+
+                            }
+                            else
+                            {
+                                <div class="text-gray-800 text-2xl mr-4">$ @item.discount</div>
+                                <div class="text-gray-800 text-md text-decoration-line-through">$ @item.price</div>
+                            }
+
+                        </div>
+                        <div class="flex align-items-center">
+                            @if (item.rate != 0)
+                            {
+
+
+                                for (int i = 0; i < (int)item.rate; i++)
+                                {
+                                    <i class="fa-solid fa-star text-yellow-500"></i>
+                                }
+                                if ((double)item.rate > (int)item.rate)
+                                {
+                                    <i class="fa-solid fa-star-half text-yellow-500"></i>
+                                }
+
+                                <span class="ml-4 font-medium">@item.rate</span>
+                            }
+                            else
+                            {
+                                <i class="fa-solid fa-star text-gray-200"></i>
+                                <i class="fa-solid fa-star text-gray-200"></i>
+                                <i class="fa-solid fa-star text-gray-200"></i>
+                                <i class="fa-solid fa-star text-gray-200"></i>
+                                <i class="fa-solid fa-star text-gray-200"></i>
+                                <span class="ml-4 font-medium">0</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <div class="flex">
+                            <div class="bg-gray-100 py-2 px-4 text-sm rounded-full mr-2">@item.brand</div>
+                            <div class="bg-gray-100 py-2 px-4 text-sm rounded-full">@item.color</div>
+                        </div>
+                        <a href="/Home/Details_Pro/@item.id_product" class="bg-blue-600 py-2 px-4 text-white rounded-full">View</a>
+                    </div>
                 </div>
-            </div>
-
-            @*Name + Status*@
-            <div class="flex mt-4 mb-2 justify-between justify-center font-medium">
-                <div class="flex mr-4 align-items-center space-x-2">
-                    <div class="h-3 w-3 rounded-full" style="background-color: black"></div>
-                    <span class="text-truncate text-xl">Galaxy S23 Pro</span>
-                    <div class="text-sm text-gray-200">12 sold</div> @*số lượt bán*@
-                </div>
-                <span class="ml-4 text-gray-200">Avail</span> @*Sold hoặc Avail*@
-            </div>
-
-            @*Price + Rating*@
-            <div class="flex justify-between align-items-center mb-2">
-                <div class="flex align-items-center">
-                    <div class="text-gray-800 text-2xl mr-4">$ 00.000</div>
-                    <div class="text-gray-800 text-md text-decoration-line-through">$ 00.000</div>
-                </div>
-                <div class="flex align-items-center">
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <span class="ml-4 font-medium">5.0</span>
-                </div>
-            </div>
-
-            <div class="flex justify-between">
-                <div class="flex">
-                    <div class="bg-gray-100 py-2 px-4 text-sm rounded-full mr-2">Samsung</div>
-                    <div class="bg-gray-100 py-2 px-4 text-sm rounded-full">Black</div>
-                </div>
-                <a href="#" class="bg-blue-600 py-2 px-4 text-white rounded-full">View</a>
-            </div>
-        </div>
-
-
-        <div class="bg-gray-100 py-3">
-            <img src="~/wwwroot/Images/Products/1.png" class="object-center" />
-        </div>
-
-        <div class="bg-gray-100 py-3">
-            <img src="~/wwwroot/Images/Products/1.png" class="object-center" />
-        </div>
-
+            }
+        }
     </div>
 
 
 
 
-            @*samsunng-iphone*@
-            <div class="grid grid-cols-2 my-5">
-                <img src="~/wwwroot/Images/Others/Group 51.png" class="object-cover w-full" href="@Url.Action("Search", "Home", new {id = 1})" />
-                <img src="~/wwwroot/Images/Others/Group 52.png" class="object-cover w-full" href="@Url.Action("Search", "Home", new {id = 1})" />
-            </div>
+    @*samsunng-iphone*@
+    <div class="grid grid-cols-2 my-5">
+        <img src="~/wwwroot/Images/Others/Group 51.png" class="object-cover w-full" href="@Url.Action("Search", "Home", new {id = 1})" />
+        <img src="~/wwwroot/Images/Others/Group 52.png" class="object-cover w-full" href="@Url.Action("Search", "Home", new {id = 1})" />
+    </div>
 
-            <div class="mx-auto w-50 mt-6">
-                <img src="~/wwwroot/Images/Others/Frame 32.png" class="object-cover object-center" />
-            </div>
+    <div class="mx-auto w-50 mt-6">
+        <img src="~/wwwroot/Images/Others/Frame 32.png" class="object-cover object-center" />
+    </div>
 
-        </main>
+</main>
